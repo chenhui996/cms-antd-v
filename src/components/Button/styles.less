@@ -1,0 +1,25 @@
+.cs-btn.ant-btn {
+  background-color: @btn-default-bg;
+
+  // size
+  .btn-size(@btn-size-md-height,
+    @btn-size-md-padding,
+    @btn-size-md-border-radius,
+    @btn-size-md-font-size );
+
+  // small
+  &.ant-btn-sm {
+    .btn-size(@btn-size-sm-height,
+      @btn-size-sm-padding,
+      @btn-size-sm-border-radius,
+      @btn-size-sm-font-size );
+  }
+
+  // large
+  &.ant-btn-lg {
+    .btn-size(@btn-size-lg-height,
+      @btn-size-lg-padding,
+      @btn-size-lg-border-radius,
+      @btn-size-lg-font-size );
+  }
+}

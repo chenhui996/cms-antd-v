@@ -40,3 +40,6 @@ export interface ArgType {
 export interface ArgTypes$1 {
   [key: string]: ArgType
 }
+
+// -----------------------------------------------------------
+

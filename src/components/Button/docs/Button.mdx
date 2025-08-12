@@ -1,0 +1,47 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import Button from '../Button.vue'
+import * as ButtonStories from './Button.stories';
+import { Title, Controls, Description } from '@storybook/addon-docs'
+
+<Meta of={ButtonStories} />
+
+<Title />
+
+<Description />
+
+```ts
+import { Button } from "cms-antd-v";
+```
+
+## {ButtonStories.Default.storyName}
+
+<Canvas of={ButtonStories.Default} />
+
+## {ButtonStories.BaseComponent.storyName}
+
+<Canvas of={ButtonStories.BaseComponent} />
+
+## {ButtonStories.PrimaryComponent.storyName}
+
+<Canvas of={ButtonStories.PrimaryComponent} />
+
+
+{/* ## 不可用状态
+<Canvas of={ButtonStories.不可用状态}></Canvas>
+
+## 加载中状态
+<Canvas of={ButtonStories.加载中状态}></Canvas>
+
+## 图标按钮
+<Canvas of={ButtonStories.图标按钮}></Canvas>
+
+## 按钮尺寸
+<Canvas of={ButtonStories.按钮尺寸}></Canvas>
+
+## 危险按钮
+<Canvas of={ButtonStories.危险按钮}></Canvas> */}
+
+## API
+
+<ArgTypes of={Button} />

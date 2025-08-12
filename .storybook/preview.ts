@@ -1,9 +1,8 @@
 
 import type { Preview } from '@storybook/vue3';
-import { withAntdTheme } from './decorators/antdTheme';
+import '@/styles/index.less'
 
 const preview: Preview = {
-  decorators: [withAntdTheme],
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -12,18 +11,16 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-  },
-  globalTypes: {
-    themeMode: {
-      name: '主题',
-      description: '切换 Ant Design 主题',
-      defaultValue: 'light',
-      toolbar: {
-        icon: 'paintbrush',
-        items: ['light', 'dark'],
+    backgrounds: {
+      grid: {
+        cellSize: 10,
+        opacity: 0.5,
+        cellAmount: 5,
+        offsetX: 16, // default is 0 if story has 'fullscreen' layout, 16 if layout is 'padded'
+        offsetY: 16, // default is 0 if story has 'fullscreen' layout, 16 if layout is 'padded'
       },
     },
-  }
+  },
 };
 
 export default preview;

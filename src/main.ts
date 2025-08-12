@@ -1,14 +1,15 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/reset.css'
-import 'ant-design-vue/es/style/reset.css'
-import '@/assets/index.css'
+// import Antd from 'ant-design-vue'
+// import 'ant-design-vue/es/style/reset.css'
+// import 'ant-design-vue/dist/reset.css'
+// import '@/assets/index.css'
 import App from './App.vue'
+import './styles/index.less'
 
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(Antd)
+// app.use(Antd)
 
 app.mount('#app')

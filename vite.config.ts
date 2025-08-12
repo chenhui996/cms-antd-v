@@ -16,13 +16,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-        additionalData: `@import "@/theme/theme.less";`,
-        // additionalData: '@root-entry-name: default;',
-        modifyVars: {
-          'primary-color': '#1DA57A',
-          'link-color': '#1DA57A',
-          'border-radius-base': '2px',
-        },
+        additionalData: `@import "@/styles/index.less";`,
       },
     },
   },
