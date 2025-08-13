@@ -1,6 +1,4 @@
 .cs-btn.ant-btn {
-  background-color: @btn-default-bg;
-
   // size
   .btn-size(@btn-size-md-height,
     @btn-size-md-padding,
@@ -21,5 +19,210 @@
       @btn-size-lg-padding,
       @btn-size-lg-border-radius,
       @btn-size-lg-font-size );
+  }
+
+  // color
+  &.ant-btn-primary {
+    .btn-color(
+      @btn-primary-color,
+      @btn-primary-bg,
+      @btn-primary-border-color,
+      @btn-primary-color-hover,
+      @btn-primary-bg-hover,
+      @btn-primary-border-color-hover,
+      @btn-primary-color-active,
+      @btn-primary-bg-active,
+      @btn-primary-border-color-active,
+      @btn-primary-color-disabled,
+      @btn-primary-bg-disabled,
+      @btn-primary-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-primary-color-dangerous,
+        @btn-primary-bg-dangerous,
+        @btn-primary-border-color-dangerous,
+        @btn-primary-color-dangerous-hover,
+        @btn-primary-bg-dangerous-hover,
+        @btn-primary-border-color-dangerous-hover,
+        @btn-primary-color-dangerous-active,
+        @btn-primary-bg-dangerous-active,
+        @btn-primary-border-color-dangerous-active,
+        @btn-primary-color-dangerous-disabled,
+        @btn-primary-bg-dangerous-disabled,
+        @btn-primary-border-color-dangerous-disabled
+      );
+    }
+
+    &.ant-btn-background-ghost {
+      .btn-color(
+        @btn-primary-color-ghost,
+        @btn-primary-bg-ghost,
+        @btn-primary-border-color-ghost,
+        @btn-primary-color-ghost-hover,
+        @btn-primary-bg-ghost-hover,
+        @btn-primary-border-color-ghost-hover,
+        @btn-primary-color-ghost-active,
+        @btn-primary-bg-ghost-active,
+        @btn-primary-border-color-ghost-active,
+        @btn-primary-color-ghost-disabled,
+        @btn-primary-bg-ghost-disabled,
+        @btn-primary-border-color-ghost-disabled
+      );
+    }
+  }
+
+  &.ant-btn-second {
+    .btn-color(
+      @btn-second-color,
+      @btn-second-bg,
+      @btn-second-border-color,
+      @btn-second-color-hover,
+      @btn-second-bg-hover,
+      @btn-second-border-color-hover,
+      @btn-second-color-active,
+      @btn-second-bg-active,
+      @btn-second-border-color-active,
+      @btn-second-color-disabled,
+      @btn-second-bg-disabled,
+      @btn-second-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-second-color-dangerous,
+        @btn-second-bg-dangerous,
+        @btn-second-border-color-dangerous,
+        @btn-second-color-dangerous-hover,
+        @btn-second-bg-dangerous-hover,
+        @btn-second-border-color-dangerous-hover,
+        @btn-second-color-dangerous-active,
+        @btn-second-bg-dangerous-active,
+        @btn-second-border-color-dangerous-active,
+        @btn-second-color-dangerous-disabled,
+        @btn-second-bg-dangerous-disabled,
+        @btn-second-border-color-dangerous-disabled
+      );
+    }
+
+    &.ant-btn-background-ghost {
+      .btn-color(
+        @btn-second-color-ghost,
+        @btn-second-bg-ghost,
+        @btn-second-border-color-ghost,
+        @btn-second-color-ghost-hover,
+        @btn-second-bg-ghost-hover,
+        @btn-second-border-color-ghost-hover,
+        @btn-second-color-ghost-active,
+        @btn-second-bg-ghost-active,
+        @btn-second-border-color-ghost-active,
+        @btn-second-color-ghost-disabled,
+        @btn-second-bg-ghost-disabled,
+        @btn-second-border-color-ghost-disabled
+      );
+    }
+  }
+
+  &.ant-btn-weak {
+    .btn-color(
+      @btn-weak-color,
+      @btn-weak-bg,
+      @btn-weak-border-color,
+      @btn-weak-color-hover,
+      @btn-weak-bg-hover,
+      @btn-weak-border-color-hover,
+      @btn-weak-color-active,
+      @btn-weak-bg-active,
+      @btn-weak-border-color-active,
+      @btn-weak-color-disabled,
+      @btn-weak-bg-disabled,
+      @btn-weak-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-weak-color-dangerous,
+        @btn-weak-bg-dangerous,
+        @btn-weak-border-color-dangerous,
+        @btn-weak-color-dangerous-hover,
+        @btn-weak-bg-dangerous-hover,
+        @btn-weak-border-color-dangerous-hover,
+        @btn-weak-color-dangerous-active,
+        @btn-weak-bg-dangerous-active,
+        @btn-weak-border-color-dangerous-active,
+        @btn-weak-color-dangerous-disabled,
+        @btn-weak-bg-dangerous-disabled,
+        @btn-weak-border-color-dangerous-disabled
+      );
+    }
+
+    &.ant-btn-background-ghost {
+      .btn-color(
+        @btn-weak-color-ghost,
+        @btn-weak-bg-ghost,
+        @btn-weak-border-color-ghost,
+        @btn-weak-color-ghost-hover,
+        @btn-weak-bg-ghost-hover,
+        @btn-weak-border-color-ghost-hover,
+        @btn-weak-color-ghost-active,
+        @btn-weak-bg-ghost-active,
+        @btn-weak-border-color-ghost-active,
+        @btn-weak-color-ghost-disabled,
+        @btn-weak-bg-ghost-disabled,
+        @btn-weak-border-color-ghost-disabled
+      );
+    }
+  }
+
+  &.ant-btn-dashed {
+    .btn-color(
+      @btn-dashed-color,
+      @btn-dashed-bg,
+      @btn-dashed-border-color,
+      @btn-dashed-color-hover,
+      @btn-dashed-bg-hover,
+      @btn-dashed-border-color-hover,
+      @btn-dashed-color-active,
+      @btn-dashed-bg-active,
+      @btn-dashed-border-color-active,
+      @btn-dashed-color-disabled,
+      @btn-dashed-bg-disabled,
+      @btn-dashed-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-dashed-color-dangerous,
+        @btn-dashed-bg-dangerous,
+        @btn-dashed-border-color-dangerous,
+        @btn-dashed-color-dangerous-hover,
+        @btn-dashed-bg-dangerous-hover,
+        @btn-dashed-border-color-dangerous-hover,
+        @btn-dashed-color-dangerous-active,
+        @btn-dashed-bg-dangerous-active,
+        @btn-dashed-border-color-dangerous-active,
+        @btn-dashed-color-dangerous-disabled,
+        @btn-dashed-bg-dangerous-disabled,
+        @btn-dashed-border-color-dangerous-disabled
+      );
+    }
+
+    &.ant-btn-background-ghost {
+      .btn-color(
+        @btn-dashed-color-ghost,
+        @btn-dashed-bg-ghost,
+        @btn-dashed-border-color-ghost,
+        @btn-dashed-color-ghost-hover,
+        @btn-dashed-bg-ghost-hover,
+        @btn-dashed-border-color-ghost-hover,
+        @btn-dashed-color-ghost-active,
+        @btn-dashed-bg-ghost-active,
+        @btn-dashed-border-color-ghost-active,
+        @btn-dashed-color-ghost-disabled,
+        @btn-dashed-bg-ghost-disabled,
+        @btn-dashed-border-color-ghost-disabled
+      );
+    }
   }
 }

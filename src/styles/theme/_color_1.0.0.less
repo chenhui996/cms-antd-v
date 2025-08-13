@@ -14,16 +14,29 @@
 
   // ComStar Blue 星际蓝
   // 崭新、聚焦
-  --cs-bule-1: #E6F4FF;
-  --cs-bule-2: #B8DFFF;
-  --cs-bule-3: #8FC9FF;
-  --cs-bule-4: #67B0FF;
-  --cs-bule-5: #3D94FF;
-  --cs-bule-6: #1373F7;
+  --cs-bule-1: #e6f4ff;
+  --cs-bule-2: #b8dfff;
+  --cs-bule-3: #8fc9ff;
+  --cs-bule-4: #67b0ff;
+  --cs-bule-5: #3d94ff;
+  --cs-bule-6: #1373f7;
   --cs-bule-7: #0654d1;
-  --cs-bule-8: #003CAB;
-  --cs-bule-9: #002A85;
-  --cs-bule-10: #001A5E;
+  --cs-bule-8: #003cab;
+  --cs-bule-9: #002a85;
+  --cs-bule-10: #001a5e;
+
+  // Grey 灰
+  // 平稳、中性
+  --cs-grey-1: #ffffff;
+  --cs-grey-2: #fafafa;
+  --cs-grey-3: #f5f5f5;
+  --cs-grey-4: #f0f0f0;
+  --cs-grey-5: #e5e5e5;
+  --cs-grey-6: #d9d9d9;
+  --cs-grey-7: #bfbfbf;
+  --cs-grey-8: #8c8c8c;
+  --cs-grey-9: #595959;
+  --cs-grey-10: #1f1f1f;
 
   // padding size
   --cs-padding-size-sm: 8px;
@@ -41,17 +54,18 @@
   --cs-font-size-lg: 18px;
 }
 
+// ------------------------------------------------------------------------------------------
 // btn
-
-//bg
-@btn-default-bg: var(--cs-bule-6);
+// ------------------------------------------------------------------------------------------
 
 // padding
 @btn-size-sm-padding: 0 var(--cs-padding-size-sm);
 @btn-size-md-padding: 0 var(--cs-padding-size-md);
 @btn-size-lg-padding: 0 var(--cs-padding-size-md);
 
-// border radius
+// border
+@btn-border-width: 1px;
+@btn-border-dashed-style: dashed;
 @btn-size-sm-border-radius: var(--cs-border-radius-sm);
 @btn-size-md-border-radius: var(--cs-border-radius-sm);
 @btn-size-lg-border-radius: var(--cs-border-radius-sm);
@@ -65,3 +79,169 @@
 @btn-size-sm-font-size: var(--cs-font-size-sm);
 @btn-size-md-font-size: var(--cs-font-size-sm);
 @btn-size-lg-font-size: var(--cs-font-size-md);
+
+// bg
+// primary
+@btn-primary-bg: var(--cs-bule-6);
+@btn-primary-bg-hover: var(--cs-bule-5);
+@btn-primary-bg-active: var(--cs-bule-7);
+@btn-primary-bg-disabled: var(--cs-grey-3);
+@btn-primary-bg-dangerous: var(--cs-red-6);
+@btn-primary-bg-dangerous-hover: var(--cs-red-5);
+@btn-primary-bg-dangerous-active: var(--cs-red-7);
+@btn-primary-bg-dangerous-disabled: var(--cs-grey-3);
+@btn-primary-bg-ghost: transparent;
+@btn-primary-bg-ghost-hover: transparent;
+@btn-primary-bg-ghost-active: transparent;
+@btn-primary-bg-ghost-disabled: transparent;
+// second
+@btn-second-bg: var(--cs-bule-1);
+@btn-second-bg-hover: var(--cs-grey-1);
+@btn-second-bg-active: var(--cs-grey-1);
+@btn-second-bg-disabled: var(--cs-grey-3);
+@btn-second-bg-dangerous: var(--cs-grey-1);
+@btn-second-bg-dangerous-hover: var(--cs-grey-1);
+@btn-second-bg-dangerous-active: var(--cs-grey-1);
+@btn-second-bg-dangerous-disabled: var(--cs-grey-3);
+@btn-second-bg-ghost: transparent;
+@btn-second-bg-ghost-hover: transparent;
+@btn-second-bg-ghost-active: transparent;
+@btn-second-bg-ghost-disabled: transparent;
+// weak
+@btn-weak-bg: var(--cs-grey-4);
+@btn-weak-bg-hover: var(--cs-grey-1);
+@btn-weak-bg-active: var(--cs-grey-1);
+@btn-weak-bg-disabled: var(--cs-grey-3);
+@btn-weak-bg-dangerous: @btn-weak-bg;
+@btn-weak-bg-dangerous-hover: @btn-weak-bg-hover;
+@btn-weak-bg-dangerous-active: @btn-weak-bg-active;
+@btn-weak-bg-dangerous-disabled: var(--cs-grey-3);
+@btn-weak-bg-ghost: transparent;
+@btn-weak-bg-ghost-hover: transparent;
+@btn-weak-bg-ghost-active: transparent;
+@btn-weak-bg-ghost-disabled: transparent;
+// dashed
+@btn-dashed-bg: var(--cs-grey-1);
+@btn-dashed-bg-hover: var(--cs-grey-1);
+@btn-dashed-bg-active: var(--cs-grey-1);
+@btn-dashed-bg-disabled: var(--cs-grey-3);
+@btn-dashed-bg-dangerous: @btn-dashed-bg;
+@btn-dashed-bg-dangerous-hover: @btn-dashed-bg;
+@btn-dashed-bg-dangerous-active: @btn-dashed-bg;
+@btn-dashed-bg-dangerous-disabled: var(--cs-grey-6);
+@btn-dashed-bg-ghost: transparent;
+@btn-dashed-bg-ghost-hover: transparent;
+@btn-dashed-bg-ghost-active: transparent;
+@btn-dashed-bg-ghost-disabled: transparent;
+
+// border color
+// primary
+@btn-primary-border-color: var(--cs-bule-6);
+@btn-primary-border-color-hover: var(--cs-bule-5);
+@btn-primary-border-color-active: var(--cs-bule-7);
+@btn-primary-border-color-disabled: var(--cs-grey-6);
+@btn-primary-border-color-dangerous: var(--cs-red-6);
+@btn-primary-border-color-dangerous-hover: var(--cs-red-5);
+@btn-primary-border-color-dangerous-active: var(--cs-red-7);
+@btn-primary-border-color-dangerous-disabled: var(--cs-grey-6);
+@btn-primary-border-color-ghost: @btn-primary-bg;
+@btn-primary-border-color-ghost-hover: @btn-primary-bg-hover;
+@btn-primary-border-color-ghost-active: @btn-primary-bg-active;
+@btn-primary-border-color-ghost-disabled: @btn-primary-bg-disabled;
+// second
+@btn-second-border-color: var(--cs-bule-6);
+@btn-second-border-color-hover: var(--cs-bule-5);
+@btn-second-border-color-active: var(--cs-bule-7);
+@btn-second-border-color-disabled: var(--cs-grey-6);
+@btn-second-border-color-dangerous: var(--cs-red-5);
+@btn-second-border-color-dangerous-hover: var(--cs-red-4);
+@btn-second-border-color-dangerous-active: var(--cs-red-7);
+@btn-second-border-color-dangerous-disabled: var(--cs-grey-6);
+@btn-second-border-color-ghost: @btn-second-bg;
+@btn-second-border-color-ghost-hover: @btn-second-border-color-hover;
+@btn-second-border-color-ghost-active: @btn-second-border-color-active;
+@btn-second-border-color-ghost-disabled: @btn-second-border-color-disabled;
+// weak
+@btn-weak-border-color: var(--cs-grey-6);
+@btn-weak-border-color-hover: var(--cs-bule-5);
+@btn-weak-border-color-active: var(--cs-bule-7);
+@btn-weak-border-color-disabled: var(--cs-grey-6);
+@btn-weak-border-color-dangerous: @btn-weak-border-color;
+@btn-weak-border-color-dangerous-hover: var(--cs-red-4);
+@btn-weak-border-color-dangerous-active: var(--cs-red-7);
+@btn-weak-border-color-dangerous-disabled: var(--cs-grey-6);
+@btn-weak-border-color-ghost: @btn-weak-bg;
+@btn-weak-border-color-ghost-hover: @btn-weak-border-color-hover;
+@btn-weak-border-color-ghost-active: @btn-weak-border-color-active;
+@btn-weak-border-color-ghost-disabled: @btn-weak-border-color-disabled;
+// dashed
+@btn-dashed-border-color: var(--cs-grey-6);
+@btn-dashed-border-color-hover: var(--cs-bule-5);
+@btn-dashed-border-color-active: var(--cs-bule-7);
+@btn-dashed-border-color-disabled: var(--cs-grey-6);
+@btn-dashed-border-color-dangerous: var(--cs-red-5);
+@btn-dashed-border-color-dangerous-hover: var(--cs-red-4);
+@btn-dashed-border-color-dangerous-active: var(--cs-red-7);
+@btn-dashed-border-color-dangerous-disabled: var(--cs-grey-6);
+@btn-dashed-border-color-ghost: @btn-dashed-bg;
+@btn-dashed-border-color-ghost-hover: @btn-dashed-border-color-hover;
+@btn-dashed-border-color-ghost-active: @btn-dashed-border-color-active;
+@btn-dashed-border-color-ghost-disabled: @btn-dashed-border-color-disabled;
+// color
+// primary
+@btn-primary-color: var(--cs-grey-1);
+@btn-primary-color-hover: var(--cs-grey-1);
+@btn-primary-color-active: var(--cs-grey-1);
+@btn-primary-color-disabled: var(--cs-grey-7);
+@btn-primary-color-dangerous: var(--cs-grey-1);
+@btn-primary-color-dangerous-hover: var(--cs-grey-1);
+@btn-primary-color-dangerous-active: var(--cs-grey-1);
+@btn-primary-color-dangerous-disabled: var(--cs-grey-7);
+@btn-primary-color-ghost: @btn-primary-bg;
+@btn-primary-color-ghost-hover: @btn-primary-bg-hover;
+@btn-primary-color-ghost-active: @btn-primary-bg-active;
+@btn-primary-color-ghost-disabled: @btn-primary-bg-disabled;
+
+// second
+@btn-second-color: var(--cs-bule-6);
+@btn-second-color-hover: var(--cs-bule-5);
+@btn-second-color-active: var(--cs-bule-7);
+@btn-second-color-disabled: var(--cs-grey-7);
+@btn-second-color-dangerous: var(--cs-red-5);
+@btn-second-color-dangerous-hover: var(--cs-red-4);
+@btn-second-color-dangerous-active: var(--cs-red-7);
+@btn-second-color-dangerous-disabled: var(--cs-grey-6);
+@btn-second-color-ghost: @btn-second-bg;
+@btn-second-color-ghost-hover: @btn-second-color-hover;
+@btn-second-color-ghost-active: @btn-second-color-active;
+@btn-second-color-ghost-disabled: @btn-second-color-disabled;
+// weak
+@btn-weak-color: var(--cs-grey-10);
+@btn-weak-color-hover: var(--cs-bule-5);
+@btn-weak-color-active: var(--cs-bule-7);
+@btn-weak-color-disabled: var(--cs-grey-7);
+@btn-weak-color-dangerous:var(--cs-red-5);
+@btn-weak-color-dangerous-hover: var(--cs-red-4);
+@btn-weak-color-dangerous-active: var(--cs-red-7);
+@btn-weak-color-dangerous-disabled: var(--cs-grey-6);
+@btn-weak-color-ghost: @btn-weak-bg;
+@btn-weak-color-ghost-hover: @btn-weak-color-hover;
+@btn-weak-color-ghost-active: @btn-weak-color-active;
+@btn-weak-color-ghost-disabled: @btn-weak-color-disabled;
+// dashed
+@btn-dashed-color: var(--cs-grey-10);
+@btn-dashed-color-hover: var(--cs-bule-5);
+@btn-dashed-color-active: var(--cs-bule-7);
+@btn-dashed-color-disabled: var(--cs-grey-7);
+@btn-dashed-color-dangerous: var(--cs-red-5);
+@btn-dashed-color-dangerous-hover: var(--cs-red-4);
+@btn-dashed-color-dangerous-active: var(--cs-red-7);
+@btn-dashed-color-dangerous-disabled: var(--cs-grey-6);
+@btn-dashed-color-ghost: @btn-dashed-bg;
+@btn-dashed-color-ghost-hover: @btn-dashed-color-hover;
+@btn-dashed-color-ghost-active: @btn-dashed-color-active;
+@btn-dashed-color-ghost-disabled: @btn-dashed-color-disabled;
+
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ const meta: Meta<typeof Button> = {
   decorators: [
     () => ({
       components: { ConfigProvider },
-      template: '<div class="storybook-demo"><ConfigProvider><story /></ConfigProvider></div>',
+      template: '<div class="storybook-demo"><story /></div>',
     })
   ],
   parameters: {
@@ -60,58 +60,59 @@ export const Default = () => {
 Default.storyName = "默认 button";
 Default.parameters = parameters(Default)
 
-// type?: 'primary' | 'ghost' | 'dashed' | 'link' | 'text' | 'second' | 'weak';
-
 export const BaseComponent = () => ({
   components,
   template: `
+  <div class="story-desc-span">Size</div>
   <Button type="primary" size="small">主按钮</Button>
-  <Button type="ghost" size="small">幽灵按钮</Button>
+  <Button type="second" size="small">次要按钮</Button>
+  <Button type="weak" size="small">弱化按钮</Button>
   <Button type="dashed" size="small">虚线按钮</Button>
   <Button type="link" size="small">链接按钮</Button>
   <Button type="text" size="small">文字按钮</Button>
-  <Button type="second" size="small">次要按钮</Button>
-  <Button type="weak" size="small">弱化按钮</Button>
-  <Button type="danger" size="small">危险按钮</Button>
-  <br />
   <br />
   <Button type="primary">主按钮</Button>
-  <Button type="ghost">幽灵按钮</Button>
+  <Button type="second">次要按钮</Button>
+  <Button type="weak">弱化按钮</Button>
   <Button type="dashed">虚线按钮</Button>
   <Button type="link">链接按钮</Button>
   <Button type="text">文字按钮</Button>
-  <Button type="second">次要按钮</Button>
-  <Button type="weak">弱化按钮</Button>
-  <Button type="danger">危险按钮</Button>
-  <br />
   <br />
   <Button type="primary" size="large">主按钮</Button>
-  <Button type="ghost" size="large">幽灵按钮</Button>
+  <Button type="second" size="large">次要按钮</Button>
+  <Button type="weak" size="large">弱化按钮</Button>
   <Button type="dashed" size="large">虚线按钮</Button>
   <Button type="link" size="large">链接按钮</Button>
   <Button type="text" size="large">文字按钮</Button>
-  <Button type="second" size="large">次要按钮</Button>
-  <Button type="weak" size="large">弱化按钮</Button>
-  <Button type="danger" size="large">危险按钮</Button>
+  <br />
+  <div class="story-desc-span">Danger</div>
+  <Button type="primary" danger>主按钮</Button>
+  <Button type="second" danger>次要按钮</Button>
+  <Button type="weak" danger>弱化按钮</Button>
+  <Button type="dashed" danger>虚线按钮</Button>
+  <Button type="link" danger>链接按钮</Button>
+  <Button type="text" danger>文字按钮</Button>
+  <br />
+  <div class="story-desc-span">Ghost</div>
+  <div class="story-bg-gary">
+    <Button type="primary" ghost>主按钮</Button>
+    <Button type="second" ghost>次要按钮</Button>
+    <Button type="weak" ghost>弱化按钮</Button>
+    <Button type="dashed" ghost>虚线按钮</Button>
+  </div>
+  <br />  
+  <div class="story-desc-span">Disabled</div>
+  <Button type="primary" disabled>主按钮</Button>
+  <Button type="second" disabled>次要按钮</Button>
+  <Button type="weak" disabled>弱化按钮</Button>
+  <Button type="dashed" disabled>虚线按钮</Button>
+  <Button type="link" disabled>链接按钮</Button>
+  <Button type="text" disabled>文字按钮</Button>
 `,
 })
 
 BaseComponent.storyName = "基本用法 button";
 BaseComponent.parameters = parameters(BaseComponent)
-
-export const PrimaryComponent = () => ({
-  components,
-  template: `
-  <Button size="small">主按钮</Button>
-  <Button size="middle">主按钮</Button>
-  <Button size="large">主按钮</Button>
-`,
-})
-
-PrimaryComponent.storyName = "主要按钮 button";
-PrimaryComponent.parameters = parameters(PrimaryComponent)
-
-
 
 // export const 不可用状态 = () => ({
 //   components,

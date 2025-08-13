@@ -5,3 +5,39 @@
   border-radius: @border-radius;
   font-size: @font-size;
 }
+
+.btn-color(@color,
+  @bg,
+  @border,
+  @color-hover,
+  @bg-hover,
+  @border-hover,
+  @color-active,
+  @bg-active,
+  @border-active,
+  @color-disabled,
+  @bg-disabled,
+  @border-disabled) {
+  color: @color;
+  background-color: @bg;
+  border-color: @border;
+
+  &:hover {
+    background-color: @bg-hover;
+    border-color: @border-hover;
+    color: @color-hover;
+  }
+
+  &:active {
+    background-color: @bg-active;
+    border-color: @border-active;
+    color: @color-active;
+  }
+
+  &:disabled {
+    background-color: @bg-disabled;
+    border-color: @border-disabled;
+    color: @color-disabled;
+    cursor: not-allowed;
+  }
+}

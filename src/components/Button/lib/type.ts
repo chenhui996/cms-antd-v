@@ -1,8 +1,10 @@
 import type { ButtonProps } from 'ant-design-vue/lib/button/buttonTypes'
 
-export interface BaseButtonProps extends Omit<ButtonProps, "type" | 'danger'> {
+export interface BaseButtonProps extends Omit<ButtonProps, "type"> {
     /** 将按钮宽度调整为其父宽度的选项 */
     block?: boolean;
+    /** 设置危险按钮*/
+    danger?: boolean
     /** 按钮失效状态 */
     disabled?: boolean
     /** 幽灵属性，使按钮背景透明 */
@@ -22,7 +24,7 @@ export interface BaseButtonProps extends Omit<ButtonProps, "type" | 'danger'> {
     /** 相当于 a 链接的 target 属性，href 存在时生效 */
     target?: string
     /** 设置按钮类型 */
-    type?: 'primary' | 'ghost' | 'dashed' | 'link' | 'text' | 'second' | 'weak' | 'danger';
+    type?: 'primary' | 'dashed' | 'link' | 'text' | 'second' | 'weak';
     /** 添加样式 */
     style?: Object
     /** 功能码，埋点用 */
