@@ -1,11 +1,9 @@
-// import { reactive, toRefs, ref } from 'vue'
+import { ref, h } from 'vue';
 import Button from '../Button.vue'
-// import { PoweroffOutlined, SearchOutlined, DownloadOutlined } from '@ant-design/icons-vue'
-// import type { SizeType } from 'ant-design-vue/lib/config-provider/context'
-// import ARadioGroup from 'ant-design-vue/lib/radio/Group'
-// import ARadioButton from 'ant-design-vue/lib/radio/RadioButton'
-import { ConfigProvider } from 'ant-design-vue'
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta } from '@storybook/vue3';
+import {RadioButton, RadioGroup, Space, Tooltip, Dropdown, Menu, MenuItem} from 'ant-design-vue'
+import { PoweroffOutlined, DownloadOutlined, SearchOutlined, DownOutlined } from '@ant-design/icons-vue';
+import type { SizeType } from 'ant-design-vue/lib/config-provider';
 import './style.less'
 
 const components = { Button }
@@ -13,20 +11,11 @@ const components = { Button }
 const meta: Meta<typeof Button> = {
   title: '通用/Button 按钮',
   component: Button,
-  // tags: ['autodocs'],
   decorators: [
     () => ({
-      components: { ConfigProvider },
       template: '<div class="storybook-demo"><story /></div>',
     })
   ],
-  parameters: {
-    docs: {
-      description: {
-        component: '按钮用于开始一个即时操作。标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。'
-      }
-    }
-  }
 };
 
 //👇 This default export determines where your story goes in the story list
@@ -60,277 +49,397 @@ export const Default = () => {
 Default.storyName = "默认 button";
 Default.parameters = parameters(Default)
 
-export const BaseComponent = () => ({
+export const TypesComponent = () => ({
   components,
   template: `
-  <div class="story-desc-span">Size</div>
-  <Button type="primary" size="small">主按钮</Button>
-  <Button type="second" size="small">次要按钮</Button>
-  <Button type="weak" size="small">弱化按钮</Button>
-  <Button type="dashed" size="small">虚线按钮</Button>
-  <Button type="link" size="small">链接按钮</Button>
-  <Button type="text" size="small">文字按钮</Button>
-  <br />
-  <Button type="primary">主按钮</Button>
-  <Button type="second">次要按钮</Button>
-  <Button type="weak">弱化按钮</Button>
-  <Button type="dashed">虚线按钮</Button>
-  <Button type="link">链接按钮</Button>
-  <Button type="text">文字按钮</Button>
-  <br />
-  <Button type="primary" size="large">主按钮</Button>
-  <Button type="second" size="large">次要按钮</Button>
-  <Button type="weak" size="large">弱化按钮</Button>
-  <Button type="dashed" size="large">虚线按钮</Button>
-  <Button type="link" size="large">链接按钮</Button>
-  <Button type="text" size="large">文字按钮</Button>
-  <br />
-  <div class="story-desc-span">Danger</div>
-  <Button type="primary" danger>主按钮</Button>
-  <Button type="second" danger>次要按钮</Button>
-  <Button type="weak" danger>弱化按钮</Button>
-  <Button type="dashed" danger>虚线按钮</Button>
-  <Button type="link" danger>链接按钮</Button>
-  <Button type="text" danger>文字按钮</Button>
-  <br />
-  <div class="story-desc-span">Ghost</div>
-  <div class="story-bg-gary">
-    <Button type="primary" ghost>主按钮</Button>
-    <Button type="second" ghost>次要按钮</Button>
-    <Button type="weak" ghost>弱化按钮</Button>
-    <Button type="dashed" ghost>虚线按钮</Button>
+  <div class="story-flex-wrap">
+    <Button type="primary">Primary Button</Button>
+    <Button type="second">Second Button</Button>
+    <Button type="weak">Weak Button</Button>
+    <Button type="dashed">Dashed Button</Button>
+    <Button type="text">Text Button</Button>
+    <Button type="text-primary">Text Primary Button</Button>
+    <Button type="link">Link Button</Button>
   </div>
-  <br />  
-  <div class="story-desc-span">Disabled</div>
-  <Button type="primary" disabled>主按钮</Button>
-  <Button type="second" disabled>次要按钮</Button>
-  <Button type="weak" disabled>弱化按钮</Button>
-  <Button type="dashed" disabled>虚线按钮</Button>
-  <Button type="link" disabled>链接按钮</Button>
-  <Button type="text" disabled>文字按钮</Button>
 `,
 })
 
-BaseComponent.storyName = "基本用法 button";
-BaseComponent.parameters = parameters(BaseComponent)
+TypesComponent.storyName = "按钮类型 type";
+TypesComponent.parameters = parameters(TypesComponent)
 
-// export const 不可用状态 = () => ({
-//   components,
-//   template: `
-//   <Button type="primary" disabled>主按钮</Button>
-//         <Button type="secoundPrimary"disabled>次要按钮</Button>
-//         <Button type="dashed" ghost disabled>虚线按钮</Button>
-//         <Button type="primary" danger disabled>危险按钮</Button>
-//         <Button danger ghost disabled>危险按钮</Button>
-//         <Button type="ghost" danger disabled>危险按钮</Button>
-//         <Button type="weak" disabled>弱化按钮</Button>
-//         <Button type="ghost" disabled>幽灵按钮(文字按钮)</Button>
-//     `
-// })
+export const GhostComponent = () => ({
+  components,
+  template: `
+  <div class="story-flex-wrap story-bg-gary">
+    <Button type="primary" ghost>Primary Button</Button>
+    <Button type="second" ghost>Second Button</Button>
+    <Button type="weak" ghost>Weak Button</Button>
+    <Button type="dashed" ghost>Dashed Button</Button>
 
-// 不可用状态.parameters = parameters(不可用状态)
+    <Button type="primary" ghost danger>Danger Primary Button</Button>
+    <Button type="dashed" ghost danger>Danger Dashed Button</Button>
+  </div>
+`,
+})
 
-// export const 加载中状态 = () => ({
-//   components: {
-//     PoweroffOutlined,
-//     Button
-//   },
-//   setup() {
-//     const state = reactive({
-//       loading: false,
-//       iconLoading: false as boolean | object
-//     })
-//     const methods = reactive({
-//       enterIconLoading: () => {
-//         state.iconLoading = { delay: 1000 }
+GhostComponent.storyName = "幽灵按钮 ghost";
+GhostComponent.parameters = parameters(GhostComponent)
 
-//         setTimeout(() => {
-//           state.iconLoading = false
-//         }, 6000)
-//       }
-//     })
-//     return { ...toRefs(state), ...toRefs(methods) }
-//   },
-//   template: `
-//   <a-space style="width: 100%">
-//     <Button type="primary" loading>Loading</Button>
-//   </a-space>
-//   <a-space style="width: 100%">
-//     <Button type="primary" :loading="loading" @mouseenter="loading = true">
-//       mouseenter me!
-//     </Button>
-//     <Button type="primary" :loading="iconLoading" @click="enterIconLoading">
-//       <template #icon><PoweroffOutlined /></template>
-//       延迟1s
-//     </Button>
-//   </a-space>
-//   <a-space style="width: 100%">
-//     <Button type="primary" loading />
-//     <Button type="primary" shape="circle" loading />
-//     <Button danger shape="round" loading />
-//   </a-space>
-//     `
-// })
+export const LoadingComponent = () => ({
+  components: {
+    PoweroffOutlined,
+    Button
+  },
+  setup() {
+    const loading = ref<boolean>(false);
+    const iconLoading = ref<boolean | { delay: number }>(false);
+    const enterIconLoading = () => {
+      iconLoading.value = { delay: 1000 };
 
-// 加载中状态.parameters = parameters(加载中状态)
+      setTimeout(() => {
+        iconLoading.value = false;
+      }, 6000);
+    };
 
-// console.log('加载', 加载中状态())
+    return {
+      loading,
+      iconLoading,
+      enterIconLoading
+    }
+  },
+  template: `
+  <div class="story-flex-wrap">
+    <Button type="primary" loading>Loading</Button>
+    <Button type="primary" size='small' loading>Loading</Button>
+    <div>
+      <Button type="primary" :loading="loading" @mouseenter="loading = true">
+        mouseenter me!
+      </Button>
+      <Button type="primary" :loading="iconLoading" @click="enterIconLoading">
+       <template #icon><PoweroffOutlined /></template>
+        延迟1s
+      </Button>
+    </div>
+    <div>
+      <Button type="primary" loading />
+      <Button type="primary" shape="circle" loading />
+      <Button danger shape="round" loading />
+    </div>
+  </div>
+`,
+})
 
-// export const 图标按钮 = () => ({
-//   components: {
-//     SearchOutlined,
-//     Button
-//   },
-//   template: `
-//   <Button type="primary" shape="circle">
-//     <template #icon><SearchOutlined /></template>
-//   </Button>
-//   <Button type="primary" shape="circle">A</Button>
-//   <Button type="primary">
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <Button shape="circle">
-//     <template #icon><SearchOutlined /></template>
-//   </Button>
-//   <Button>
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <Button shape="circle">
-//     <template #icon><SearchOutlined /></template>
-//   </Button>
-//   <Button>
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <Button type="dashed" shape="circle">
-//     <template #icon><SearchOutlined /></template>
-//   </Button>
-//   <Button type="dashed">
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <Button href="https://www.google.com">
-//     <template #icon><SearchOutlined /></template>
-//   </Button>
-//   <br />
-//   <br />
-//   <a-tooltip title="search">
-//     <Button type="primary" shape="circle" size="large">
-//       <template #icon><SearchOutlined /></template>
-//     </Button>
-//   </a-tooltip>
-//   <Button type="primary" shape="circle" size="large">A</Button>
-//   <Button type="primary" size="large">
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <a-tooltip title="search">
-//     <Button shape="circle" size="large">
-//       <template #icon><SearchOutlined /></template>
-//     </Button>
-//   </a-tooltip>
-//   <Button size="large">
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <br />
-//   <a-tooltip title="search">
-//     <Button shape="circle" size="large">
-//       <template #icon><SearchOutlined /></template>
-//     </Button>
-//   </a-tooltip>
-//   <Button size="large">
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <a-tooltip title="search">
-//     <Button type="dashed" shape="circle" size="large">
-//       <template #icon><SearchOutlined /></template>
-//     </Button>
-//   </a-tooltip>
-//   <Button type="dashed" size="large">
-//     <template #icon><SearchOutlined /></template>
-//     Search
-//   </Button>
-//   <Button size="large" href="https://www.google.com">
-//     <template #icon><SearchOutlined /></template>
-//   </Button>
-//     `
-// })
+LoadingComponent.storyName = "加载中状态 loading";
+LoadingComponent.parameters = parameters(LoadingComponent)
 
-// 图标按钮.parameters = parameters(图标按钮)
+export const SizeComponent = () => ({
+  components: {
+    DownloadOutlined,
+    Button,
+    RadioGroup,
+    RadioButton
+  },
+  setup() {
+    const size = ref<SizeType>('large');
+    return {
+      size
+    }
+  },
+  template: `
+  <div style="margin-bottom: 16px;">
+    <RadioGroup v-model:value="size">
+      <RadioButton value="large">Large</RadioButton>
+      <RadioButton value="default">Default</RadioButton>
+      <RadioButton value="small">Small</RadioButton>
+    </RadioGroup>
+  </div>
+  <div class="story-flex-wrap">
+    <Button type="primary" :size="size">Primary</Button>
+    <Button type="second" :size="size">Normal</Button>
+    <Button type="weak" :size="size">Weak</Button>
+    <Button type="dashed" :size="size">Dashed</Button>
+    <Button danger :size="size">Danger</Button>
+    <Button type="link" :size="size">Link</Button>
+  </div>
+  <div class="story-flex-wrap">
+    <Button type="primary" :size="size">
+      <template #icon>
+          <DownloadOutlined />
+      </template>
+    </Button>
+    <Button type="primary" shape="circle" :size="size">
+      <template #icon>
+        <DownloadOutlined />
+      </template>
+    </Button>
+    <Button type="primary" shape="round" :size="size">
+      <template #icon>
+        <DownloadOutlined />
+      </template>
+      Download
+    </Button>
+    <Button type="primary" shape="round" :size="size">
+      <template #icon>
+        <DownloadOutlined />
+      </template>
+    </Button>
+    <Button type="primary" :size="size">
+      <template #icon>
+        <DownloadOutlined />
+      </template>
+      Download
+    </Button>
+  </div>
+`,
+})
 
-// export const 按钮尺寸 = () => ({
-//   components: {
-//     DownloadOutlined,
-//     Button,
-//     ARadioGroup,
-//     ARadioButton
-//   },
-//   setup() {
-//     return {
-//       size: ref<SizeType>('large')
-//     }
-//   },
-//   template: `
-//   <a-radio-group v-model:value="size">
-//     <a-radio-button value="large">Large</a-radio-button>
-//     <a-radio-button value="default">Default</a-radio-button>
-//     <a-radio-button value="small">Small</a-radio-button>
-//   </a-radio-group>
-//   <br />
-//   <br />
-//   <Button type="primary" :size="size">Primary</Button>
-//   <Button :size="size">Normal</Button>
-//   <Button type="dashed" :size="size">Dashed</Button>
-//   <Button danger :size="size">Danger</Button>
-//   <Button type="link" :size="size">Link</Button>
-//   <br />
-//   <Button type="primary" :size="size">
-//     <template #icon>
-//       <DownloadOutlined />
-//     </template>
-//   </Button>
-//   <Button type="primary" shape="circle" :size="size">
-//     <template #icon>
-//       <DownloadOutlined />
-//     </template>
-//   </Button>
-//   <Button type="primary" shape="round" :size="size">
-//     <template #icon>
-//       <DownloadOutlined />
-//     </template>
-//     Download
-//   </Button>
-//   <Button type="primary" shape="round" :size="size">
-//     <template #icon>
-//       <DownloadOutlined />
-//     </template>
-//   </Button>
-//   <Button type="primary" :size="size">
-//     <template #icon>
-//       <DownloadOutlined />
-//     </template>
-//     Download
-//   </Button>
-//   <br />
-//     `
-// })
+SizeComponent.storyName = "按钮尺寸 size";
+SizeComponent.parameters = parameters(SizeComponent)
 
-// 按钮尺寸.parameters = parameters(按钮尺寸)
+export const DangerComponent = () => ({
+  components,
+  template: `
+  <div class="story-flex-wrap">
+    <Button type="primary" danger>Primary Button</Button>
+    <Button type="second" danger>Second Button</Button>
+    <Button type="weak" danger>Weak Button</Button>
+    <Button type="dashed" danger>Dashed Button</Button>
+    <Button type="text" danger>Text Button</Button>
+    <Button type="link" danger>Link Button</Button>
+  </div>
+`,
+})
 
-// export const 危险按钮 = () => ({
-//   components,
-//   template: `
-//     <Button type="primary" danger>Primary</Button>
-//     <Button danger>Default</Button>
-//     <Button type="dashed" danger>Dashed</Button>
-//     <Button type="text" danger>Text</Button>
-//     <Button type="link" danger>Link</Button>
-//     `
-// })
+DangerComponent.storyName = "危险按钮 danger";
+DangerComponent.parameters = parameters(DangerComponent)
 
-// 危险按钮.parameters = parameters(危险按钮)
+export const DisabledComponent = () => ({
+  components: {
+    Button,
+    Space
+  },
+  template: `
+  <Space direction="vertical">
+    <Space>
+      <Button type="primary">Primary</Button>
+      <Button type="primary" disabled>Primary(disabled)</Button>
+    </Space>
+    <Space>
+      <Button type="second">Second</Button>
+      <Button type="second" disabled>Second(disabled)</Button>
+    </Space>
+    <Space>
+      <Button type="dashed">Dashed</Button>
+      <Button type="dashed" disabled>Dashed(disabled)</Button>
+    </Space>
+    <Space>
+      <Button type="text">Text</Button>
+      <Button type="text" disabled>Text(disabled)</Button>
+    </Space>
+    <Space>
+      <Button type="link">Link</Button>
+      <Button type="link" disabled>Link(disabled)</Button>
+    </Space>
+    <Space>
+      <Button type="primary" danger>Danger Primary</Button>
+      <Button type="primary" danger disabled>Danger Primary(disabled)</Button>
+    </Space>
+        <Space>
+      <Button type="second" danger>Danger Second</Button>
+      <Button type="second" danger disabled>Danger Second(disabled)</Button>
+    </Space>
+    <Space>
+      <Button danger type="text">Danger Text</Button>
+      <Button danger type="text" disabled>Danger Text(disabled)</Button>
+    </Space>
+    <Space>
+      <Button danger type="link">Danger Link</Button>
+      <Button danger type="link" disabled>Danger Link(disabled)</Button>
+    </Space>
+    <div :style="{ padding: '8px', background: 'rgb(190, 200, 200)' }">
+      <Space>
+        <Button ghost>Ghost</Button>
+        <Button ghost disabled>Ghost(disabled)</Button>
+      </Space>
+    </div>
+  </Space>
+`,
+})
+
+DisabledComponent.storyName = "不可用状态 disabled";
+DisabledComponent.parameters = parameters(DisabledComponent)
+
+export const IconComponent = () => ({
+  components: {
+    Button,
+    Space,
+    SearchOutlined,
+    Tooltip,
+  },
+  setup() {
+    return {
+      h,
+      SearchOutlined
+    }
+  },
+  template: `
+  <Space direction="vertical">
+    <Space warp>
+      <Tooltip title="search">
+        <Button type="primary" shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="primary" shape="circle">A</Button>
+      <Button type="primary" :icon="h(SearchOutlined)">Search</Button>
+      <Button type="primary" :icon="h(SearchOutlined)" href="https://www.google.com" />
+      <Tooltip title="search">
+        <Button type="primary" danger shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="primary" danger shape="circle">A</Button>
+      <Button type="primary" danger :icon="h(SearchOutlined)">Search</Button>
+      <Button type="primary" danger :icon="h(SearchOutlined)" href="https://www.google.com" />
+    </Space>
+    <Space warp>
+      <Tooltip title="search">
+        <Button type="second" shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="second" shape="circle">A</Button>
+      <Button type="second" :icon="h(SearchOutlined)">Search</Button>
+      <Button type="second" :icon="h(SearchOutlined)" href="https://www.google.com" />
+      <Tooltip title="search">
+        <Button type="second" danger shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="second" danger shape="circle">A</Button>
+      <Button type="second" danger :icon="h(SearchOutlined)">Search</Button>
+      <Button type="second" danger :icon="h(SearchOutlined)" href="https://www.google.com" />
+    </Space>
+    <Space warp>
+      <Tooltip title="search">
+        <Button type="weak" shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="weak" shape="circle">A</Button>
+      <Button type="weak" :icon="h(SearchOutlined)">Search</Button>
+      <Button type="weak" :icon="h(SearchOutlined)" href="https://www.google.com" />
+      <Tooltip title="search">
+        <Button type="weak" danger shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="weak" danger shape="circle">A</Button>
+      <Button type="weak" danger :icon="h(SearchOutlined)">Search</Button>
+      <Button type="weak" danger :icon="h(SearchOutlined)" href="https://www.google.com" />
+    </Space>
+    <Space warp>
+      <Tooltip title="search">
+        <Button type="dashed" shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="dashed" shape="circle">A</Button>
+      <Button type="dashed" :icon="h(SearchOutlined)">Search</Button>
+      <Button type="dashed" :icon="h(SearchOutlined)" href="https://www.google.com" />
+      <Tooltip title="search">
+        <Button type="dashed" danger shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="dashed" danger shape="circle">A</Button>
+      <Button type="dashed" danger :icon="h(SearchOutlined)">Search</Button>
+      <Button type="dashed" danger :icon="h(SearchOutlined)" href="https://www.google.com" />
+    </Space>
+    <Space warp>
+      <Tooltip title="search">
+        <Button type="text" shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="text" shape="circle">A</Button>
+      <Button type="text" :icon="h(SearchOutlined)">Search</Button>
+      <Button type="text" :icon="h(SearchOutlined)" href="https://www.google.com" />
+      <Tooltip title="search">
+        <Button type="text" danger shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="text" danger shape="circle">A</Button>
+      <Button type="text" danger :icon="h(SearchOutlined)">Search</Button>
+      <Button type="text" danger :icon="h(SearchOutlined)" href="https://www.google.com" />
+    </Space>
+    <Space warp>
+      <Tooltip title="search">
+        <Button type="link" shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="link" shape="circle">A</Button>
+      <Button type="link" :icon="h(SearchOutlined)">Search</Button>
+      <Button type="link" :icon="h(SearchOutlined)" href="https://www.google.com" />
+      <Tooltip title="search">
+        <Button type="link" danger shape="circle" :icon="h(SearchOutlined)" />
+      </Tooltip>
+      <Button type="link" danger shape="circle">A</Button>
+      <Button type="link" danger :icon="h(SearchOutlined)">Search</Button>
+      <Button type="link" danger :icon="h(SearchOutlined)" href="https://www.google.com" />
+    </Space>
+  </Space>
+`,
+})
+
+IconComponent.storyName = "图标按钮 icon";
+IconComponent.parameters = parameters(IconComponent)
+
+export const MultipleComponent = () => ({
+  components: {
+    Button,
+    Space,
+    Dropdown,
+    DownOutlined,
+    Menu,
+    MenuItem
+  },
+  setup() {
+    const handleMenuClick = (key: string) => {
+      console.log(key);
+    };
+    return {
+      handleMenuClick
+    }
+  },
+  template: `
+  <Space>
+    <Button type="primary">Primary</Button>
+    <Button type="second">secondary</Button>
+    <Dropdown>
+      <template #overlay>
+        <Menu @click="handleMenuClick">
+          <MenuItem key="1">1st item</MenuItem>
+          <MenuItem key="2">2nd item</MenuItem>
+          <MenuItem key="3">3rd item</MenuItem>
+        </Menu>
+      </template>
+      <Button type="second">
+        Actions
+        <DownOutlined />
+      </Button>
+    </Dropdown>
+  </Space>
+`,
+})
+
+MultipleComponent.storyName = "多个按钮组合";
+MultipleComponent.parameters = parameters(MultipleComponent)
+
+export const BlockComponent = () => ({
+  components,
+  template: `
+  <div style="margin-bottom: 16px;">
+    <Button type="primary" block>Primary</Button>
+  </div>
+  <div style="margin-bottom: 16px;">
+    <Button type="second" block>Default</Button>
+  </div>
+  <div style="margin-bottom: 16px;">
+    <Button type="weak" block>Default</Button>
+  </div>
+  <div style="margin-bottom: 16px;">
+    <Button type="dashed" block>Dashed</Button>
+  </div>
+  <div style="margin-bottom: 16px;">
+    <Button type="second" danger block>Danger</Button>
+  </div>
+  <div>
+    <Button type="link" block>Link</Button>
+  </div>
+`,
+})
+
+BlockComponent.storyName = "Block 按钮";
+BlockComponent.parameters = parameters(BlockComponent)
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { withDefaults, defineProps, defineEmits, useAttrs, computed, ref, watch } from 'vue'
+import { withDefaults, defineProps, defineEmits, useAttrs, computed } from 'vue'
 import { Button as AButton, ConfigProvider } from 'ant-design-vue'
 import type { ButtonProps } from 'ant-design-vue/lib/button/buttonTypes'
 import useForward from '@/hooks/useForward'
@@ -26,7 +26,6 @@ const props = withDefaults(defineProps<CSButtonProps>(), {
 
 defineEmits<ButtonEmits>()
 const attrs = useAttrs()
-const waveDisabled = ref(false)
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
@@ -48,18 +47,6 @@ const classes = computed(() => {
   })
 })
 
-// 若 type 为 ghost，则 waveDisabled 为 true
-watch(
-  () => props.ghost,
-  (newVal) => {
-    // console.log('newVal', newVal);
-    // if (newVal) waveDisabled.value = true
-  },
-  {
-    immediate: true
-  }
-)
-
 // 使用通用透传 Hook 合并 style 和 class
 const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
@@ -68,7 +55,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: waveDisabled }">
+  <ConfigProvider :wave="{ disabled: false }">
     <AButton v-bind="options" :style="mergedStyle" :class="mergedClass">
       <template #icon>
         <slot name="icon" />

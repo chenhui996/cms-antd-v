@@ -5,12 +5,20 @@
     @btn-size-md-border-radius,
     @btn-size-md-font-size );
 
+  &.ant-btn-round {
+    border-radius: @btn-around-size-md-border-radius;
+  }
+
   // small
   &.ant-btn-sm {
     .btn-size(@btn-size-sm-height,
       @btn-size-sm-padding,
       @btn-size-sm-border-radius,
       @btn-size-sm-font-size );
+
+    &.ant-btn-round {
+      border-radius: @btn-around-size-sm-border-radius;
+    }
   }
 
   // large
@@ -19,6 +27,10 @@
       @btn-size-lg-padding,
       @btn-size-lg-border-radius,
       @btn-size-lg-font-size );
+
+    &.ant-btn-round {
+      border-radius: @btn-around-size-lg-border-radius;
+    }
   }
 
   // color
@@ -73,6 +85,7 @@
     }
   }
 
+  // second
   &.ant-btn-second {
     .btn-color(
       @btn-second-color,
@@ -124,6 +137,7 @@
     }
   }
 
+  // weak
   &.ant-btn-weak {
     .btn-color(
       @btn-weak-color,
@@ -175,6 +189,7 @@
     }
   }
 
+  // dashed
   &.ant-btn-dashed {
     .btn-color(
       @btn-dashed-color,
@@ -224,5 +239,137 @@
         @btn-dashed-border-color-ghost-disabled
       );
     }
+  }
+
+  // text
+  &.ant-btn-text {
+    .btn-color(
+      @btn-text-color,
+      @btn-text-bg,
+      @btn-text-border-color,
+      @btn-text-color-hover,
+      @btn-text-bg-hover,
+      @btn-text-border-color-hover,
+      @btn-text-color-active,
+      @btn-text-bg-active,
+      @btn-text-border-color-active,
+      @btn-text-color-disabled,
+      @btn-text-bg-disabled,
+      @btn-text-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-text-color-dangerous,
+        @btn-text-bg-dangerous,
+        @btn-text-border-color-dangerous,
+        @btn-text-color-dangerous-hover,
+        @btn-text-bg-dangerous-hover,
+        @btn-text-border-color-dangerous-hover,
+        @btn-text-color-dangerous-active,
+        @btn-text-bg-dangerous-active,
+        @btn-text-border-color-dangerous-active,
+        @btn-text-color-dangerous-disabled,
+        @btn-text-bg-dangerous-disabled,
+        @btn-text-border-color-dangerous-disabled
+      );
+    }
+  }
+
+  // text-primary
+  &.ant-btn-text-primary {
+    .btn-color(
+      @btn-text-primary-color,
+      @btn-text-primary-bg,
+      @btn-text-primary-border-color,
+      @btn-text-primary-color-hover,
+      @btn-text-primary-bg-hover,
+      @btn-text-primary-border-color-hover,
+      @btn-text-primary-color-active,
+      @btn-text-primary-bg-active,
+      @btn-text-primary-border-color-active,
+      @btn-text-primary-color-disabled,
+      @btn-text-primary-bg-disabled,
+      @btn-text-primary-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-text-primary-color-dangerous,
+        @btn-text-primary-bg-dangerous,
+        @btn-text-primary-border-color-dangerous,
+        @btn-text-primary-color-dangerous-hover,
+        @btn-text-primary-bg-dangerous-hover,
+        @btn-text-primary-border-color-dangerous-hover,
+        @btn-text-primary-color-dangerous-active,
+        @btn-text-primary-bg-dangerous-active,
+        @btn-text-primary-border-color-dangerous-active,
+        @btn-text-primary-color-dangerous-disabled,
+        @btn-text-primary-bg-dangerous-disabled,
+        @btn-text-primary-border-color-dangerous-disabled
+      );
+    }
+  }
+
+  // link
+  &.ant-btn-link {
+    .btn-color(
+      @btn-link-color,
+      @btn-link-bg,
+      @btn-link-border-color,
+      @btn-link-color-hover,
+      @btn-link-bg-hover,
+      @btn-link-border-color-hover,
+      @btn-link-color-active,
+      @btn-link-bg-active,
+      @btn-link-border-color-active,
+      @btn-link-color-disabled,
+      @btn-link-bg-disabled,
+      @btn-link-border-color-disabled
+    );
+
+    &.ant-btn-dangerous {
+      .btn-color(
+        @btn-link-color-dangerous,
+        @btn-link-bg-dangerous,
+        @btn-link-border-color-dangerous,
+        @btn-link-color-dangerous-hover,
+        @btn-link-bg-dangerous-hover,
+        @btn-link-border-color-dangerous-hover,
+        @btn-link-color-dangerous-active,
+        @btn-link-bg-dangerous-active,
+        @btn-link-border-color-dangerous-active,
+        @btn-link-color-dangerous-disabled,
+        @btn-link-bg-dangerous-disabled,
+        @btn-link-border-color-dangerous-disabled
+      );
+    }
+
+    &:hover {
+      > * {
+        text-decoration: underline;
+      }
+    }
+
+    &:disabled {
+      > * {
+        text-decoration: none;
+      }
+    }
+  }
+
+  // icon-only
+  &.ant-btn-icon-only {
+    &:not(.ant-btn-round) {
+      padding-left: unset;
+      padding-right: unset;
+    }
+  }
+
+  // circle
+  &.ant-btn-circle {
+    border-radius: 50%;
+    padding-left: unset;
+    padding-right: unset;
   }
 }

@@ -2,13 +2,13 @@ import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
 import { reactive, toRefs } from 'vue';
 import Button from '../Button.vue'
 import * as ButtonStories from './Button.stories';
-import { Title, Controls, Description } from '@storybook/addon-docs'
+import { Title, Controls } from '@storybook/addon-docs'
 
 <Meta of={ButtonStories} />
 
 <Title />
 
-<Description />
+> 按钮用于开始一个即时操作。标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。
 
 ```ts
 import { Button } from "cms-antd-v";
@@ -18,25 +18,92 @@ import { Button } from "cms-antd-v";
 
 <Canvas of={ButtonStories.Default} />
 
-## {ButtonStories.BaseComponent.storyName}
+## {ButtonStories.TypesComponent.storyName}
 
-<Canvas of={ButtonStories.BaseComponent} />
+> 按钮有 **7** 种类型: **主按钮**、**次按钮**、**弱化按钮**、**虚线按钮**、**文本按钮**、**文本主按钮** 和 **链接按钮**。
+>> **危险模式** 跟 **幽灵模式** 需单独开启。
 
+<Canvas of={ButtonStories.TypesComponent} />
 
-{/* ## 不可用状态
-<Canvas of={ButtonStories.不可用状态}></Canvas>
+## {ButtonStories.GhostComponent.storyName}
 
-## 加载中状态
-<Canvas of={ButtonStories.加载中状态}></Canvas>
+> 幽灵按钮将按钮的内容反色，背景变为透明，常用在有色背景上。
 
-## 图标按钮
-<Canvas of={ButtonStories.图标按钮}></Canvas>
+<Canvas of={ButtonStories.GhostComponent} />
 
-## 按钮尺寸
-<Canvas of={ButtonStories.按钮尺寸}></Canvas>
+## {ButtonStories.LoadingComponent.storyName}
 
-## 危险按钮
-<Canvas of={ButtonStories.危险按钮}></Canvas> */}
+> 添加 loading 属性即可让按钮处于加载状态，最后两个按钮演示点击后进入加载状态。
+
+<Canvas of={ButtonStories.LoadingComponent} />
+
+> 依赖引用：
+
+```ts
+import { PoweroffOutlined } from '@ant-design/icons-vue';
+```
+
+## {ButtonStories.SizeComponent.storyName}
+
+> 按钮有 **大**、**中**、**小** 三种尺寸。
+> 通过设置 `size` 为 `large` `small` 分别把按钮设为大、小尺寸。若不设置 `size`，则尺寸为中。
+
+<Canvas of={ButtonStories.SizeComponent} />
+
+> 依赖引用：
+
+```ts
+import { RadioButton, RadioGroup } from 'ant-design-vue'
+import { DownloadOutlined } from '@ant-design/icons-vue';
+import type { SizeType } from 'ant-design-vue/lib/config-provider';
+```
+
+## {ButtonStories.DangerComponent.storyName}
+
+> 注意：危险按钮是一种 **按钮属性** 而不是 **按钮类型**。
+
+<Canvas of={ButtonStories.DangerComponent} />
+
+## {ButtonStories.DisabledComponent.storyName}
+
+> 添加 `disabled` 属性即可让按钮处于不可用状态，同时按钮样式也会改变。
+
+<Canvas of={ButtonStories.DisabledComponent} />
+
+## {ButtonStories.IconComponent.storyName}
+
+> 当需要在 Button 内嵌入 Icon 时，可以设置 icon 属性，或者直接在 Button 内使用 Icon 组件。
+>> 如果想控制 Icon 具体的位置，只能直接使用 Icon 组件，而非 icon 属性。
+
+<Canvas of={ButtonStories.IconComponent} />
+
+> 依赖引用：
+
+```ts
+import { h } from 'vue';
+import { SearchOutlined } from '@ant-design/icons-vue';
+```
+
+## {ButtonStories.MultipleComponent.storyName}
+
+> 按钮组合使用时，推荐使用 1 个主操作 + n 个次操作，3 个以上操作时把更多操作放到 `Dropdown.Button` 中组合使用。
+
+<Canvas of={ButtonStories.MultipleComponent} />
+
+> 依赖引用：
+
+```ts
+import { Dropdown, Menu, MenuItem } from 'ant-design-vue';
+import { DownOutlined } from '@ant-design/icons-vue';
+```
+
+## {ButtonStories.BlockComponent.storyName}
+
+> `block` 属性将使按钮适合其父宽度。
+
+<Canvas of={ButtonStories.BlockComponent} />
+
+---
 
 ## API
 

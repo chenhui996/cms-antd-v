@@ -54,14 +54,16 @@
   --cs-font-size-lg: 18px;
 }
 
+@border-color-block: rgba(184, 223, 255,0.76);
+
 // ------------------------------------------------------------------------------------------
 // btn
 // ------------------------------------------------------------------------------------------
 
 // padding
-@btn-size-sm-padding: 0 var(--cs-padding-size-sm);
-@btn-size-md-padding: 0 var(--cs-padding-size-md);
-@btn-size-lg-padding: 0 var(--cs-padding-size-md);
+@btn-size-sm-padding: 0px var(--cs-padding-size-sm);
+@btn-size-md-padding: 4px var(--cs-padding-size-md);
+@btn-size-lg-padding: 6.5px var(--cs-padding-size-md);
 
 // border
 @btn-border-width: 1px;
@@ -69,6 +71,9 @@
 @btn-size-sm-border-radius: var(--cs-border-radius-sm);
 @btn-size-md-border-radius: var(--cs-border-radius-sm);
 @btn-size-lg-border-radius: var(--cs-border-radius-sm);
+@btn-around-size-sm-border-radius: 24px;
+@btn-around-size-md-border-radius: 32px;
+@btn-around-size-lg-border-radius: 40px;
 
 // height
 @btn-size-sm-height: 24px;
@@ -133,6 +138,33 @@
 @btn-dashed-bg-ghost-hover: transparent;
 @btn-dashed-bg-ghost-active: transparent;
 @btn-dashed-bg-ghost-disabled: transparent;
+// text
+@btn-text-bg: transparent;
+@btn-text-bg-hover: var(--cs-grey-4);
+@btn-text-bg-active: var(--cs-grey-4);
+@btn-text-bg-disabled: transparent;
+@btn-text-bg-dangerous: transparent;
+@btn-text-bg-dangerous-hover: var(--cs-red-1);
+@btn-text-bg-dangerous-active: var(--cs-red-1);
+@btn-text-bg-dangerous-disabled: transparent;
+// text-primary
+@btn-text-primary-bg: transparent;
+@btn-text-primary-bg-hover: var(--cs-bule-1);
+@btn-text-primary-bg-active: var(--cs-bule-1);
+@btn-text-primary-bg-disabled: transparent;
+@btn-text-primary-bg-dangerous: transparent;
+@btn-text-primary-bg-dangerous-hover: var(--cs-red-1);
+@btn-text-primary-bg-dangerous-active: var(--cs-red-1);
+@btn-text-primary-bg-dangerous-disabled: transparent;
+// link
+@btn-link-bg: transparent;
+@btn-link-bg-hover: transparent;
+@btn-link-bg-active: transparent;
+@btn-link-bg-disabled: transparent;
+@btn-link-bg-dangerous: transparent;
+@btn-link-bg-dangerous-hover: transparent;
+@btn-link-bg-dangerous-active: transparent;
+@btn-link-bg-dangerous-disabled: transparent;
 
 // border color
 // primary
@@ -187,6 +219,34 @@
 @btn-dashed-border-color-ghost-hover: @btn-dashed-border-color-hover;
 @btn-dashed-border-color-ghost-active: @btn-dashed-border-color-active;
 @btn-dashed-border-color-ghost-disabled: @btn-dashed-border-color-disabled;
+// text
+@btn-text-border-color: transparent;
+@btn-text-border-color-hover: var(--cs-grey-4);
+@btn-text-border-color-active: var(--cs-grey-4);
+@btn-text-border-color-disabled: transparent;
+@btn-text-border-color-dangerous: transparent;
+@btn-text-border-color-dangerous-hover: var(--cs-red-1);
+@btn-text-border-color-dangerous-active: var(--cs-red-1);
+@btn-text-border-color-dangerous-disabled: transparent;
+// text-primary
+@btn-text-primary-border-color: transparent;
+@btn-text-primary-border-color-hover: var(--cs-bule-1);
+@btn-text-primary-border-color-active:  var(--cs-bule-1);
+@btn-text-primary-border-color-disabled: transparent;
+@btn-text-primary-border-color-dangerous: transparent;
+@btn-text-primary-border-color-dangerous-hover: var(--cs-red-1);
+@btn-text-primary-border-color-dangerous-active: var(--cs-red-1);
+@btn-text-primary-border-color-dangerous-disabled: transparent;
+// link
+@btn-link-border-color: transparent;
+@btn-link-border-color-hover: transparent;
+@btn-link-border-color-active:  transparent;
+@btn-link-border-color-disabled: transparent;
+@btn-link-border-color-dangerous: transparent;
+@btn-link-border-color-dangerous-hover: transparent;
+@btn-link-border-color-dangerous-active: transparent;
+@btn-link-border-color-dangerous-disabled: transparent;
+
 // color
 // primary
 @btn-primary-color: var(--cs-grey-1);
@@ -210,7 +270,7 @@
 @btn-second-color-dangerous: var(--cs-red-5);
 @btn-second-color-dangerous-hover: var(--cs-red-4);
 @btn-second-color-dangerous-active: var(--cs-red-7);
-@btn-second-color-dangerous-disabled: var(--cs-grey-6);
+@btn-second-color-dangerous-disabled: var(--cs-grey-7);
 @btn-second-color-ghost: @btn-second-bg;
 @btn-second-color-ghost-hover: @btn-second-color-hover;
 @btn-second-color-ghost-active: @btn-second-color-active;
@@ -223,7 +283,7 @@
 @btn-weak-color-dangerous:var(--cs-red-5);
 @btn-weak-color-dangerous-hover: var(--cs-red-4);
 @btn-weak-color-dangerous-active: var(--cs-red-7);
-@btn-weak-color-dangerous-disabled: var(--cs-grey-6);
+@btn-weak-color-dangerous-disabled: var(--cs-grey-7);
 @btn-weak-color-ghost: @btn-weak-bg;
 @btn-weak-color-ghost-hover: @btn-weak-color-hover;
 @btn-weak-color-ghost-active: @btn-weak-color-active;
@@ -236,11 +296,38 @@
 @btn-dashed-color-dangerous: var(--cs-red-5);
 @btn-dashed-color-dangerous-hover: var(--cs-red-4);
 @btn-dashed-color-dangerous-active: var(--cs-red-7);
-@btn-dashed-color-dangerous-disabled: var(--cs-grey-6);
+@btn-dashed-color-dangerous-disabled:var(--cs-grey-7);
 @btn-dashed-color-ghost: @btn-dashed-bg;
 @btn-dashed-color-ghost-hover: @btn-dashed-color-hover;
 @btn-dashed-color-ghost-active: @btn-dashed-color-active;
 @btn-dashed-color-ghost-disabled: @btn-dashed-color-disabled;
+// text
+@btn-text-color: var(--cs-grey-8);
+@btn-text-color-hover: var(--cs-grey-9);
+@btn-text-color-active: var(--cs-grey-10);
+@btn-text-color-disabled: var(--cs-grey-7);
+@btn-text-color-dangerous: var(--cs-red-5);
+@btn-text-color-dangerous-hover: var(--cs-red-4);
+@btn-text-color-dangerous-active: var(--cs-red-7);
+@btn-text-color-dangerous-disabled:  var(--cs-grey-7);
+// text-primary
+@btn-text-primary-color: var(--cs-bule-6);
+@btn-text-primary-color-hover: var(--cs-bule-5);
+@btn-text-primary-color-active: var(--cs-bule-7);
+@btn-text-primary-color-disabled: var(--cs-grey-7);
+@btn-text-primary-color-dangerous: var(--cs-red-5);
+@btn-text-primary-color-dangerous-hover: var(--cs-red-4);
+@btn-text-primary-color-dangerous-active: var(--cs-red-7);
+@btn-text-primary-color-dangerous-disabled:  var(--cs-grey-7);
+// link
+@btn-link-color: var(--cs-bule-6);
+@btn-link-color-hover: var(--cs-bule-5);
+@btn-link-color-active: var(--cs-bule-7);
+@btn-link-color-disabled: var(--cs-grey-7);
+@btn-link-color-dangerous: var(--cs-red-5);
+@btn-link-color-dangerous-hover: var(--cs-red-4);
+@btn-link-color-dangerous-active: var(--cs-red-7);
+@btn-link-color-dangerous-disabled:  var(--cs-grey-7);
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------

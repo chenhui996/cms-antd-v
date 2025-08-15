@@ -24,7 +24,7 @@ export interface BaseButtonProps extends Omit<ButtonProps, "type"> {
     /** 相当于 a 链接的 target 属性，href 存在时生效 */
     target?: string
     /** 设置按钮类型 */
-    type?: 'primary' | 'dashed' | 'link' | 'text' | 'second' | 'weak';
+    type?: 'primary' | 'dashed' | 'link' | 'second' | 'weak' | 'text' | 'text-primary';
     /** 添加样式 */
     style?: Object
     /** 功能码，埋点用 */

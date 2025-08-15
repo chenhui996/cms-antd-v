@@ -2,7 +2,7 @@
   .docblock-source {
     .prismjs {
       // background-color: rgb(246, 249, 252) !important;
-      background-color: rgb(255,255,255) !important;
+      background-color: rgb(255, 255, 255) !important;
       background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px !important;
       background-position: 16px 16px, 16px 16px, 16px 16px, 16px 16px !important;
       background-blend-mode: difference !important;
@@ -15,7 +15,7 @@
 
   .css-xzp052 {
     // background-color: rgb(246, 249, 252) !important;
-    background-color: rgb(255,255,255) !important;
+    background-color: rgb(255, 255, 255) !important;
     background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px !important;
     background-position: 16px 16px, 16px 16px, 16px 16px, 16px 16px !important;
     background-blend-mode: difference !important;
@@ -24,14 +24,26 @@
       linear-gradient(rgba(130, 130, 130, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(130, 130, 130, 0.05) 1px, transparent 1px) !important;
   }
+
+  blockquote {
+    margin-bottom: -12px !important;
+
+    p {
+      line-height: 1em;
+      font-size: 12px;
+
+      code {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .sbdocs-preview + blockquote{
+    margin-top: -26px !important;
+  }
 }
 
 .storybook-demo {
-  .cs-btn + .cs-btn {
-    margin-left: 8px;
-    margin-bottom: 16px;
-  }
-
   .story-desc-span {
     font-size: 12px;
     color: #8c8c8c;
@@ -40,8 +52,20 @@
 
   .story-bg-gary {
     background-color: rgba(190, 200, 200, 1);
-    padding: 16px 16px 0 10px;
     border-radius: 4px;
+    padding: 8px;
+    padding-bottom: 0;
+  }
+
+  // .story-flex-wrap {
+  //   display: flex;
+  //   align-items: flex-start;
+  //   flex-wrap: wrap;
+  //   gap: 8px;
+  // }
+
+  .cs-btn + .cs-btn {
+    margin: 0 0 8px 8px;
   }
 }
 
@@ -51,9 +75,9 @@
     background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px !important;
     background-position: 16px 16px, 16px 16px, 16px 16px, 16px 16px !important;
     background-blend-mode: difference !important;
-    background-image: linear-gradient(rgba(130, 130, 130, 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(130, 130, 130, 0.4) 1px, transparent 1px),
-      linear-gradient(rgba(130, 130, 130, 0.2) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(130, 130, 130, 0.2) 1px, transparent 1px) !important;
+    background-image: linear-gradient(rgba(130, 130, 130, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(130, 130, 130, 0.2) 1px, transparent 1px),
+      linear-gradient(rgba(130, 130, 130, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(130, 130, 130, 0.1) 1px, transparent 1px) !important;
   }
 }
