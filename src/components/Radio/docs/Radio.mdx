@@ -1,0 +1,31 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import Radio from '../Radio.vue';
+import RadioGroup from '../RadioGroup.vue';
+import * as RadioStories from './Radio.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={RadioStories} />
+
+<Title />
+
+> 按钮用于开始一个即时操作。标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。
+
+```ts
+import { Button } from "cms-antd-v";
+```
+
+## {RadioStories.Default.storyName}
+
+<Canvas of={RadioStories.Default} />
+
+## {RadioStories.GroupComponent.storyName}
+
+<Canvas of={RadioStories.GroupComponent} />
+
+---
+
+## API
+
+<ArgTypes of={Radio} />
+<ArgTypes of={RadioGroup} />
