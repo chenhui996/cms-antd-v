@@ -47,7 +47,7 @@ export const Default = () => {
   }
 };
 
-Default.storyName = "默认 button";
+Default.storyName = "基本使用 button";
 Default.parameters = parameters(Default)
 
 export const TypesComponent = () => ({

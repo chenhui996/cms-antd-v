@@ -8,7 +8,7 @@ export interface BaseRadioProps extends RadioProps {
     /** 禁用 Radio */
     disabled?: boolean;
     /** 根据 value 进行比较，判断是否选中 */
-    value?: boolean;
+    value?: boolean | string | number;
 }
 
 export interface BaseRadioGroupProps extends RadioGroupProps {
@@ -29,9 +29,17 @@ export interface BaseRadioGroupProps extends RadioGroupProps {
 }
 
 export type CSRadioProps = BaseRadioProps
+export type CSRadioButtonProps = BaseRadioProps
 export type CSRadioGroupProps = BaseRadioGroupProps
 
 export interface RadioEmits {
+    /** 获取焦点 */
+    (e: 'focus', event: MouseEvent): void
+    /** 移除焦点 */
+    (e: 'blur', event: MouseEvent): void
+}
+
+export interface RadioButtonEmits {
     /** 获取焦点 */
     (e: 'focus', event: MouseEvent): void
     /** 移除焦点 */

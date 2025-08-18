@@ -50,6 +50,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   </ConfigProvider>
 </template>
 
-<style scoped lang="less">
+<style lang="less">
 @import './styles.less';
 </style>
