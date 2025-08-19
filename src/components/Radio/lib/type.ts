@@ -17,7 +17,7 @@ export interface BaseRadioGroupProps extends RadioGroupProps {
     /** 禁选所有子单选器 */
     disabled?: boolean;
     /** RadioGroup 下所有 input[type="radio"] 的 name 属性 */
-    name?: 'string';
+    name?: string;
     /** 以配置形式设置子元素 */
     options?: string[] | number[] | Array<{ label: string; value: string; disabled?: boolean }>;
     /** 用于设置 Radio options 类型 */

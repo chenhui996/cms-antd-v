@@ -77,7 +77,7 @@
   }
 
   // checked
-  &.ant-radio-wrapper-checked{
+  &.ant-radio-wrapper-checked {
     .ant-radio-checked {
       .ant-radio-inner {
         background-color: @bg-active !important;
@@ -94,6 +94,90 @@
       .ant-radio-inner {
         background-color: @bg-disabled !important;
         border-color: @border-color-disabled !important;
+      }
+    }
+  }
+}
+
+// checkbox
+.checkbox-color(
+  @color,
+  @border-color-hover,
+  @border-color-active,
+  @border-color-active-hover,
+  @border-color-disabled,
+  @border-color-disabled-hover,
+  @bg-active,
+  @bg-active-hover,
+  @bg-disabled,
+  @bg-disabled-hover,
+  ) {
+  color: @color;
+
+  .ant-checkbox {
+    .ant-checkbox-inner {
+      &:after {
+        transform: rotate(45deg) scale(0.8) translate(-60%, -60%);
+      }
+    }
+    
+    &.ant-checkbox-indeterminate {
+      .ant-checkbox-inner {
+        &:after {
+          background-color: @bg-active;
+          transform: translate(-50%, -50%) scale(1);
+        }
+
+        &.ant-checkbox-checked {
+          &:after,
+          &:hover {
+            border-color: @border-color-active;
+          }
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        border-color: @border-color-active;
+      }
+    }
+  }
+
+  &.ant-checkbox-wrapper-checked {
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        border-color: @border-color-active;
+        background-color: @bg-active;
+      }
+    }
+
+    &:hover {
+      .ant-checkbox {
+        .ant-checkbox-inner {
+          border-color: @border-color-active-hover;
+          background-color: @bg-active-hover;
+        }
+      }
+    }
+  }
+
+  &.ant-checkbox-wrapper-disabled {
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        border-color: @border-color-disabled;
+        background-color: @bg-disabled;
+      }
+    }
+
+    &:hover {
+      .ant-checkbox {
+        .ant-checkbox-inner {
+          border-color: @border-color-disabled-hover;
+          background-color: @bg-disabled-hover;
+        }
       }
     }
   }
