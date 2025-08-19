@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { withDefaults, useAttrs, computed } from 'vue'
+import { useAttrs, computed } from 'vue'
 import { CheckboxGroup as ACheckboxGroup, ConfigProvider } from 'ant-design-vue'
 import type { CheckboxGroupProps } from 'ant-design-vue/lib/checkbox'
 import useForward from '@/hooks/useForward'

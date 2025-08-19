@@ -20,15 +20,24 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 
+const setupMatch = (code: string) => {
+  const matches = code.matchAll(/const\s+\w+\s*=\s*ref\([^)]+\);/g);
+  const extractedLines = Array.from(matches).map(match => match[0]);
+
+  // console.log(extractedLines.join('\n'));
+
+  return extractedLines.join('\n') || ''
+}
+
 const parameters = (instance: any) => {
   return {
     docs: {
       source: {
         code: `
 <template>${instance().template}</template>
-  
+
 <script lang="ts" setup>
-${instance().setup ? `${instance().setup}` : ''}
+${instance().setup ? `${setupMatch(String(instance().setup))}` : ''}
 </script>
 `
       }
