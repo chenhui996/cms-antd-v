@@ -1,30 +1,24 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { useAttrs, computed } from 'vue'
-import { Button as AButton, ConfigProvider } from 'ant-design-vue'
-import type { ButtonProps } from 'ant-design-vue/lib/button/buttonTypes'
+import { withDefaults, useAttrs, computed } from 'vue'
+import { Checkbox as ACheckbox, ConfigProvider } from 'ant-design-vue'
+import type { CheckboxProps } from 'ant-design-vue/lib/checkbox'
 import useForward from '@/hooks/useForward'
-import type { CSButtonProps, ButtonEmits } from './lib/type'
+import type { CSCheckboxProps, CheckboxEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSButton',
+  name: 'CSCheckbox',
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<CSButtonProps>(), {
-  block: false,
-  danger: false,
-  disabled: false,
-  ghost: false,
-  loading: false,
-  shape: 'default',
-  size: 'middle',
-  htmlType: 'button',
-  type: 'primary'
+const props = withDefaults(defineProps<CSCheckboxProps>(), {
+  autofocus: false,
+  checked: false,
+  disabled: false
 })
 
-defineEmits<ButtonEmits>()
+defineEmits<CheckboxEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -33,18 +27,12 @@ const options = computed(() => {
   return {
     ...props,
     ...restAttrs
-  } as ButtonProps
+  } as CheckboxProps
 })
 
 // 组件初始化 class
 const classes = computed(() => {
-  console.log('props', props)
-
-  const type = props.type
-
-  return cs('cs-btn', {
-    [`cs-btn-${type}`]: type
-  })
+  return cs('cs-checkbox')
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -56,13 +44,9 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AButton v-bind="options" :style="mergedStyle" :class="mergedClass">
-      <!-- 透传所有 slots -->
+    <ACheckbox v-bind="options" :style="mergedStyle" :class="mergedClass">
       <slot />
-      <template #icon>
-        <slot name="icon" />
-      </template>
-    </AButton>
+    </ACheckbox>
   </ConfigProvider>
 </template>
 

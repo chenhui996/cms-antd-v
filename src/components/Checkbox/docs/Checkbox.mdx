@@ -1,0 +1,81 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import Checkbox from '../Checkbox.vue';
+import CheckboxGroup from '../CheckboxGroup.vue';
+import * as CheckboxStories from './Checkbox.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={CheckboxStories} />
+
+<Title />
+
+> 在一组可选项中进行多项选择时；<br /><br />
+> 单独使用可以表示两种状态之间的切换，和 switch 类似。区别在于切换 switch 会直接触发状态改变，而 checkbox 一般用于状态标记，需要和提交操作配合。
+
+```ts
+import { Checkbox, CheckboxGroup } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {CheckboxStories.Default.storyName}
+
+> 简单的 Checkbox。
+
+<Canvas of={CheckboxStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {CheckboxStories.ControlComponent.storyName}
+
+> 联动 Checkbox。
+
+<Canvas of={CheckboxStories.ControlComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {CheckboxStories.DisabledComponent.storyName}
+
+> 不可用 Checkbox。
+
+<Canvas of={CheckboxStories.DisabledComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {CheckboxStories.GroupComponent.storyName}
+
+> 方便的从数组生成 Checkbox。
+
+<Canvas of={CheckboxStories.GroupComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {CheckboxStories.SelectAllComponent.storyName}
+
+> 在实现全选效果时，你可能会用到 indeterminate 属性。
+
+<Canvas of={CheckboxStories.SelectAllComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {CheckboxStories.GridLayoutComponent.storyName}
+
+> Checkbox.Group 内嵌 Checkbox 并与 Grid 组件一起使用，可以实现灵活的布局。
+
+<Canvas of={CheckboxStories.GridLayoutComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Checkbox
+
+<ArgTypes of={Checkbox} />
+
+### CheckboxGroup
+
+<ArgTypes of={CheckboxGroup} />

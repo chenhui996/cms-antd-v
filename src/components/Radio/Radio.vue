@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { withDefaults, defineProps, defineEmits, useAttrs, computed } from 'vue'
+import { withDefaults, useAttrs, computed } from 'vue'
 import { Radio as ARadio, ConfigProvider } from 'ant-design-vue'
 import type { RadioProps } from 'ant-design-vue/lib/radio'
 import useForward from '@/hooks/useForward'
