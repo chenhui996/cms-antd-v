@@ -2,29 +2,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
 import { withDefaults, defineProps, defineEmits, useAttrs, computed } from 'vue'
-import { Button as AButton, ConfigProvider } from 'ant-design-vue'
-import type { ButtonProps } from 'ant-design-vue/lib/button/buttonTypes'
+import { Radio as ARadio, ConfigProvider } from 'ant-design-vue'
+import type { RadioProps } from 'ant-design-vue/lib/radio'
 import useForward from '@/hooks/useForward'
-import type { CSButtonProps, ButtonEmits } from './lib/type'
+import type { CSRadioProps, RadioEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSButton',
+  name: 'CSRadio',
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<CSButtonProps>(), {
-  block: false,
-  danger: false,
-  disabled: false,
-  ghost: false,
-  loading: false,
-  shape: 'default',
-  size: 'middle',
-  htmlType: 'button',
-  type: 'primary'
+const props = withDefaults(defineProps<CSRadioProps>(), {
+  autofocus: false,
+  checked: false,
+  disabled: false
 })
 
-defineEmits<ButtonEmits>()
+defineEmits<RadioEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -33,18 +27,12 @@ const options = computed(() => {
   return {
     ...props,
     ...restAttrs
-  } as ButtonProps
+  } as RadioProps
 })
 
 // 组件初始化 class
 const classes = computed(() => {
-  console.log('props', props)
-
-  const type = props.type
-
-  return cs('cs-btn', {
-    [`cs-btn-${type}`]: type
-  })
+  return cs('cs-radio')
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -56,12 +44,9 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AButton v-bind="options" :style="mergedStyle" :class="mergedClass">
-      <template #icon>
-        <slot name="icon" />
-      </template>
+    <ARadio v-bind="options" :style="mergedStyle" :class="mergedClass">
       <slot />
-    </AButton>
+    </ARadio>
   </ConfigProvider>
 </template>
 

@@ -4,7 +4,7 @@ import type { Meta } from '@storybook/vue3';
 import {RadioButton, RadioGroup, Space, Tooltip, Dropdown, Menu, MenuItem} from 'ant-design-vue'
 import { PoweroffOutlined, DownloadOutlined, SearchOutlined, DownOutlined } from '@ant-design/icons-vue';
 import type { SizeType } from 'ant-design-vue/lib/config-provider';
-import './style.less'
+import './style.less';
 
 const components = { Button }
 
@@ -18,7 +18,6 @@ const meta: Meta<typeof Button> = {
   ],
 };
 
-//👇 This default export determines where your story goes in the story list
 export default meta;
 
 const parameters = (instance: any) => {
@@ -37,6 +36,8 @@ ${instance().setup ? `${instance().setup}` : ''}
   }
 }
 
+// ------------------------------------------------------------------------------------------------------------------------
+
 export const Default = () => {
   return {
     components,
@@ -46,7 +47,7 @@ export const Default = () => {
   }
 };
 
-Default.storyName = "默认 button";
+Default.storyName = "基本使用 button";
 Default.parameters = parameters(Default)
 
 export const TypesComponent = () => ({

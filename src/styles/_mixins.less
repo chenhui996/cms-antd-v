@@ -41,3 +41,60 @@
     cursor: not-allowed;
   }
 }
+
+// radio
+.radio-color(
+//bg
+@bg,
+@bg-hover,
+@bg-active,
+@bg-disabled,
+// border-color
+@border-color,
+@border-color-hover,
+@border-color-active,
+@border-color-disabled,
+// color
+@color,
+@color-disabled,
+) {
+  color: @color;
+
+  .ant-radio {
+    .ant-radio-inner {
+      background-color: @bg;
+      border-color: @border-color;
+    }
+  }
+
+  &:hover {
+    .ant-radio {
+      .ant-radio-inner {
+        background-color: @bg-hover;
+        border-color: @border-color-hover;
+      }
+    }
+  }
+
+  // checked
+  &.ant-radio-wrapper-checked{
+    .ant-radio-checked {
+      .ant-radio-inner {
+        background-color: @bg-active !important;
+        border-color: @border-color-active !important;
+      }
+    }
+  }
+
+  // disabled
+  &.ant-radio-wrapper-disabled {
+    color: @color-disabled !important;
+
+    .ant-radio.ant-radio-disabled {
+      .ant-radio-inner {
+        background-color: @bg-disabled !important;
+        border-color: @border-color-disabled !important;
+      }
+    }
+  }
+}

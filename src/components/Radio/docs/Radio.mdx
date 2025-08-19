@@ -1,0 +1,98 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import Radio from '../Radio.vue';
+import RadioGroup from '../RadioGroup.vue';
+import * as RadioStories from './Radio.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={RadioStories} />
+
+<Title />
+
+> 用于在多个备选项中选中单个状态。和 Select 的区别是，Radio 所有选项默认可见，方便用户在比较中选择，因此选项不宜过多。
+
+```ts
+import { Radio, RadioGroup, RadioButton } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={RadioStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.DisabledComponent.storyName}
+
+> Radio 不可用。
+
+<Canvas of={RadioStories.DisabledComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.NormalGroupComponent.storyName}
+
+> 一组互斥的 Radio 配合使用。
+
+<Canvas of={RadioStories.NormalGroupComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.NameComponent.storyName}
+
+> 可以为 Radio.Group 配置 `name` 参数，为组合内的 input 元素赋予相同的 `name` 属性，使浏览器把 Radio.Group 下的 Radio 真正看作是一组。
+>>例如可以通过方向键始终在同一组内更改选项。
+
+<Canvas of={RadioStories.NameComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.VerticalComponent.storyName}
+
+> 垂直的 RadioGroup，配合更多输入框选项。
+
+<Canvas of={RadioStories.VerticalComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.GroupComponent.storyName}
+
+> 按钮样式的单选组合。
+
+<Canvas of={RadioStories.GroupComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.FullColorComponent.storyName}
+
+> 实色填底的单选按钮样式。
+
+<Canvas of={RadioStories.FullColorComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.DiffGroupComponent.storyName}
+
+> 通过配置 `options` 参数来渲染单选框。
+
+<Canvas of={RadioStories.DiffGroupComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {RadioStories.SizeComponent.storyName}
+
+> 大中小三种组合，可以和表单输入框进行对应配合。
+
+<Canvas of={RadioStories.SizeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+<ArgTypes of={Radio} />
+<ArgTypes of={RadioGroup} />
