@@ -2,24 +2,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
 import { useAttrs, computed } from 'vue'
-import { InputSearch as AInputSearch, ConfigProvider } from 'ant-design-vue'
+import { InputPassword as AInputPassword, ConfigProvider } from 'ant-design-vue'
 import type { InputProps } from 'ant-design-vue/lib/input'
 import useForward from '@/hooks/useForward'
-import type { CSInputSearchProps, InputSearchEmits } from './lib/type'
+import type { CSInputPasswordProps, InputPasswordEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSInputSearch',
+  name: 'CSInputPassword',
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<CSInputSearchProps>(), {
+const props = withDefaults(defineProps<CSInputPasswordProps>(), {
   bordered: true,
   disabled: false,
   showCount: false,
-  type: 'text'
+  type: 'text',
+  visible: false,
+  visibilityToggle: true
 })
 
-defineEmits<InputSearchEmits>()
+defineEmits<InputPasswordEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -33,7 +35,7 @@ const options = computed(() => {
 
 // 组件初始化 class
 const classes = computed(() => {
-  return cs('cs-input-search')
+  return cs('cs-input-password')
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -45,7 +47,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AInputSearch v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <AInputPassword v-bind="options" :style="mergedStyle" :class="mergedClass">
       <template v-if="$slots.icon" #icon>
         <slot name="icon"></slot>
       </template>
@@ -61,11 +63,8 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       <template v-if="$slots.suffix" #suffix>
         <slot name="suffix"></slot>
       </template>
-      <template v-if="$slots.enterButton" #enterButton>
-        <slot name="enterButton"></slot>
-      </template>
       <slot></slot>
-    </AInputSearch>
+    </AInputPassword>
   </ConfigProvider>
 </template>
 

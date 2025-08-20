@@ -71,11 +71,11 @@ export interface BaseTextAreaProps extends TextAreaProps {
     value?: string
 }
 
-export interface BaseInputGroupProps extends InputProps {
+export interface BaseInputGroupProps {
     /** 可以点击清除图标删除内容 */
     compact?: boolean
     /** Input.Group 中所有的 Input 的大小，可选 large default small */
-    size?: 'large' | 'middle' | 'small'
+    size?: 'large' | 'default' | 'small'
 }
 
 export interface BaseInputPasswordProps extends InputProps {
