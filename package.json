@@ -2,10 +2,27 @@
   "name": "cms-ui",
   "version": "0.0.0",
   "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./style": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
     "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
-    "build": "storybook build -o ./dist",
+    "build": "storybook build -o ./dist-storybook",
+    "build-lib": "vite build --config vite.lib.config.ts",
+    "preview": "npx serve dist-storybook -p 8000",
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
@@ -62,8 +79,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^8.6.10",
+    "terser": "^5.43.1",
     "typescript": "~5.0.4",
     "vite": "^4.3.9",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^0.32.0",
     "vue-tsc": "^1.6.5"
   }

@@ -1,0 +1,35 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import Input from '../Input.vue'
+import * as InputStories from './Input.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={InputStories} />
+
+<Title />
+
+> 通过鼠标或键盘输入内容，是最基础的表单域的包装。<br /><br />
+> 使用：需要用户输入表单域内容时。提供组合型输入框，带搜索的输入框，还可以进行大小选择。
+
+```ts
+import { Input } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={InputStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Input
+
+<ArgTypes of={Input} />
