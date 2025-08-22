@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import cs from 'classnames'
 import { useAttrs, computed } from 'vue'
 import { InputPassword as AInputPassword, ConfigProvider } from 'ant-design-vue'
 import type { InputProps } from 'ant-design-vue/lib/input'
+import cs from 'classnames'
 import useForward from '@/hooks/useForward'
 import type { CSInputPasswordProps, InputPasswordEmits } from './lib/type'
 
@@ -16,7 +16,6 @@ const props = withDefaults(defineProps<CSInputPasswordProps>(), {
   bordered: true,
   disabled: false,
   showCount: false,
-  type: 'text',
   visible: false,
   visibilityToggle: true
 })
@@ -24,21 +23,19 @@ const props = withDefaults(defineProps<CSInputPasswordProps>(), {
 defineEmits<InputPasswordEmits>()
 const attrs = useAttrs()
 
-// options 为合并后的 props+attrs（直接 v-bind 用）
+// 合并 props + attrs
 const options = computed(() => {
-  const { class: _unusedClass, style: _unusedStyle, type: _unusedType, ...restAttrs } = attrs
+  const { class: _class, style: _style, iconRender: _iconRender, ...restAttrs } = attrs
   return {
     ...props,
     ...restAttrs
   } as InputProps
 })
 
-// 组件初始化 class
-const classes = computed(() => {
-  return cs('cs-input-password')
-})
+// 组件 class
+const classes = computed(() => cs('cs-input-password'))
 
-// 使用通用透传 Hook 合并 style 和 class
+// style + class 透传 Hook
 const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
@@ -62,6 +59,9 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <template v-if="$slots.suffix" #suffix>
         <slot name="suffix"></slot>
+      </template>
+      <template v-if="$slots.iconRender" #iconRender="v">
+        <slot name="iconRender" v-bind="{ v }"></slot>
       </template>
       <slot></slot>
     </AInputPassword>

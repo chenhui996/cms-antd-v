@@ -81,8 +81,8 @@ export interface BaseInputGroupProps {
 export interface BaseInputPasswordProps extends InputProps {
     /** 密码是否可见 */
     visible?: boolean
-    /** 自定义切换按钮 */
-    iconRender?: Slot<any>
+    // /** 自定义切换按钮 */
+    // iconRender?: Slot<any>
     /** 是否显示切换按钮或者控制密码显隐 */
     visibilityToggle?: boolean
 }

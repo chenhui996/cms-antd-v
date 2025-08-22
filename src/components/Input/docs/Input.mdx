@@ -13,7 +13,7 @@ import { Title, Controls } from '@storybook/addon-docs'
 ```ts
 import { Input } from "cms-antd-v";
 ```
-
+{/* 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
 ## {InputStories.Default.storyName}
@@ -62,6 +62,108 @@ import { Input } from "cms-antd-v";
 > 我们为 `<Input />` 输入框定义了三种尺寸（大、默认、小），高度分别为 `40px`、`32px` 和 `24px`。
 
 <Canvas of={InputStories.SizeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.DifferentInputComponent.storyName}
+
+> 输入框的组合展现。 注意：使用 `compact` 模式时，不需要通过 `Col` 来控制宽度。
+
+<Canvas of={InputStories.DifferentInputComponent} />
+
+> 依赖引用：
+
+```ts
+import { CopyOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.FormatTooltipComponent.storyName}
+
+> 结合 `Tooltip` 组件，实现一个数值输入框，方便内容超长时的全量展现。
+
+<Canvas of={InputStories.FormatTooltipComponent} />
+
+> 依赖引用：
+
+```ts
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.AddonComponent.storyName}
+
+> 设置 `addonBefore` 和 `addonAfter` 属性，可以添加前置和后置标签。
+
+<Canvas of={InputStories.AddonComponent} />
+
+> 依赖引用：
+
+```ts
+import { SettingOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.ClearIconComponent.storyName}
+
+> 带移除图标的输入框，点击图标删除所有内容。
+
+<Canvas of={InputStories.ClearIconComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.PasswordComponent.storyName}
+
+> 密码框。
+
+<Canvas of={InputStories.PasswordComponent} />
+
+> 依赖引用：
+
+```ts
+import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.TipNumberComponent.storyName}
+
+> 带计数器的输入框。
+
+<Canvas of={InputStories.TipNumberComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.TextareaComponent.storyName}
+
+> 文本域 textarea。
+
+<Canvas of={InputStories.TextareaComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.StatusComponent.storyName}
+
+> 使用 `status` 为 Input 添加状态，可选 `error` 或者 `warning`。
+
+<Canvas of={InputStories.StatusComponent} />
+
+> 依赖引用：
+
+```ts
+import { ClockCircleOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputStories.NoBorderComponent.storyName}
+
+> 没有边框。
+
+<Canvas of={InputStories.NoBorderComponent} />
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
