@@ -21,11 +21,27 @@ const meta: Meta<typeof Input> = {
 
 export default meta;
 
+function trimFirstTwoSpaces(str: string) {
+  if (str.startsWith('    ')) {
+    return str.slice(4);
+  }
+  return str;
+}
+
 const setupMatch = (code: string) => {
   const matches = code.matchAll(/const\s+\w+\s*=\s*ref\([^)]+\);/g);
   const extractedLines = Array.from(matches).map(match => match[0]);
 
-  // console.log(extractedLines.join('\n'));
+  const regex = /setup\(\)\s*\{([\s\S]*?)\s*return\s*\{/;
+  const match = code.match(regex);
+  
+  if (match && match[1]) {
+    const setupContent = match[1].split('\n').slice(1).map(line => trimFirstTwoSpaces(line)).join('\n');
+    // console.log(setupContent);
+    return setupContent
+  }
+
+  // console.log(code, extractedLines);
 
   return extractedLines.join('\n') || ''
 }
@@ -48,6 +64,35 @@ ${instance().setup ? `${setupMatch(String(instance().setup))}` : ''}
 
 // ------------------------------------------------------------------------------------------------------------------------
 
+// export const Default = () => {
+//   return {
+//     components: {
+//       Input,
+//       Space
+//     },
+//     setup() {
+//       const value = ref<string>('');
+//       const value1 = ref<string>('');
+//       watch(value, () => {
+//         console.log(value.value);
+//       });
+//       watch(value1, () => {
+//         console.log(value1.value);
+//       });
+//       return {
+//         value,
+//         value1
+//       }
+//     },
+//     template: `
+//   <Space direction="vertical">
+//     <Input v-model:value="value" placeholder="Basic usage" />
+//     <Input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
+//   </Space>
+// `
+//   }
+// };
+
 export const Default = () => {
   return {
     components: {
@@ -56,22 +101,17 @@ export const Default = () => {
     },
     setup() {
       const value = ref<string>('');
-      const value1 = ref<string>('');
       watch(value, () => {
         console.log(value.value);
       });
-      watch(value1, () => {
-        console.log(value1.value);
-      });
+
       return {
-        value,
-        value1
+        value
       }
     },
     template: `
   <Space direction="vertical">
-    <Input v-model:value="value" placeholder="Basic usage" />
-    <Input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
+    <Input v-model:value="value" placeholder="Basic usage" :maxlength="10" />
   </Space>
 `
   }

@@ -25,6 +25,9 @@ const attrs = useAttrs()
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
   const { class: _unusedClass, style: _unusedStyle, type: _unusedType, ...restAttrs } = attrs
+
+  // console.log(props.maxlength, restAttrs);
+
   return {
     ...props,
     ...restAttrs
