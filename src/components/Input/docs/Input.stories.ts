@@ -4,7 +4,7 @@ import InputSearch from '../InputSearch.vue';
 import InputPassword from '../InputPassword.vue';
 import { Button } from '../../Button';
 import Textarea from '../TextArea.vue'
-import { Space, Tooltip, Select, DatePicker, AutoComplete, Cascader, Row, Col, InputGroup } from 'ant-design-vue'
+import { Space, Tooltip, Select, DatePicker, AutoComplete, Cascader, Row, Col, InputGroup, Divider } from 'ant-design-vue'
 import { UserOutlined, InfoCircleOutlined, CopyOutlined, SettingOutlined, ClockCircleOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons-vue';
 import type { Meta } from '@storybook/vue3';
 import './style.less';
@@ -34,7 +34,7 @@ const setupMatch = (code: string) => {
 
   const regex = /setup\(\)\s*\{([\s\S]*?)\s*return\s*\{/;
   const match = code.match(regex);
-  
+
   if (match && match[1]) {
     const setupContent = match[1].split('\n').slice(1).map(line => trimFirstTwoSpaces(line)).join('\n');
     // console.log(setupContent);
@@ -64,35 +64,6 @@ ${instance().setup ? `${setupMatch(String(instance().setup))}` : ''}
 
 // ------------------------------------------------------------------------------------------------------------------------
 
-// export const Default = () => {
-//   return {
-//     components: {
-//       Input,
-//       Space
-//     },
-//     setup() {
-//       const value = ref<string>('');
-//       const value1 = ref<string>('');
-//       watch(value, () => {
-//         console.log(value.value);
-//       });
-//       watch(value1, () => {
-//         console.log(value1.value);
-//       });
-//       return {
-//         value,
-//         value1
-//       }
-//     },
-//     template: `
-//   <Space direction="vertical">
-//     <Input v-model:value="value" placeholder="Basic usage" />
-//     <Input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
-//   </Space>
-// `
-//   }
-// };
-
 export const Default = () => {
   return {
     components: {
@@ -101,17 +72,22 @@ export const Default = () => {
     },
     setup() {
       const value = ref<string>('');
+      const value1 = ref<string>('');
       watch(value, () => {
         console.log(value.value);
       });
-
+      watch(value1, () => {
+        console.log(value1.value);
+      });
       return {
-        value
+        value,
+        value1
       }
     },
     template: `
   <Space direction="vertical">
-    <Input v-model:value="value" placeholder="Basic usage" :maxlength="10" />
+    <Input v-model:value="value" placeholder="Basic usage" />
+    <Input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
   </Space>
 `
   }
@@ -119,6 +95,33 @@ export const Default = () => {
 
 Default.storyName = "基本使用 input";
 Default.parameters = parameters(Default)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const OpenChineseComponent = () => {
+  return {
+    components: {
+      Input,
+      Space
+    },
+    setup() {
+      const value = ref<string>('');
+
+      return {
+        value
+      }
+    },
+    template: `
+  <Space direction="vertical">
+    <div>openChinese 基础使用</div>
+    <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese />
+  </Space>
+`
+  }
+};
+
+OpenChineseComponent.storyName = "汉字计数 openChinese";
+OpenChineseComponent.parameters = parameters(OpenChineseComponent)
 
 // ------------------------------------------------------------------------------------------------------------------------
 
@@ -873,3 +876,170 @@ export const NoBorderComponent = () => {
 
 NoBorderComponent.storyName = "无边框 no border";
 NoBorderComponent.parameters = parameters(NoBorderComponent)
+
+export const OpenChineseTest = () => {
+  return {
+    components: {
+      Input,
+      Space,
+      Divider
+    },
+    setup() {
+      const value1 = ref<string>('');
+      const value2 = ref<string>('');
+      const value3 = ref<string>('');
+      const eventLog = ref<string[]>([]);
+
+      const addLog = (message: string) => {
+        const timestamp = new Date().toLocaleTimeString();
+        eventLog.value.unshift(`[${timestamp}] ${message}`);
+        if (eventLog.value.length > 15) {
+          eventLog.value = eventLog.value.slice(0, 15);
+        }
+      };
+
+      const handleChange = (inputName: string, e: any) => {
+        const value = e.target?.value || e;
+        addLog(`${inputName} CHANGE: "${value}"`);
+        console.log(`${inputName} CHANGE 事件:`, e);
+      };
+
+      const handleInput = (inputName: string, e: any) => {
+        const value = e.target?.value || e;
+        addLog(`${inputName} INPUT: "${value}"`);
+        console.log(`${inputName} INPUT 事件:`, e);
+      };
+
+      const clearLog = () => {
+        eventLog.value = [];
+        addLog('日志已清空');
+      };
+
+      return {
+        value1,
+        value2,
+        value3,
+        eventLog,
+        handleChange,
+        handleInput,
+        clearLog
+      }
+    },
+    template: `
+  <Space direction="vertical" size="large" style="width: 100%">
+    <div>
+      <h3>openChinese 功能专项测试</h3>
+      <p>测试中文字符计数功能，验证 emit('change') 事件是否正确触发</p>
+    </div>
+
+    <Divider>测试用例 1: 基础中文字符计数</Divider>
+    <div>
+      <h4>Input (maxlength=10, openChinese=true):</h4>
+      <Input 
+        v-model:value="value1"
+        :open-chinese="true" 
+        :maxlength="10" 
+        placeholder="输入中英文混合内容" 
+        show-count 
+        @change="(e) => handleChange('Input1', e)"
+        @input="(e) => handleInput('Input1', e)"
+        style="width: 300px;"
+      />
+      <p>当前值: <code>{{ value1 }}</code></p>
+    </div>
+
+    <Divider>测试用例 2: 对比测试（无 openChinese）</Divider>
+    <div>
+      <h4>Input (maxlength=10, openChinese=false):</h4>
+      <Input 
+        v-model:value="value2"
+        :open-chinese="false" 
+        :maxlength="10" 
+        placeholder="对比：普通字符计数" 
+        show-count 
+        @change="(e) => handleChange('Input2', e)"
+        @input="(e) => handleInput('Input2', e)"
+        style="width: 300px;"
+      />
+      <p>当前值: <code>{{ value2 }}</code></p>
+    </div>
+
+    <Divider>测试用例 3: 长文本截断测试</Divider>
+    <div>
+      <h4>Input (maxlength=8, openChinese=true):</h4>
+      <Input 
+        v-model:value="value3"
+        :open-chinese="true" 
+        :maxlength="8" 
+        placeholder="测试截断：输入'你好世界hello'" 
+        show-count 
+        @change="(e) => handleChange('Input3', e)"
+        @input="(e) => handleInput('Input3', e)"
+        style="width: 300px;"
+      />
+      <p>当前值: <code>{{ value3 }}</code></p>
+      <p>预期：'你好世界hello' 应该被截断，因为中文字符占2位，总长度超过8</p>
+    </div>
+
+    <Divider>事件日志</Divider>
+    <div>
+      <div style="margin-bottom: 10px;">
+        <button @click="clearLog">清空日志</button>
+        <span style="margin-left: 10px; color: #666;">实时显示最近15条事件</span>
+      </div>
+      <div style="
+        background: #f8f9fa; 
+        padding: 15px; 
+        border-radius: 6px; 
+        max-height: 400px; 
+        overflow-y: auto;
+        font-family: monospace;
+        font-size: 12px;
+        border: 1px solid #dee2e6;
+      ">
+        <div v-if="eventLog.length === 0" style="color: #999; font-style: italic;">
+          等待事件触发...
+        </div>
+        <div 
+          v-for="(log, index) in eventLog" 
+          :key="index"
+          style="
+            margin: 3px 0; 
+            padding: 6px; 
+            background: white; 
+            border-left: 3px solid #28a745;
+            border-radius: 2px;
+            font-size: 11px;
+          "
+        >
+          {{ log }}
+        </div>
+      </div>
+    </div>
+
+    <Divider>测试步骤说明</Divider>
+    <div>
+      <h4>测试步骤：</h4>
+      <ol>
+        <li><strong>基础测试：</strong>在第一个输入框中输入 "hello世界" (5+4=9个字符)</li>
+        <li><strong>对比测试：</strong>在第二个输入框中输入相同内容，观察字符计数差异</li>
+        <li><strong>截断测试：</strong>在第三个输入框中输入 "你好世界hello" (8+5=13个字符长度，应该被截断)</li>
+        <li><strong>事件观察：</strong>观察事件日志，确认 change 事件是否正确触发</li>
+        <li><strong>控制台检查：</strong>打开浏览器控制台，查看详细的事件信息</li>
+      </ol>
+      
+      <h4>预期结果：</h4>
+      <ul>
+        <li>openChinese=true 时，中文字符占用2个字符长度</li>
+        <li>超出 maxlength 时，输入会被自动截断</li>
+        <li>每次输入和截断都会触发相应的 INPUT 和 CHANGE 事件</li>
+        <li>事件日志应该实时显示所有事件触发情况</li>
+      </ul>
+    </div>
+  </Space>
+`
+  }
+};
+
+OpenChineseTest.storyName = "openChinese 功能测试";
+OpenChineseTest.parameters = parameters(OpenChineseTest)

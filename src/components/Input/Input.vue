@@ -6,6 +6,7 @@ import { Input as AInput, ConfigProvider } from 'ant-design-vue'
 import type { InputProps } from 'ant-design-vue/lib/input'
 import useForward from '@/hooks/useForward'
 import type { CSInputProps, InputEmits } from './lib/type'
+import { getChineseCharLength, truncateToMaxLength } from './lib/chineseCount'
 
 defineOptions({
   name: 'CSInput',
@@ -16,10 +17,11 @@ const props = withDefaults(defineProps<CSInputProps>(), {
   bordered: true,
   disabled: false,
   showCount: false,
-  type: 'text'
+  type: 'text',
+  openChinese: false
 })
 
-defineEmits<InputEmits>()
+const emit = defineEmits<InputEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -44,11 +46,32 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+// 处理输入事件，实现中文字符计数限制
+const handleInput = (event: Event) => {
+  if (props.openChinese && props.maxlength) {
+    const target = event.target as HTMLInputElement
+    const value = target.value
+
+    // 如果超出长度限制，截断输入
+    if (getChineseCharLength(value) > props.maxlength) {
+      const truncatedValue = truncateToMaxLength(value, props.maxlength, true)
+      // console.log('truncatedValue', truncatedValue)
+      
+      // 使用 setTimeout 确保在下一个事件循环中执行，避免浏览器优化
+      setTimeout(() => {
+        target.value = truncatedValue
+        // 触发 input 事件，让 antd 知道值已改变
+        target.dispatchEvent(new Event('input', { bubbles: true }))
+      }, 0)
+    }
+  }
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AInput v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <AInput v-bind="options" :style="mergedStyle" :class="mergedClass" @input="handleInput">
       <template v-if="$slots.icon" #icon>
         <slot name="icon"></slot>
       </template>

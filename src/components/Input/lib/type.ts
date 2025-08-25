@@ -20,6 +20,8 @@ export interface BaseInputProps extends InputProps {
     id?: string
     /** 最大长度 */
     maxlength?: number
+    /** 开启中文字符计数（中文字符占用2字符） */
+    openChinese?: boolean
     /** 带有前缀图标的 input */
     prefix?: string | Slot<any>
     /** 是否展示字数 */
