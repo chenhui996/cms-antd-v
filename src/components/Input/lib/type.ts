@@ -100,6 +100,8 @@ export interface InputEmits {
     (e: 'change', event: any): void
     /** 按下回车的回调 */
     (e: 'pressEnter', event: any): void
+    /** v-model 更新事件 */
+    (e: 'update:value', value: string): void
 }
 
 export interface TextAreaEmits {

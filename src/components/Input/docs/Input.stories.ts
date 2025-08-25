@@ -68,27 +68,9 @@ export const Default = () => {
   return {
     components: {
       Input,
-      Space
-    },
-    setup() {
-      const value = ref<string>('');
-      const value1 = ref<string>('');
-      watch(value, () => {
-        console.log(value.value);
-      });
-      watch(value1, () => {
-        console.log(value1.value);
-      });
-      return {
-        value,
-        value1
-      }
     },
     template: `
-  <Space direction="vertical">
-    <Input v-model:value="value" placeholder="Basic usage" />
-    <Input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
-  </Space>
+   <Input placeholder="默认输入框" />
 `
   }
 };
@@ -102,19 +84,29 @@ export const OpenChineseComponent = () => {
   return {
     components: {
       Input,
-      Space
+      Space,
+      Button
     },
     setup() {
       const value = ref<string>('');
+      const value1 = ref<string>('');
+      watch(value1, (val) => {
+        console.log(val) // 只在最终不同才打印
+      })
 
       return {
-        value
+        value,
+        value1
       }
     },
     template: `
   <Space direction="vertical">
     <div>openChinese 基础使用</div>
     <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese />
+
+    <div>v-model</div>
+    <Input v-model:value="value1" placeholder="openChinese 配合 v-model" :maxlength="5" show-count open-chinese />
+    <Button @click="value1 = '测试内容中文计数'">设置为 "测试内容中文计数"，自动截取 5 个字符</Button>
   </Space>
 `
   }
@@ -1043,3 +1035,99 @@ export const OpenChineseTest = () => {
 
 OpenChineseTest.storyName = "openChinese 功能测试";
 OpenChineseTest.parameters = parameters(OpenChineseTest)
+
+export const CustomShowCount = () => {
+  return {
+    components: {
+      Input,
+      Space,
+      Divider
+    },
+    setup() {
+      const value1 = ref<string>('');
+      const value2 = ref<string>('');
+      const value3 = ref<string>('');
+
+      return {
+        value1,
+        value2,
+        value3
+      }
+    },
+    template: `
+  <Space direction="vertical" size="large" style="width: 100%">
+    <div>
+      <h3>自定义 showCount 功能测试</h3>
+      <p>测试当 openChinese 开启时，自定义的中文字符计数显示</p>
+    </div>
+
+    <Divider>测试用例 1: 中文字符计数 (openChinese=true, showCount=true)</Divider>
+    <div>
+      <h4>Input (maxlength=10, openChinese=true, showCount=true):</h4>
+      <Input 
+        v-model:value="value1"
+        :open-chinese="true" 
+        :maxlength="10" 
+        :show-count="true"
+        placeholder="输入中英文混合内容，观察字符计数" 
+        style="width: 300px;"
+      />
+      <p>当前值: <code>{{ value1 }}</code></p>
+      <p>说明: 中文字符占用2个字符长度，英文字符占用1个字符长度</p>
+    </div>
+
+    <Divider>测试用例 2: 对比测试（无 openChinese，使用 antd 默认计数）</Divider>
+    <div>
+      <h4>Input (maxlength=10, openChinese=false, showCount=true):</h4>
+      <Input 
+        v-model:value="value2"
+        :open-chinese="false" 
+        :maxlength="10" 
+        :show-count="true"
+        placeholder="对比：普通字符计数" 
+        style="width: 300px;"
+      />
+      <p>当前值: <code>{{ value2 }}</code></p>
+      <p>说明: 使用 antd 默认的字符计数，每个字符都算1个长度</p>
+    </div>
+
+    <Divider>测试用例 3: 无 showCount 对比</Divider>
+    <div>
+      <h4>Input (maxlength=10, openChinese=true, showCount=false):</h4>
+      <Input 
+        v-model:value="value3"
+        :open-chinese="true" 
+        :maxlength="10" 
+        :show-count="false"
+        placeholder="无字符计数显示" 
+        style="width: 300px;"
+      />
+      <p>当前值: <code>{{ value3 }}</code></p>
+      <p>说明: 不显示字符计数，但中文字符计数逻辑仍然生效</p>
+    </div>
+
+    <Divider>功能说明</Divider>
+    <div>
+      <h4>自定义 showCount 特性：</h4>
+      <ul>
+        <li><strong>智能切换：</strong>当 openChinese=true 时，自动禁用 antd 默认的 showCount</li>
+        <li><strong>中文字符计数：</strong>中文字符按 2 个字符计算，英文按 1 个字符计算</li>
+        <li><strong>剩余字符显示：</strong>显示剩余可输入的字符数</li>
+        <li><strong>完全兼容：</strong>不影响原有的 suffix 插槽功能</li>
+      </ul>
+      
+      <h4>测试步骤：</h4>
+      <ol>
+        <li><strong>中文字符测试：</strong>在第一个输入框中输入 "你好世界" (4个中文字符 = 8个字符长度)</li>
+        <li><strong>混合字符测试：</strong>继续输入 "hello" (5个英文字符 = 5个字符长度)</li>
+        <li><strong>对比观察：</strong>观察两个输入框的字符计数差异</li>
+        <li><strong>截断测试：</strong>尝试输入更多内容，观察自动截断和剩余字符显示</li>
+      </ol>
+    </div>
+  </Space>
+`
+  }
+};
+
+CustomShowCount.storyName = "自定义 showCount 功能";
+CustomShowCount.parameters = parameters(CustomShowCount)
