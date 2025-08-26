@@ -39,6 +39,7 @@ watch(
         const truncatedValue = truncateToMaxLength(newValue, props.maxlength, true)
         currentValue.value = truncatedValue
         emit('update:value', truncatedValue)
+        emit('value-update', truncatedValue)
         return
       }
     }

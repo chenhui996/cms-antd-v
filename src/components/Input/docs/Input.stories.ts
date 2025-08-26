@@ -4,7 +4,7 @@ import InputSearch from '../InputSearch.vue';
 import InputPassword from '../InputPassword.vue';
 import { Button } from '../../Button';
 import Textarea from '../TextArea.vue'
-import { Space, Tooltip, Select, DatePicker, AutoComplete, Cascader, Row, Col, InputGroup, Divider } from 'ant-design-vue'
+import { Space, Tooltip, Select, DatePicker, AutoComplete, Cascader, Row, Col, InputGroup, Divider, SelectOption } from 'ant-design-vue'
 import { UserOutlined, InfoCircleOutlined, CopyOutlined, SettingOutlined, ClockCircleOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons-vue';
 import type { Meta } from '@storybook/vue3';
 import './style.less';
@@ -90,13 +90,16 @@ export const OpenChineseComponent = () => {
     setup() {
       const value = ref<string>('');
       const value1 = ref<string>('');
-      watch(value1, (val) => {
-        console.log(val) // 只在最终不同才打印
-      })
+
+      // 用 value-update 事件来监听 v-model 的更新，用 watch 可能监听到多次
+      const handleUpdate = (val: string) => {
+        console.log('handleUpdate', val)
+      }
 
       return {
         value,
-        value1
+        value1,
+        handleUpdate
       }
     },
     template: `
@@ -105,7 +108,7 @@ export const OpenChineseComponent = () => {
     <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese />
 
     <div>v-model</div>
-    <Input v-model:value="value1" placeholder="openChinese 配合 v-model" :maxlength="5" show-count open-chinese />
+    <Input v-model:value="value1" @value-update="handleUpdate" placeholder="openChinese 配合 v-model" :maxlength="5" show-count open-chinese />
     <Button @click="value1 = '测试内容中文计数'">设置为 "测试内容中文计数"，自动截取 5 个字符</Button>
   </Space>
 `
@@ -174,13 +177,13 @@ export const AutoHeightTextAreaComponent = () => {
     <Textarea
       v-model:value="value1"
       placeholder="Autosize height based on content lines"
-      auto-size
+      autoSize
     />
     <div style="margin: 24px 0" />
     <Textarea
       v-model:value="value2"
       placeholder="Autosize height with minimum and maximum number of lines"
-      :auto-size="{ minRows: 2, maxRows: 5 }"
+      :autoSize="{ minRows: 2, maxRows: 5 }"
     />
   </div>
 `
@@ -316,6 +319,7 @@ export const DifferentInputComponent = () => {
       Input,
       InputGroup,
       Select,
+      SelectOption,
       DatePicker,
       AutoComplete,
       Cascader,
@@ -423,15 +427,15 @@ export const DifferentInputComponent = () => {
     </InputGroup>
     <InputGroup compact>
       <Select v-model:value="value3">
-        <Select.OptGroup value="Zhejiang">Zhejiang</Select.OptGroup>
-        <Select.OptGroup value="Jiangsu">Jiangsu</Select.OptGroup>
+        <SelectOption value="Zhejiang">Zhejiang</SelectOption>
+        <SelectOption value="Jiangsu">Jiangsu</SelectOption>
       </Select>
       <Input v-model:value="value4" style="width: 50%" />
     </InputGroup>
     <InputGroup compact>
       <Select v-model:value="value5">
-        <Select.OptGroup value="Option1">Option1</Select.OptGroup>
-        <Select.OptGroup value="Option2">Option2</Select.OptGroup>
+        <SelectOption value="Option1">Option1</SelectOption>
+        <SelectOption value="Option2">Option2</SelectOption>
       </Select>
       <Input v-model:value="value6" style="width: 50%" />
     </InputGroup>
@@ -441,18 +445,18 @@ export const DifferentInputComponent = () => {
     </InputGroup>
     <InputGroup compact>
       <Select v-model:value="value9">
-        <Select.OptGroup value="Option1-1">Option1-1</Select.OptGroup>
-        <Select.OptGroup value="Option1-2">Option1-2</Select.OptGroup>
+        <SelectOption value="Option1-1">Option1-1</SelectOption>
+        <SelectOption value="Option1-2">Option1-2</SelectOption>
       </Select>
       <Select v-model:value="value10">
-        <Select.OptGroup value="Option2-1">Option2-1</Select.OptGroup>
-        <Select.OptGroup value="Option2-2">Option2-2</Select.OptGroup>
+        <SelectOption value="Option2-1">Option2-1</SelectOption>
+        <SelectOption value="Option2-2">Option2-2</SelectOption>
       </Select>
     </InputGroup>
     <InputGroup compact>
       <Select v-model:value="value11">
-        <Select.OptGroup value="1">Between</Select.OptGroup>
-        <Select.OptGroup value="2">Except</Select.OptGroup>
+        <SelectOption value="1">Between</SelectOption>
+        <SelectOption value="2">Except</SelectOption>
       </Select>
       <Input
         v-model:value="value12"
@@ -475,8 +479,8 @@ export const DifferentInputComponent = () => {
     </InputGroup>
     <InputGroup compact>
       <Select v-model:value="value15">
-        <Select.OptGroup value="Sign Up">Sign Up</Select.OptGroup>
-        <Select.OptGroup value="Sign In">Sign In</Select.OptGroup>
+        <SelectOption value="Sign Up">Sign Up</SelectOption>
+        <SelectOption value="Sign In">Sign In</SelectOption>
       </Select>
       <AutoComplete
         v-model:value="value16"
@@ -487,8 +491,8 @@ export const DifferentInputComponent = () => {
     </InputGroup>
     <InputGroup compact>
       <Select v-model:value="value17" style="width: 30%">
-        <Select.OptGroup value="Home">Home</Select.OptGroup>
-        <Select.OptGroup value="Company">Company</Select.OptGroup>
+        <SelectOption value="Home">Home</SelectOption>
+        <SelectOption value="Company">Company</SelectOption>
       </Select>
       <Cascader
         v-model:value="value18"
@@ -611,7 +615,8 @@ export const AddonComponent = () => {
       Space,
       SettingOutlined,
       Cascader,
-      Select
+      Select,
+      SelectOption
     },
     setup() {
       const value1 = ref<string>('mysite');
@@ -636,16 +641,16 @@ export const AddonComponent = () => {
     <Input v-model:value="value2">
       <template #addonBefore>
         <Select v-model:value="value3" style="width: 90px">
-          <Select.OptGroup value="Http://">Http://</Select.OptGroup>
-          <Select.OptGroup value="Https://">Https://</Select.OptGroup>
+          <SelectOption value="Http://">Http://</SelectOption>
+          <SelectOption value="Https://">Https://</SelectOption>
         </Select>
       </template>
       <template #addonAfter>
         <Select v-model:value="value4" style="width: 80px">
-          <Select.OptGroup value=".com">.com</Select.OptGroup>
-          <Select.OptGroup value=".jp">.jp</Select.OptGroup>
-          <Select.OptGroup value=".cn">.cn</Select.OptGroup>
-          <Select.OptGroup value=".org">.org</Select.OptGroup>
+          <SelectOption value=".com">.com</SelectOption>
+          <SelectOption value=".jp">.jp</SelectOption>
+          <SelectOption value=".cn">.cn</SelectOption>
+          <SelectOption value=".org">.org</SelectOption>
         </Select>
       </template>
     </Input>
@@ -664,6 +669,7 @@ export const AddonComponent = () => {
 `
   }
 };
+
 
 AddonComponent.storyName = "前置/后置标签 addon";
 AddonComponent.parameters = parameters(AddonComponent)
@@ -783,6 +789,8 @@ export const TipNumberComponent = () => {
   }
 };
 
+
+
 TipNumberComponent.storyName = "带字数提示";
 TipNumberComponent.parameters = parameters(PasswordComponent)
 
@@ -808,6 +816,8 @@ export const TextareaComponent = () => {
 `
   }
 };
+
+
 
 TextareaComponent.storyName = "文本域 textarea";
 TextareaComponent.parameters = parameters(TextareaComponent)

@@ -38,8 +38,6 @@ const options = computed(() => {
 
 // 组件初始化 class
 const classes = computed(() => {
-  console.log('props', props)
-
   const type = props.type
 
   return cs('cs-btn', {

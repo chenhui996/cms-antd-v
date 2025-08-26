@@ -64,7 +64,7 @@ export interface BaseTextAreaProps extends TextAreaProps {
     /** 可以点击清除图标删除内容 */
     allowClear?: boolean
     /** 自适应内容高度，可设置为 true | false 或对象：{ minRows: 2, maxRows: 6 } */
-    autosize?: boolean | object
+    autoSize?: boolean | object
     /** 输入框默认内容 */
     defaultValue?: string
     /** 是否展示字数 */
@@ -102,6 +102,8 @@ export interface InputEmits {
     (e: 'pressEnter', event: any): void
     /** v-model 更新事件 */
     (e: 'update:value', value: string): void
+    /** 普通事件触发更新事件 */
+    (e: 'value-update', value: string): void
 }
 
 export interface TextAreaEmits {

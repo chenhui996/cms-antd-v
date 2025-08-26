@@ -9,14 +9,14 @@ import type { CSTextAreaProps, TextAreaEmits } from './lib/type'
 
 defineOptions({
   name: 'CSTextarea',
-  inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<CSTextAreaProps>(), {
+const props = withDefaults(defineProps<Omit<TextAreaProps, 'autosize'>>(), {
   bordered: true,
   disabled: false,
   showCount: false,
-  type: 'text'
+  type: 'text',
+  // autoSize: false
 })
 
 defineEmits<TextAreaEmits>()
@@ -28,7 +28,7 @@ const options = computed(() => {
   return {
     ...props,
     ...restAttrs
-  } as TextAreaProps
+  } as Omit<TextAreaProps, 'autosize'>
 })
 
 // 组件初始化 class
