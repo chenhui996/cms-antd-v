@@ -66,7 +66,13 @@ const options = computed(() => {
 
 // 组件初始化 class
 const classes = computed(() => {
-  return cs('cs-input')
+  // 获取是否禁用
+  const disabled = props.disabled || attrs.disabled
+
+  return cs('cs-input', {
+    'cs-input-disabled': disabled,
+    'cs-input-no-border': !props.bordered
+  })
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -113,11 +119,31 @@ const chineseCountDisplay = computed(() => {
 
   return `${currentLength}`
 })
+
+const handleChange = (event: Event) => {
+  emit('change', event)
+}
+
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
+}
+
+const handleValueUpdate = (value: string) => {
+  emit('value-update', value)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AInput v-bind="options" :style="mergedStyle" :class="mergedClass" @input="handleInput">
+    <AInput
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @input="handleInput"
+      @change="handleChange"
+      @pressEnter="handlePressEnter"
+      @value-update="handleValueUpdate"
+    >
       <template v-if="$slots.icon" #icon>
         <slot name="icon"></slot>
       </template>

@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<CSInputPasswordProps>(), {
   visibilityToggle: true
 })
 
-defineEmits<InputPasswordEmits>()
+const emit = defineEmits<InputPasswordEmits>()
 const attrs = useAttrs()
 
 // 合并 props + attrs
@@ -40,11 +40,30 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleChange = (event: Event) => {
+  emit('change', event)
+}
+
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
+}
+
+const handleValueUpdate = (value: string) => {
+  emit('value-update', value)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AInputPassword v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <AInputPassword
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @change="handleChange"
+      @pressEnter="handlePressEnter"
+      @value-update="handleValueUpdate"
+    >
       <template v-if="$slots.icon" #icon>
         <slot name="icon"></slot>
       </template>

@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<CSInputGroupProps>(), {
   size: 'default',
 })
 
-defineEmits<InputGroupEmits>()
+const emit = defineEmits<InputGroupEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -39,11 +39,30 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleChange = (event: Event) => {
+  emit('change', event)
+}
+
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
+}
+
+const handleValueUpdate = (value: string) => {
+  emit('value-update', value)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AInputGroup v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <AInputGroup
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @change="handleChange"
+      @pressEnter="handlePressEnter"
+      @value-update="handleValueUpdate"
+    >
       <slot></slot>
     </AInputGroup>
   </ConfigProvider>

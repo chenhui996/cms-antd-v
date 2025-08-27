@@ -1,7 +1,7 @@
 import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
-import Input from '../Input.vue'
+import { Input, Textarea, InputGroup, InputPassword, InputSearch } from '../index';
 import * as InputStories from './Input.stories';
-import { Title, Controls } from '@storybook/addon-docs'
+import { Title, Controls } from '@storybook/addon-docs';
 
 <Meta of={InputStories} />
 
@@ -24,9 +24,17 @@ import { Input } from "cms-antd-v";
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
+## {InputStories.NoBorderComponent.storyName}
+
+> 没有边框。
+
+<Canvas of={InputStories.NoBorderComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
 ## {InputStories.OpenChineseComponent.storyName}
 
-> 汉字计数 openChinese。
+> 汉字计数 openChinese。目前仅支持 Input 组件。
 
 <Canvas of={InputStories.OpenChineseComponent} />
 
@@ -73,7 +81,7 @@ import { Input } from "cms-antd-v";
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
-{/* ## {InputStories.DifferentInputComponent.storyName}
+## {InputStories.DifferentInputComponent.storyName}
 
 > 输入框的组合展现。 注意：使用 `compact` 模式时，不需要通过 `Col` 来控制宽度。
 
@@ -83,8 +91,7 @@ import { Input } from "cms-antd-v";
 
 ```ts
 import { CopyOutlined } from '@ant-design/icons-vue';
-``` */}
-
+```
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
@@ -168,14 +175,6 @@ import { ClockCircleOutlined } from '@ant-design/icons-vue';
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
-## {InputStories.NoBorderComponent.storyName}
-
-> 没有边框。
-
-<Canvas of={InputStories.NoBorderComponent} />
-
-{/* ------------------------------------------------------------------------------------------------------------------------ */}
-
 
 ---
 
@@ -186,3 +185,19 @@ import { ClockCircleOutlined } from '@ant-design/icons-vue';
 ### Input
 
 <ArgTypes of={Input} />
+
+### InputGroup
+
+<ArgTypes of={InputGroup} />
+
+### InputPassword
+
+<ArgTypes of={InputPassword} />
+
+### InputSearch
+
+<ArgTypes of={InputSearch} />
+
+### Textarea
+
+<ArgTypes of={Textarea} />

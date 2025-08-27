@@ -8,18 +8,17 @@ import useForward from '@/hooks/useForward'
 import type { CSTextAreaProps, TextAreaEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSTextarea',
+  name: 'CSTextarea'
 })
 
-const props = withDefaults(defineProps<Omit<TextAreaProps, 'autosize'>>(), {
+const props = withDefaults(defineProps<CSTextAreaProps>(), {
   bordered: true,
   disabled: false,
-  showCount: false,
-  type: 'text',
+  showCount: false
   // autoSize: false
 })
 
-defineEmits<TextAreaEmits>()
+const emit = defineEmits<TextAreaEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -41,11 +40,20 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ATextarea v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ATextarea
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @pressEnter="handlePressEnter"
+    >
       <slot></slot>
     </ATextarea>
   </ConfigProvider>

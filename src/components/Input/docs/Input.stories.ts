@@ -2,9 +2,10 @@ import { computed, ref, watch } from 'vue';
 import Input from '../Input.vue';
 import InputSearch from '../InputSearch.vue';
 import InputPassword from '../InputPassword.vue';
+import Textarea from '../TextArea.vue';
+import InputGroup from '../InputGroup.vue';
 import { Button } from '../../Button';
-import Textarea from '../TextArea.vue'
-import { Space, Tooltip, Select, DatePicker, AutoComplete, Cascader, Row, Col, InputGroup, Divider, SelectOption } from 'ant-design-vue'
+import { Space, Tooltip, Select, DatePicker, AutoComplete, Cascader, Row, Col, Divider, SelectOption, Checkbox } from 'ant-design-vue'
 import { UserOutlined, InfoCircleOutlined, CopyOutlined, SettingOutlined, ClockCircleOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons-vue';
 import type { Meta } from '@storybook/vue3';
 import './style.less';
@@ -67,10 +68,16 @@ ${instance().setup ? `${setupMatch(String(instance().setup))}` : ''}
 export const Default = () => {
   return {
     components: {
-      Input,
+      Input
+    },
+    setup() {
+      const value = ref<string>('');
+      return {
+        value
+      }
     },
     template: `
-   <Input placeholder="默认输入框" />
+  <Input v-model:value="value" placeholder="默认输入框" style="width: 200px;" />
 `
   }
 };
@@ -103,14 +110,16 @@ export const OpenChineseComponent = () => {
       }
     },
     template: `
-  <Space direction="vertical">
-    <div>openChinese 基础使用</div>
-    <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese />
-
-    <div>v-model</div>
-    <Input v-model:value="value1" @value-update="handleUpdate" placeholder="openChinese 配合 v-model" :maxlength="5" show-count open-chinese />
-    <Button @click="value1 = '测试内容中文计数'">设置为 "测试内容中文计数"，自动截取 5 个字符</Button>
-  </Space>
+  <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese />
+  <br />
+  <br />
+  <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese :bordered="false" />
+  <br />
+  <br />
+  <Input v-model:value="value1" @value-update="handleUpdate" placeholder="openChinese 配合 v-model" :maxlength="5" show-count open-chinese />
+  <br />
+  <br />
+  <Button @click="value1 = '测试内容中文计数'">设置为 "测试内容中文计数"，自动截取 5 个字符</Button>
 `
   }
 };
@@ -163,6 +172,7 @@ export const AutoHeightTextAreaComponent = () => {
   return {
     components: {
       Textarea,
+      Space
     },
     setup() {
       const value1 = ref<string>('');
@@ -185,6 +195,21 @@ export const AutoHeightTextAreaComponent = () => {
       placeholder="Autosize height with minimum and maximum number of lines"
       :autoSize="{ minRows: 2, maxRows: 5 }"
     />
+    <br />
+    <br />
+    <Textarea
+      v-model:value="value1"
+      placeholder="Autosize height based on content lines"
+      autoSize
+      :bordered="false"
+    />
+    <div style="margin: 24px 0" />
+    <Textarea
+      v-model:value="value2"
+      placeholder="Autosize height with minimum and maximum number of lines"
+      :autoSize="{ minRows: 2, maxRows: 5 }"
+      :bordered="false"
+    />
   </div>
 `
   }
@@ -200,14 +225,17 @@ export const SearchComponent = () => {
     components: {
       InputSearch,
       Space,
-      Button
+      Button,
+      Input,
+      Checkbox
     },
     setup() {
       const value = ref<string>('');
 
-      const onSearch = (searchValue: string) => {
+      const onSearch = (searchValue: string, event: Event) => {
         console.log('use value', searchValue);
         console.log('or use this.value', value.value);
+        console.log('event', event);
       };
       return {
         value,
@@ -225,8 +253,22 @@ export const SearchComponent = () => {
     <InputSearch
       v-model:value="value"
       placeholder="input search text"
+      style="width: 200px"
+      @search="onSearch"
+      :bordered="false"
+    />
+    <InputSearch
+      v-model:value="value"
+      placeholder="input search text"
       enter-button
       @search="onSearch"
+    />
+    <InputSearch
+      v-model:value="value"
+      placeholder="input search text"
+      enter-button
+      @search="onSearch"
+      :bordered="false"
     />
     <InputSearch
       v-model:value="value"
@@ -242,7 +284,9 @@ export const SearchComponent = () => {
       @search="onSearch"
     >
       <template #enterButton>
-        <Button>Custom</Button>
+        <div>
+          Custom
+        </div>
       </template>
     </InputSearch>
   </Space>
@@ -291,6 +335,7 @@ export const SizeComponent = () => {
   return {
     components: {
       Input,
+      Space
     },
     setup() {
       const value = ref<string>('');
@@ -299,11 +344,18 @@ export const SizeComponent = () => {
       }
     },
     template: `
-  <div class="components-input-demo-size">
+  <Space direction="vertical">
     <Input v-model:value="value" size="large" placeholder="large size" />
     <Input v-model:value="value" placeholder="default size" />
     <Input v-model:value="value" size="small" placeholder="small size" />
-  </div>
+  </Space>
+  <br />
+  <br />
+  <Space direction="vertical">
+    <Input v-model:value="value" size="large" placeholder="large size" :bordered="false" />
+    <Input v-model:value="value" placeholder="default size" :bordered="false" />
+    <Input v-model:value="value" size="small" placeholder="small size" :bordered="false" />
+  </Space>
 `
   }
 };
@@ -421,17 +473,62 @@ export const DifferentInputComponent = () => {
         </Col>
       </Row>
     </InputGroup>
-      <InputGroup compact>
+    <InputGroup size="large">
+      <Row :gutter="8">
+        <Col :span="5">
+          <Input v-model:value="value1" :bordered="false" />
+        </Col>
+        <Col :span="8">
+          <Input v-model:value="value2" :bordered="false" />
+        </Col>
+      </Row>
+    </InputGroup>
+    <InputGroup compact>
       <Input v-model:value="value1" style="width: 20%" />
+      <Input v-model:value="value2" style="width: 30%" />
       <Input v-model:value="value2" style="width: 30%" />
     </InputGroup>
     <InputGroup compact>
-      <Select v-model:value="value3">
+      <Input v-model:value="value1" style="width: 20%" :bordered="false" />
+      <Input v-model:value="value2" style="width: 30%" :bordered="false" />
+      <Input v-model:value="value2" style="width: 30%" :bordered="false" />
+    </InputGroup>
+    <br />
+    <br />
+    <InputGroup compact>
+      <Select v-model:value="value3" style="width: 20%">
         <SelectOption value="Zhejiang">Zhejiang</SelectOption>
         <SelectOption value="Jiangsu">Jiangsu</SelectOption>
       </Select>
-      <Input v-model:value="value4" style="width: 50%" />
+      <Input v-model:value="value4" style="width: 40%" />
+      <Input v-model:value="value4" style="width: 40%" />
     </InputGroup>
+    <InputGroup compact>
+      <Select v-model:value="value3" style="width: 20%" disabled>
+        <SelectOption value="Zhejiang">Zhejiang</SelectOption>
+        <SelectOption value="Jiangsu">Jiangsu</SelectOption>
+      </Select>
+      <Input v-model:value="value4" style="width: 40%" disabled />
+      <Input v-model:value="value4" style="width: 40%" disabled />
+    </InputGroup>
+    <InputGroup compact>
+      <Select v-model:value="value3" :bordered="false" style="width: 20%">
+        <SelectOption value="Zhejiang">Zhejiang</SelectOption>
+        <SelectOption value="Jiangsu">Jiangsu</SelectOption>
+      </Select>
+      <Input v-model:value="value4" style="width: 40%" :bordered="false" />
+      <Input v-model:value="value4" style="width: 40%" :bordered="false" />
+    </InputGroup>
+    <InputGroup compact>
+      <Select v-model:value="value3" :bordered="false" style="width: 20%" disabled>
+        <SelectOption value="Zhejiang">Zhejiang</SelectOption>
+        <SelectOption value="Jiangsu">Jiangsu</SelectOption>
+      </Select>
+      <Input v-model:value="value4" style="width: 40%" :bordered="false" disabled />
+      <Input v-model:value="value4" style="width: 40%" :bordered="false" disabled />
+    </InputGroup>
+    <br />
+    <br />
     <InputGroup compact>
       <Select v-model:value="value5">
         <SelectOption value="Option1">Option1</SelectOption>
@@ -637,6 +734,69 @@ export const AddonComponent = () => {
     },
     template: `
   <Space direction="vertical">
+    <Input v-model:value="value1" addon-before="Http://" addon-after=".com" :bordered="false" />
+    <Input v-model:value="value2" :bordered="false">
+      <template #addonBefore>
+        <Select v-model:value="value3" style="width: 90px">
+          <SelectOption value="Http://">Http://</SelectOption>
+          <SelectOption value="Https://">Https://</SelectOption>
+        </Select>
+      </template>
+      <template #addonAfter>
+        <Select v-model:value="value4" style="width: 80px">
+          <SelectOption value=".com">.com</SelectOption>
+          <SelectOption value=".jp">.jp</SelectOption>
+          <SelectOption value=".cn">.cn</SelectOption>
+          <SelectOption value=".org">.org</SelectOption>
+        </Select>
+      </template>
+    </Input>
+    <Input v-model:value="value5" :bordered="false">
+      <template #addonAfter>
+        <setting-outlined />
+      </template>
+    </Input>
+
+    <Input v-model:value="value6" :bordered="false">
+      <template #addonBefore>
+        <Cascader placeholder="cascader" style="width: 150px" />
+      </template>
+    </Input>
+  </Space>
+  <Space direction="vertical">
+    <Input v-model:value="value1" addon-before="Http://" addon-after=".com" :bordered="false" disabled />
+    <Input v-model:value="value2" :bordered="false" disabled>
+      <template #addonBefore>
+        <Select v-model:value="value3" style="width: 90px" disabled>
+          <SelectOption value="Http://">Http://</SelectOption>
+          <SelectOption value="Https://">Https://</SelectOption>
+        </Select>
+      </template>
+      <template #addonAfter>
+        <Select v-model:value="value4" style="width: 80px" disabled>
+          <SelectOption value=".com">.com</SelectOption>
+          <SelectOption value=".jp">.jp</SelectOption>
+          <SelectOption value=".cn">.cn</SelectOption>
+          <SelectOption value=".org">.org</SelectOption>
+        </Select>
+      </template>
+    </Input>
+    <Input v-model:value="value5" :bordered="false" disabled>
+      <template #addonAfter>
+        <setting-outlined />
+      </template>
+    </Input>
+
+    <Input v-model:value="value6" :bordered="false" disabled>
+      <template #addonBefore>
+        <Cascader placeholder="cascader" style="width: 150px" disabled />
+      </template>
+    </Input>
+  </Space>
+  <br />
+  <br />
+  <br />
+  <Space direction="vertical">
     <Input v-model:value="value1" addon-before="Http://" addon-after=".com" />
     <Input v-model:value="value2">
       <template #addonBefore>
@@ -663,6 +823,36 @@ export const AddonComponent = () => {
     <Input v-model:value="value6">
       <template #addonBefore>
         <Cascader placeholder="cascader" style="width: 150px" />
+      </template>
+    </Input>
+  </Space>
+  <Space direction="vertical">
+    <Input v-model:value="value1" addon-before="Http://" addon-after=".com" disabled />
+    <Input v-model:value="value2" disabled>
+      <template #addonBefore>
+        <Select v-model:value="value3" style="width: 90px" disabled>
+          <SelectOption value="Http://">Http://</SelectOption>
+          <SelectOption value="Https://">Https://</SelectOption>
+        </Select>
+      </template>
+      <template #addonAfter>
+        <Select v-model:value="value4" style="width: 80px" disabled>
+          <SelectOption value=".com">.com</SelectOption>
+          <SelectOption value=".jp">.jp</SelectOption>
+          <SelectOption value=".cn">.cn</SelectOption>
+          <SelectOption value=".org">.org</SelectOption>
+        </Select>
+      </template>
+    </Input>
+    <Input v-model:value="value5" disabled>
+      <template #addonAfter>
+        <setting-outlined />
+      </template>
+    </Input>
+
+    <Input v-model:value="value6" disabled>
+      <template #addonBefore>
+        <Cascader placeholder="cascader" style="width: 150px" disabled />
       </template>
     </Input>
   </Space>
@@ -871,7 +1061,7 @@ export const NoBorderComponent = () => {
       }
     },
     template: `
-  <Input v-model:value="value" :bordered="false" placeholder="Borderless" />
+  <Input v-model:value="value" :bordered="false" placeholder="Borderless" style="width: 200px;" />
 `
   }
 };
