@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<CSSwitchProps>(), {
   unCheckedValue: false
 })
 
-defineEmits<SwitchEmits>()
+const emit = defineEmits<SwitchEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -44,11 +44,35 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleChange = (checked: boolean | string | number, event: Event) => {
+  emit('change', checked, event)
+}
+
+const handleClick = (checked: boolean | string | number, event: Event) => {
+  emit('click', checked, event)
+}
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ASwitch v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ASwitch
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @change="handleChange"
+      @click="handleClick"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <template v-if="$slots.checkedChildren" #checkedChildren>
         <slot name="checkedChildren" />
       </template>

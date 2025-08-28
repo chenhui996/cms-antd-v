@@ -6,6 +6,7 @@ import { RadioGroup as ARadioGroup, ConfigProvider } from 'ant-design-vue'
 import type { RadioGroupProps } from 'ant-design-vue/lib/radio'
 import useForward from '@/hooks/useForward'
 import type { CSRadioGroupProps, RadioGroupEmits } from './lib/type'
+import type { RadioChangeEvent } from 'ant-design-vue/lib/radio/interface'
 
 defineOptions({
   name: 'CSRadioGroup',
@@ -18,7 +19,7 @@ const props = withDefaults(defineProps<CSRadioGroupProps>(), {
   disabled: false
 })
 
-defineEmits<RadioGroupEmits>()
+const emit = defineEmits<RadioGroupEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -40,11 +41,30 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleChange = (event: RadioChangeEvent) => {
+  emit('change', event)
+}
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ARadioGroup v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ARadioGroup
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <slot />
     </ARadioGroup>
   </ConfigProvider>

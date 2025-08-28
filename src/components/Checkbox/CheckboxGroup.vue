@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<CSCheckboxGroupProps>(), {
   disabled: false
 })
 
-defineEmits<CheckboxGroupEmits>()
+const emit = defineEmits<CheckboxGroupEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -38,11 +38,30 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleChange = (val: (boolean | string | number)[]) => {
+  emit('change', val)
+}
+
+const handleFocus = (event: MouseEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: MouseEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ACheckboxGroup v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ACheckboxGroup
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <template v-if="$slots.label" #label="scopeProps">
         <slot name="label" v-bind="scopeProps" />
       </template>

@@ -34,23 +34,23 @@ export type CSRadioGroupProps = BaseRadioGroupProps
 
 export interface RadioEmits {
     /** 获取焦点 */
-    (e: 'focus', event: MouseEvent): void
+    (e: 'focus', event: FocusEvent): void
     /** 移除焦点 */
-    (e: 'blur', event: MouseEvent): void
+    (e: 'blur', event: FocusEvent): void
 }
 
 export interface RadioButtonEmits {
     /** 获取焦点 */
-    (e: 'focus', event: MouseEvent): void
+    (e: 'focus', event: FocusEvent): void
     /** 移除焦点 */
-    (e: 'blur', event: MouseEvent): void
+    (e: 'blur', event: FocusEvent): void
 }
 
 export interface RadioGroupEmits {
     /** 选中时触发 */
     (e: 'change', event: RadioChangeEvent): void
     /** 获取焦点 */
-    (e: 'focus', event: MouseEvent): void
+    (e: 'focus', event: FocusEvent): void
     /** 移除焦点 */
-    (e: 'blur', event: MouseEvent): void
+    (e: 'blur', event: FocusEvent): void
 }

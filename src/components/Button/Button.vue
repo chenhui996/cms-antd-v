@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<CSButtonProps>(), {
   type: 'primary'
 })
 
-defineEmits<ButtonEmits>()
+const emit = defineEmits<ButtonEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -50,11 +50,30 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleClick = (event: MouseEvent) => {
+  emit('click', event)
+}
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AButton v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <AButton
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @click="handleClick"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <!-- 透传所有 slots -->
       <slot />
       <template #icon>

@@ -30,7 +30,7 @@ export interface SwitchEmits {
     /** 点击事件 */
     (e: 'click', checked: boolean | string | number, event: Event): void
     /** 获取焦点 */
-    (e: 'focus', event: MouseEvent): void
+    (e: 'focus', event: FocusEvent): void
     /** 移除焦点 */
-    (e: 'blur', event: MouseEvent): void
+    (e: 'blur', event: FocusEvent): void
 }

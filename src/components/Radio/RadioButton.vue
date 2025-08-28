@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<CSRadioButtonProps>(), {
   disabled: false
 })
 
-defineEmits<RadioButtonEmits>()
+const emit = defineEmits<RadioButtonEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -40,11 +40,25 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ARadioButton v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ARadioButton
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <slot />
     </ARadioButton>
   </ConfigProvider>
