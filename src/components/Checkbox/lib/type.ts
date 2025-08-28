@@ -30,7 +30,7 @@ export type CSCheckboxGroupProps = BaseCheckboxGroupProps
 
 export interface CheckboxEmits {
     /** 变化时回调函数 */
-    (e: 'change', event: Event): void
+    (e: 'change', event: CheckboxChangeEvent): void
     /** 获取焦点 */
     (e: 'focus', event: MouseEvent): void
     /** 移除焦点 */

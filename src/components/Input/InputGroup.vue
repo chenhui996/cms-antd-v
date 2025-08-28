@@ -2,21 +2,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
 import { useAttrs, computed } from 'vue'
-import { CheckboxGroup as ACheckboxGroup, ConfigProvider } from 'ant-design-vue'
-import type { CheckboxGroupProps } from 'ant-design-vue/lib/checkbox'
+import { InputGroup as AInputGroup, ConfigProvider } from 'ant-design-vue'
+import type { InputProps } from 'ant-design-vue/lib/input'
 import useForward from '@/hooks/useForward'
-import type { CSCheckboxGroupProps, CheckboxGroupEmits, OptionItem } from './lib/type'
+import type { CSInputGroupProps, InputGroupEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSCheckboxGroup',
+  name: 'CSInputGroup',
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<CSCheckboxGroupProps>(), {
-  disabled: false
+const props = withDefaults(defineProps<CSInputGroupProps>(), {
+  compact: false,
+  size: 'default',
 })
 
-const emit = defineEmits<CheckboxGroupEmits>()
+const emit = defineEmits<InputGroupEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -25,12 +26,12 @@ const options = computed(() => {
   return {
     ...props,
     ...restAttrs
-  } as CheckboxGroupProps
+  } as InputProps
 })
 
 // 组件初始化 class
 const classes = computed(() => {
-  return cs('cs-checkbox-group')
+  return cs('cs-input-group')
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -39,34 +40,31 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initClass: [classes.value]
 })
 
-const handleChange = (val: (boolean | string | number)[]) => {
-  emit('change', val)
+const handleChange = (event: Event) => {
+  emit('change', event)
 }
 
-const handleFocus = (event: MouseEvent) => {
-  emit('focus', event)
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
 }
 
-const handleBlur = (event: MouseEvent) => {
-  emit('blur', event)
+const handleValueUpdate = (value: string) => {
+  emit('value-update', value)
 }
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ACheckboxGroup
+    <AInputGroup
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
       @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
+      @pressEnter="handlePressEnter"
+      @value-update="handleValueUpdate"
     >
-      <template v-if="$slots.label" #label="scopeProps">
-        <slot name="label" v-bind="scopeProps" />
-      </template>
-      <slot />
-    </ACheckboxGroup>
+      <slot></slot>
+    </AInputGroup>
   </ConfigProvider>
 </template>
 

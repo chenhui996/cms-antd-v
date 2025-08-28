@@ -37,7 +37,7 @@ export interface ButtonEmits {
     /** 点击事件 */
     (e: 'click', event: MouseEvent): void
     /** 获取焦点 */
-    (e: 'focus', event: MouseEvent): void
+    (e: 'focus', event: FocusEvent): void
     /** 移除焦点 */
-    (e: 'blur', event: MouseEvent): void
+    (e: 'blur', event: FocusEvent): void
 }

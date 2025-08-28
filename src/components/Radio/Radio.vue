@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { withDefaults, useAttrs, computed } from 'vue'
+import { useAttrs, computed } from 'vue'
 import { Radio as ARadio, ConfigProvider } from 'ant-design-vue'
 import type { RadioProps } from 'ant-design-vue/lib/radio'
 import useForward from '@/hooks/useForward'
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<CSRadioProps>(), {
   disabled: false
 })
 
-defineEmits<RadioEmits>()
+const emit = defineEmits<RadioEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -40,11 +40,25 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ARadio v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ARadio
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <slot />
     </ARadio>
   </ConfigProvider>

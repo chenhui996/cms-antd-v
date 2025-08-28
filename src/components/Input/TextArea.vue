@@ -2,24 +2,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
 import { useAttrs, computed } from 'vue'
-import { RadioGroup as ARadioGroup, ConfigProvider } from 'ant-design-vue'
-import type { RadioGroupProps } from 'ant-design-vue/lib/radio'
+import { Textarea as ATextarea, ConfigProvider } from 'ant-design-vue'
+import type { TextAreaProps } from 'ant-design-vue/lib/input'
 import useForward from '@/hooks/useForward'
-import type { CSRadioGroupProps, RadioGroupEmits } from './lib/type'
-import type { RadioChangeEvent } from 'ant-design-vue/lib/radio/interface'
+import type { CSTextAreaProps, TextAreaEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSRadioGroup',
-  inheritAttrs: false
+  name: 'CSTextarea'
 })
 
-const props = withDefaults(defineProps<CSRadioGroupProps>(), {
-  autofocus: false,
-  checked: false,
-  disabled: false
+const props = withDefaults(defineProps<CSTextAreaProps>(), {
+  bordered: true,
+  disabled: false,
+  showCount: false
+  // autoSize: false
 })
 
-const emit = defineEmits<RadioGroupEmits>()
+const emit = defineEmits<TextAreaEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -28,12 +27,12 @@ const options = computed(() => {
   return {
     ...props,
     ...restAttrs
-  } as RadioGroupProps
+  } as Omit<TextAreaProps, 'autosize'>
 })
 
 // 组件初始化 class
 const classes = computed(() => {
-  return cs('cs-radio-group')
+  return cs('cs-textarea')
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -42,31 +41,21 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initClass: [classes.value]
 })
 
-const handleChange = (event: RadioChangeEvent) => {
-  emit('change', event)
-}
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
 }
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ARadioGroup
+    <ATextarea
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
+      @pressEnter="handlePressEnter"
     >
-      <slot />
-    </ARadioGroup>
+      <slot></slot>
+    </ATextarea>
   </ConfigProvider>
 </template>
 

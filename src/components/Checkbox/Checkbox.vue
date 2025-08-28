@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { withDefaults, useAttrs, computed } from 'vue'
+import { useAttrs, computed } from 'vue'
 import { Checkbox as ACheckbox, ConfigProvider } from 'ant-design-vue'
 import type { CheckboxProps } from 'ant-design-vue/lib/checkbox'
 import useForward from '@/hooks/useForward'
 import type { CSCheckboxProps, CheckboxEmits } from './lib/type'
+import type { CheckboxChangeEvent } from 'ant-design-vue/lib/checkbox/interface'
 
 defineOptions({
   name: 'CSCheckbox',
@@ -18,7 +19,7 @@ const props = withDefaults(defineProps<CSCheckboxProps>(), {
   disabled: false
 })
 
-defineEmits<CheckboxEmits>()
+const emit = defineEmits<CheckboxEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -40,11 +41,30 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
+
+const handleChange = (event: CheckboxChangeEvent) => {
+  emit('change', event)
+}
+
+const handleFocus = (event: MouseEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: MouseEvent) => {
+  emit('blur', event)
+}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ACheckbox v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <ACheckbox
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
       <slot />
     </ACheckbox>
   </ConfigProvider>

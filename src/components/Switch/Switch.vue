@@ -2,29 +2,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
 import { useAttrs, computed } from 'vue'
-import { Button as AButton, ConfigProvider } from 'ant-design-vue'
-import type { ButtonProps } from 'ant-design-vue/lib/button/buttonTypes'
+import { Switch as ASwitch, ConfigProvider } from 'ant-design-vue'
+import type { SwitchProps } from 'ant-design-vue/lib/switch'
 import useForward from '@/hooks/useForward'
-import type { CSButtonProps, ButtonEmits } from './lib/type'
+import type { CSSwitchProps, SwitchEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSButton',
+  name: 'CSSwitch',
   inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<CSButtonProps>(), {
-  block: false,
-  danger: false,
+const props = withDefaults(defineProps<CSSwitchProps>(), {
+  autofocus: false,
+  checked: false,
+  checkedValue: true,
   disabled: false,
-  ghost: false,
   loading: false,
-  shape: 'default',
-  size: 'middle',
-  htmlType: 'button',
-  type: 'primary'
+  size: 'default',
+  unCheckedValue: false
 })
 
-const emit = defineEmits<ButtonEmits>()
+const emit = defineEmits<SwitchEmits>()
 const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
@@ -33,16 +31,12 @@ const options = computed(() => {
   return {
     ...props,
     ...restAttrs
-  } as ButtonProps
+  } as SwitchProps
 })
 
 // 组件初始化 class
 const classes = computed(() => {
-  const type = props.type
-
-  return cs('cs-btn', {
-    [`cs-btn-${type}`]: type
-  })
+  return cs('cs-switch')
 })
 
 // 使用通用透传 Hook 合并 style 和 class
@@ -51,8 +45,12 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initClass: [classes.value]
 })
 
-const handleClick = (event: MouseEvent) => {
-  emit('click', event)
+const handleChange = (checked: boolean | string | number, event: Event) => {
+  emit('change', checked, event)
+}
+
+const handleClick = (checked: boolean | string | number, event: Event) => {
+  emit('click', checked, event)
 }
 
 const handleFocus = (event: FocusEvent) => {
@@ -66,20 +64,23 @@ const handleBlur = (event: FocusEvent) => {
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AButton
+    <ASwitch
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
+      @change="handleChange"
       @click="handleClick"
       @focus="handleFocus"
       @blur="handleBlur"
     >
-      <!-- 透传所有 slots -->
-      <slot />
-      <template #icon>
-        <slot name="icon" />
+      <template v-if="$slots.checkedChildren" #checkedChildren>
+        <slot name="checkedChildren" />
       </template>
-    </AButton>
+      <template v-if="$slots.unCheckedChildren" #unCheckedChildren>
+        <slot name="unCheckedChildren" />
+      </template>
+      <slot />
+    </ASwitch>
   </ConfigProvider>
 </template>
 
