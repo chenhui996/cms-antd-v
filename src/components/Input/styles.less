@@ -1,4 +1,4 @@
-.cs-input.ant-input-affix-wrapper {
+.cs-input.ant-input-affix-wrapper,.cs-input-password.ant-input-password {
   border-radius: @input-border-radius;
 
   .input-size(
@@ -459,13 +459,15 @@
 
   &.ant-input-group-compact {
     & > *:first-child {
-      border-start-start-radius: @input-border-radius;
-      border-end-start-radius: @input-border-radius;
+      border-radius: 0 !important;
+      border-start-start-radius: @input-border-radius !important;
+      border-end-start-radius: @input-border-radius !important;
     }
 
     & > *:last-child {
-      border-start-end-radius: @input-border-radius;
-      border-end-end-radius: @input-border-radius;
+      border-radius: 0 !important;
+      border-start-end-radius: @input-border-radius !important;
+      border-end-end-radius: @input-border-radius !important;
     }
 
     .cs-input-no-border + .cs-input-no-border {
@@ -478,6 +480,91 @@
 
     .ant-input-affix-wrapper-disabled {
       border-color: @input-no-border-color-disabled !important;
+    }
+
+    // select
+    .ant-select {
+      &:first-child > .ant-select-selector {
+        border-start-start-radius: @input-border-radius;
+        border-end-start-radius: @input-border-radius;
+      }
+
+      &:last-child > .ant-select-selector {
+        border-start-end-radius: @input-border-radius;
+        border-end-end-radius: @input-border-radius;
+      }
+
+      // color
+      &:hover {
+        .ant-select-selector {
+          border-color: @input-border-color-hover;
+        }
+      }
+
+      &.ant-select-focused {
+        .ant-select-selector {
+          box-shadow: @input-border-shadow-focused;
+        }
+      }
+
+      &.ant-select-borderless {
+        .ant-select-selector {
+          border-color: @input-no-border-color !important;
+          background-color: @input-no-border-bg !important;
+          border-width: 1px;
+          border-style: solid;
+        }
+
+        &:hover {
+          .ant-select-selector {
+            border-color: @input-border-color-hover !important;
+          }
+        }
+
+        &.ant-select-focused {
+          .ant-select-selector {
+            border-color: @input-border-color-hover !important;
+            box-shadow: @input-border-shadow-focused !important;
+          }
+        }
+      }
+
+      &.ant-select-disabled {
+        .ant-select-selector {
+          border-color: @input-border-color-disabled !important;
+          background-color: @input-bg-disabled !important;
+        }
+
+        &:hover {
+          .ant-select-selector {
+            border-color: @input-border-color-disabled !important;
+          }
+        }
+      }
+    }
+
+    // special no border
+    .ant-select-borderless + .ant-select-borderless,
+    .ant-select-borderless + .ant-input-affix-wrapper,
+    .ant-input-affix-wrapper + .ant-select-borderless,
+    .ant-input-affix-wrapper + .ant-input-affix-wrapper {
+      &.ant-input-affix-wrapper, .ant-select-selector{
+        border-left: 1px solid @input-no-border-color-divider !important;
+      }
+
+      &:hover {
+        &.ant-input-affix-wrapper,
+        .ant-select-selector {
+          border-color: @input-border-color-hover !important;
+        }
+      }
+
+      &.ant-select-disabled, 
+      &.ant-input-affix-wrapper-disabled{
+        &.ant-input-affix-wrapper, .ant-select-selector{
+          border-color: @input-no-border-color-disabled !important;
+        }
+      }
     }
   }
 
@@ -504,5 +591,5 @@
   // color ------------------------------------------------------------------------------------------------
 }
 
-.cs-input-password.ant-input-password {
-}
+// .cs-input-password.ant-input-password {
+// }

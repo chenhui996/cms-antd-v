@@ -462,7 +462,7 @@ export const DifferentInputComponent = () => {
       }
     },
     template: `
-  <Space class="site-input-group-wrapper" direction="vertical" size="middle">
+  <Space class="site-input-group-wrapper" direction="vertical" size="middle" style="width: 100%;">
     <InputGroup size="large">
       <Row :gutter="8">
         <Col :span="5">
@@ -493,48 +493,35 @@ export const DifferentInputComponent = () => {
       <Input v-model:value="value2" style="width: 30%" :bordered="false" />
       <Input v-model:value="value2" style="width: 30%" :bordered="false" />
     </InputGroup>
-    <br />
-    <br />
     <InputGroup compact>
-      <Select v-model:value="value3" style="width: 20%">
+      <Select v-model:value="value3" style="width: 200px">
         <SelectOption value="Zhejiang">Zhejiang</SelectOption>
         <SelectOption value="Jiangsu">Jiangsu</SelectOption>
       </Select>
-      <Input v-model:value="value4" style="width: 40%" />
-      <Input v-model:value="value4" style="width: 40%" />
+      <Input v-model:value="value4" style="width: 200px" />
+      <Input v-model:value="value4" style="width: 200px" />
     </InputGroup>
     <InputGroup compact>
-      <Select v-model:value="value3" style="width: 20%" disabled>
+      <Select v-model:value="value3" style="width: 200px" :bordered="false">
         <SelectOption value="Zhejiang">Zhejiang</SelectOption>
         <SelectOption value="Jiangsu">Jiangsu</SelectOption>
       </Select>
-      <Input v-model:value="value4" style="width: 40%" disabled />
-      <Input v-model:value="value4" style="width: 40%" disabled />
+      <Input v-model:value="value4" style="width: 200px" :bordered="false" />
+      <Input v-model:value="value4" style="width: 200px" :bordered="false" />
     </InputGroup>
-    <InputGroup compact>
-      <Select v-model:value="value3" :bordered="false" style="width: 20%">
-        <SelectOption value="Zhejiang">Zhejiang</SelectOption>
-        <SelectOption value="Jiangsu">Jiangsu</SelectOption>
-      </Select>
-      <Input v-model:value="value4" style="width: 40%" :bordered="false" />
-      <Input v-model:value="value4" style="width: 40%" :bordered="false" />
-    </InputGroup>
-    <InputGroup compact>
-      <Select v-model:value="value3" :bordered="false" style="width: 20%" disabled>
-        <SelectOption value="Zhejiang">Zhejiang</SelectOption>
-        <SelectOption value="Jiangsu">Jiangsu</SelectOption>
-      </Select>
-      <Input v-model:value="value4" style="width: 40%" :bordered="false" disabled />
-      <Input v-model:value="value4" style="width: 40%" :bordered="false" disabled />
-    </InputGroup>
-    <br />
-    <br />
     <InputGroup compact>
       <Select v-model:value="value5">
         <SelectOption value="Option1">Option1</SelectOption>
         <SelectOption value="Option2">Option2</SelectOption>
       </Select>
       <Input v-model:value="value6" style="width: 50%" />
+    </InputGroup>
+    <InputGroup compact>
+      <Select v-model:value="value5" :bordered="false">
+        <SelectOption value="Option1">Option1</SelectOption>
+        <SelectOption value="Option2">Option2</SelectOption>
+      </Select>
+      <Input v-model:value="value6" style="width: 50%" :bordered="false" />
     </InputGroup>
     <InputGroup compact>
       <Input v-model:value="value7" style="width: 50%" />
@@ -562,8 +549,7 @@ export const DifferentInputComponent = () => {
       />
       <Input
         v-model:value="value13"
-        class="site-input-split"
-        style="width: 30px; border-left: 0; pointer-events: none"
+        style="background-color: #fff; width: 38px; border-left: 0; pointer-events: none"
         placeholder="~"
         disabled
       />
