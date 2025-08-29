@@ -1,0 +1,84 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { InputNumber } from '../index';
+import * as InputNumberStories from './InputNumber.stories';
+import { Title, Controls } from '@storybook/addon-docs';
+
+<Meta of={InputNumberStories} />
+
+<Title />
+
+> 通过鼠标或键盘，输入范围内的数值。<br /><br />
+> 使用：当需要获取标准数值时。
+
+```ts
+import { InputNumber } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={InputNumberStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.NoBorderComponent.storyName}
+
+> 无边框。
+
+<Canvas of={InputNumberStories.NoBorderComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.SizeComponent.storyName}
+
+> 三种大小的数字输入框，当 size 分别为 `large` 和 `small` 时，输入框高度为 `40px` 和 `24px` ，默认高度为 `32px`。
+
+<Canvas of={InputNumberStories.SizeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.HighPrecisionDecimalsComponent.storyName}
+
+> 通过 `stringMode` 开启高精度小数支持，`change` 事件将返回 `string` 类型。 对于旧版浏览器，你需要 `BigInt` polyfill。
+
+<Canvas of={InputNumberStories.HighPrecisionDecimalsComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.KeyboardComponent.storyName}
+
+> 使用 `keyboard` 属性可以控制键盘行为。
+
+<Canvas of={InputNumberStories.KeyboardComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.DisabledComponent.storyName}
+
+> 不可用。点击按钮切换可用状态。
+
+<Canvas of={InputNumberStories.DisabledComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.PrefixComponent.storyName}
+
+> 前缀。
+
+<Canvas of={InputNumberStories.PrefixComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+
+---
+
+## API
+
+### 属性
+
+### InputNumber
+
+<ArgTypes of={InputNumber} />

@@ -5,7 +5,7 @@ import { useAttrs, computed, ref, watch } from 'vue'
 import { Input as AInput, ConfigProvider } from 'ant-design-vue'
 import type { InputProps } from 'ant-design-vue/lib/input'
 import useForward from '@/hooks/useForward'
-import type { CSInputProps, InputEmits } from './lib/type'
+import type { CSInputProps, InputEmits, ChangeEvent} from './lib/type'
 import { getChineseCharLength, truncateToMaxLength } from './lib/chineseCount'
 
 defineOptions({
@@ -50,6 +50,8 @@ watch(
   { immediate: true }
 )
 
+const { onInput, ...restProps } = props
+
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
   const { class: _unusedClass, style: _unusedStyle, type: _unusedType, ...restAttrs } = attrs
@@ -58,7 +60,7 @@ const options = computed(() => {
   const finalShowCount = props.openChinese ? false : props.showCount
 
   return {
-    ...props,
+    ...restProps,
     ...restAttrs,
     showCount: finalShowCount
   } as InputProps
@@ -83,6 +85,8 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 
 // 处理输入事件，实现中文字符计数限制
 const handleInput = (event: Event) => {
+  onInput?.(event as ChangeEvent)
+
   const target = event.target as HTMLInputElement
   const value = target.value
 
@@ -120,14 +124,6 @@ const chineseCountDisplay = computed(() => {
   return `${currentLength}`
 })
 
-const handleChange = (event: Event) => {
-  emit('change', event)
-}
-
-const handlePressEnter = (event: Event) => {
-  emit('pressEnter', event)
-}
-
 const handleValueUpdate = (value: string) => {
   emit('value-update', value)
 }
@@ -140,8 +136,6 @@ const handleValueUpdate = (value: string) => {
       :style="mergedStyle"
       :class="mergedClass"
       @input="handleInput"
-      @change="handleChange"
-      @pressEnter="handlePressEnter"
       @value-update="handleValueUpdate"
     >
       <template v-if="$slots.icon" #icon>

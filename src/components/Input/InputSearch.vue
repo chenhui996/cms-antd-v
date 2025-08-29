@@ -52,21 +52,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleSearch = (
-  value: string,
-  event?: KeyboardEvent | MouseEvent | ChangeEvent | undefined
-) => {
-  emit('search', value, event)
-}
-
-const handleChange = (event: Event) => {
-  emit('change', event)
-}
-
-const handlePressEnter = (event: Event) => {
-  emit('pressEnter', event)
-}
 </script>
 
 <template>
@@ -75,9 +60,6 @@ const handlePressEnter = (event: Event) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @search="handleSearch"
-      @change="handleChange"
-      @pressEnter="handlePressEnter"
     >
       <template v-if="$slots.icon" #icon>
         <slot name="icon"></slot>

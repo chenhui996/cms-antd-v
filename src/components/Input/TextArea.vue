@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<CSTextAreaProps>(), {
   disabled: false,
   showCount: false
   // autoSize: false
-})
+})  
 
 const emit = defineEmits<TextAreaEmits>()
 const attrs = useAttrs()
@@ -40,10 +40,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handlePressEnter = (event: Event) => {
-  emit('pressEnter', event)
-}
 </script>
 
 <template>
@@ -52,7 +48,6 @@ const handlePressEnter = (event: Event) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @pressEnter="handlePressEnter"
     >
       <slot></slot>
     </ATextarea>
