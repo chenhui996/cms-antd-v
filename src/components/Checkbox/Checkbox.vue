@@ -41,18 +41,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleChange = (event: CheckboxChangeEvent) => {
-  emit('change', event)
-}
-
-const handleFocus = (event: MouseEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: MouseEvent) => {
-  emit('blur', event)
-}
 </script>
 
 <template>
@@ -61,9 +49,6 @@ const handleBlur = (event: MouseEvent) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
     >
       <slot />
     </ACheckbox>

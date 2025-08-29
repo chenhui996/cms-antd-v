@@ -39,18 +39,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleChange = (event: Event) => {
-  emit('change', event)
-}
-
-const handlePressEnter = (event: Event) => {
-  emit('pressEnter', event)
-}
-
-const handleValueUpdate = (value: string) => {
-  emit('value-update', value)
-}
 </script>
 
 <template>
@@ -59,9 +47,6 @@ const handleValueUpdate = (value: string) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @change="handleChange"
-      @pressEnter="handlePressEnter"
-      @value-update="handleValueUpdate"
     >
       <slot></slot>
     </AInputGroup>

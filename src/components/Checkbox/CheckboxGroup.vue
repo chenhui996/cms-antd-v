@@ -38,18 +38,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleChange = (val: (boolean | string | number)[]) => {
-  emit('change', val)
-}
-
-const handleFocus = (event: MouseEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: MouseEvent) => {
-  emit('blur', event)
-}
 </script>
 
 <template>
@@ -58,9 +46,6 @@ const handleBlur = (event: MouseEvent) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
     >
       <template v-if="$slots.label" #label="scopeProps">
         <slot name="label" v-bind="scopeProps" />

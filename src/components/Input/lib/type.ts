@@ -3,8 +3,15 @@ import type { Slot } from 'vue'
 
 // 添加必要的类型导入
 type KeyboardEvent = globalThis.KeyboardEvent
-type ChangeEvent = globalThis.Event
 type MouseEvent = globalThis.MouseEvent
+
+export type ChangeEvent = Event & {
+    target: {
+        value?: string | undefined;
+    };
+};
+
+export type ChangeEventHandler = (e: ChangeEvent) => void;
 
 export interface BaseInputProps extends InputProps {
     /** 带标签的 input，设置后置标签 */

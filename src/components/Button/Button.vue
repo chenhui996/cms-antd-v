@@ -30,6 +30,7 @@ const attrs = useAttrs()
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
   const { class: _unusedClass, style: _unusedStyle, type: _unusedType, ...restAttrs } = attrs
+  
   return {
     ...props,
     ...restAttrs
@@ -50,18 +51,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleClick = (event: MouseEvent) => {
-  emit('click', event)
-}
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
-}
 </script>
 
 <template>
@@ -70,9 +59,6 @@ const handleBlur = (event: FocusEvent) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @click="handleClick"
-      @focus="handleFocus"
-      @blur="handleBlur"
     >
       <!-- 透传所有 slots -->
       <slot />

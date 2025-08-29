@@ -21,15 +21,12 @@
     "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
     "build": "storybook build -o ./dist-storybook",
-    "build-lib": "vite build --config vite.lib.config.ts",
+    "build-lib": "vite build --config vite.config.ts",
     "preview": "npx serve dist-storybook -p 8000",
-    "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/",
-    "v": "node -v",
-    "dev2": "vite"
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
