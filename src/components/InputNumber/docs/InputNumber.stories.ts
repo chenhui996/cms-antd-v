@@ -290,19 +290,99 @@ export const PrefixComponent = () => {
       }
     },
     template: `
-  <div>
-    <InputNumber v-model:value="value1" prefix="￥" style="width: 100%" />
+  <Space direction="vertical">
+    <Space>
+      <InputNumber v-model:value="value1" prefix="￥" style="width: 100%" />
+      <InputNumber v-model:value="value1" prefix="￥" style="width: 100%" :bordered="false" />
+    </Space>
+    <Space direction="vertical">
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="small">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="large">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <br />
+      <br />
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="small" :bordered="false">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" :bordered="false">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="large" :bordered="false">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <br />
+      <br />
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="small" disabled>
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" disabled>
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="large" disabled>
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <br />
+      <br />
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="small" :bordered="false" disabled>
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" :bordered="false" disabled>
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" size="large" :bordered="false" disabled>
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+    </Space>
+      <br />
+      <br />
+      <InputNumber v-model:value="value3" prefix="￥" disabled style="width: 100%" />
     <br />
+      ----------
     <br />
-    <InputNumber v-model:value="value2" prefix="￥" style="width: 100%">
-      <template #addonBefore>
-        <UserOutlined />
-      </template>
-    </InputNumber>
-    <br />
-    <br />
-    <InputNumber v-model:value="value3" prefix="￥" disabled style="width: 100%" />
-  </div>
+    <div>
+      <InputNumber v-model:value="value1" prefix="￥" style="width: 100%" :bordered="false" />
+      <br />
+      <br />
+      <InputNumber v-model:value="value2" prefix="￥" style="width: 100%" :bordered="false">
+        <template #addonBefore>
+          <UserOutlined />
+        </template>
+      </InputNumber>
+      <br />
+      <br />
+      <InputNumber v-model:value="value3" prefix="￥" disabled style="width: 100%" :bordered="false" />
+    </div>
+  </Space>
 `
   }
 };
