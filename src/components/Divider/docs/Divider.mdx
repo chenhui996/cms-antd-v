@@ -1,0 +1,60 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import Divider from '../Divider.vue'
+import * as DividerStories from './Divider.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={DividerStories} />
+
+<Title />
+
+> 区隔内容的分割线。<br /><br />
+> 使用：对不同章节的文本段落进行分割。对行内文字/链接进行分割，例如表格的操作列。
+
+```ts
+import { Divider } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {DividerStories.Default.storyName}
+
+> 默认为水平分割线，可在中间加入文字。
+
+<Canvas of={DividerStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {DividerStories.VerticalComponent.storyName}
+
+> 使用 `type="vertical"` 设置为行内的垂直分割线。
+
+<Canvas of={DividerStories.VerticalComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {DividerStories.WithTextComponent.storyName}
+
+> 分割线中带有文字，可以用 `orientation` 指定文字位置。
+
+<Canvas of={DividerStories.WithTextComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {DividerStories.CustomComponent.storyName}
+
+> 分割线中带有文字，可以用 `orientation` 指定文字位置。
+
+<Canvas of={DividerStories.CustomComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Divider
+
+<ArgTypes of={Divider} />
