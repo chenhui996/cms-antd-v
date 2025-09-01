@@ -38,6 +38,19 @@
   --cs-grey-9: #595959;
   --cs-grey-10: #1f1f1f;
 
+  // Sunset Orange / 日暮
+  // 温暖、欢快
+  --cs-orange-1: #FFF5E3;
+  --cs-orange-2: #FFE7BA;
+  --cs-orange-3: #FFD591;
+  --cs-orange-4: #FFC069;
+  --cs-orange-5: #FFA940;
+  --cs-orange-6: #FA8C16;
+  --cs-orange-7: #D46B08;
+  --cs-orange-8: #AD4E00;
+  --cs-orange-9: #873800;
+  --cs-orange-10: #612500;
+
   // padding size
   --cs-padding-size-sm: 8px;
   --cs-padding-size-md: 16px;
@@ -450,6 +463,8 @@
 // border-radius
 @input-number-border-radius: var(--cs-border-radius-sm);
 @input-number-border-shadow-focused: 0 0 0 2px rgba(184, 223, 255, 0.5);
+@input-number-border-shadow-focused-error: 0 0 0 2px rgba(255, 128, 128, 0.3);
+@input-number-border-shadow-focused-warning: 0 0 0 2px rgba(255, 213, 128, 0.5);
 
 // color
 @input-number-color: var(--cs-grey-10);
@@ -457,6 +472,7 @@
 @input-number-color-disabled: var(--cs-grey-7);
 @input-number-color-arrow: var(--cs-grey-7);
 @input-number-color-arrow-hover: var(--cs-blue-6);
+@input-number-color-error: var(--cs-red-5);
 
 // bg
 @input-number-bg: var(--cs-grey-1);
@@ -483,6 +499,20 @@
 @input-number-no-border-color-disabled: var(--cs-grey-6);
 @input-number-no-border-color-divider: var(--cs-grey-5);
 @input-number-no-border-color-addon: @input-number-no-border-bg-addon;
+
+// status
+
+// error
+@input-number-status-color-error: var(--cs-red-5);
+@input-number-status-color-error-hover: var(--cs-red-4);
+@input-number-status-color-error-active: var(--cs-red-7);
+@input-number-status-color-error-disabled: var(--cs-grey-7);
+
+// warning
+@input-number-status-color-warning: var(--cs-orange-5);
+@input-number-status-color-warning-hover: var(--cs-orange-4);
+@input-number-status-color-warning-active: var(--cs-orange-7);
+@input-number-status-color-warning-disabled: var(--cs-grey-7);
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------

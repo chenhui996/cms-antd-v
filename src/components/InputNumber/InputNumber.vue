@@ -38,7 +38,10 @@ const options = computed(() => {
 
 // 组件初始化 class
 const classes = computed(() => {
-  return cs('cs-input-number', {})
+  return cs('cs-input-number', {
+    'cs-input-number-no-bordered': !props.bordered,
+    'cs-input-number-disabled': props.disabled
+  })
 })
 
 // 使用通用透传 Hook 合并 style 和 class
