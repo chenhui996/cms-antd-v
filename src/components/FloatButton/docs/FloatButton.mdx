@@ -1,0 +1,111 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import FloatButton from '../FloatButton.vue'
+import BackTop from '../BackTop.vue';
+import FloatButtonGroup from '../FloatButtonGroup.vue';
+import * as FloatButtonStories from './FloatButton.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={FloatButtonStories} />
+
+<Title />
+
+> 悬浮按钮是一个固定在页面上的圆形按钮，通常用于快速操作或返回顶部等功能。
+
+```ts
+import { FloatButton } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.Default.storyName}
+
+<Canvas of={FloatButtonStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.TypesComponent.storyName}
+
+> 悬浮按钮有 **2** 种类型: **主按钮** 和 **默认按钮**。
+
+<Canvas of={FloatButtonStories.TypesComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.ShapesComponent.storyName}
+
+> 悬浮按钮有 **2** 种形状: **圆形** 和 **方形**。
+
+<Canvas of={FloatButtonStories.ShapesComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.DescriptionComponent.storyName}
+
+> 通过 `description` 属性可以设置按钮的描述文本。
+
+<Canvas of={FloatButtonStories.DescriptionComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.TooltipComponent.storyName}
+
+> 通过 `tooltip` 属性可以设置按钮的提示信息。
+
+<Canvas of={FloatButtonStories.TooltipComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.BadgeComponent.storyName}
+
+> 通过 `badge` 属性可以设置按钮的徽标。
+
+<Canvas of={FloatButtonStories.BadgeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.TriggerComponent.storyName}
+
+> 设置 `trigger` 属性即可开启菜单模式。提供 `hover` 和 `click` 两种触发方式。
+
+<Canvas of={FloatButtonStories.TriggerComponent} />
+
+> 依赖引用：
+
+```ts
+import { CustomerServiceOutlined, CommentOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {FloatButtonStories.FloatButtonGroupComponent.storyName}
+
+> 按钮组合使用时，推荐使用 `<FloatButton.Group />`，并通过设置 `shape` 属性改变悬浮按钮组的形状。悬浮按钮组的 `shape` 会覆盖内部 `FloatButton` 的 `shape` 属性。
+
+<Canvas of={FloatButtonStories.FloatButtonGroupComponent} />
+
+> 依赖引用：
+
+```ts
+import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### 共同的 API
+
+<ArgTypes of={FloatButton} />
+
+### FloatButtonGroup
+
+<ArgTypes of={FloatButtonGroup} />
+
+### BackTop
+
+<ArgTypes of={BackTop} />
