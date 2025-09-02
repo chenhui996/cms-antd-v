@@ -20,11 +20,27 @@ const meta: Meta<typeof Switch> = {
 
 export default meta;
 
+function trimFirstTwoSpaces(str: string) {
+  if (str.startsWith('    ')) {
+    return str.slice(4);
+  }
+  return str;
+}
+
 const setupMatch = (code: string) => {
   const matches = code.matchAll(/const\s+\w+\s*=\s*ref\([^)]+\);/g);
   const extractedLines = Array.from(matches).map(match => match[0]);
 
-  // console.log(extractedLines.join('\n'));
+  const regex = /setup\(\)\s*\{([\s\S]*?)\s*return\s*\{/;
+  const match = code.match(regex);
+
+  if (match && match[1]) {
+    const setupContent = match[1].split('\n').slice(1).map(line => trimFirstTwoSpaces(line)).join('\n');
+    // console.log(setupContent);
+    return setupContent
+  }
+
+  // console.log(code, extractedLines);
 
   return extractedLines.join('\n') || ''
 }

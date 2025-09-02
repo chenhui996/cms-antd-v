@@ -8,10 +8,7 @@ import {
   QuestionCircleOutlined,
   CustomerServiceOutlined,
   CommentOutlined,
-  HomeOutlined,
-  MessageOutlined,
   FileTextOutlined,
-  SettingOutlined,
   SyncOutlined
 } from '@ant-design/icons-vue';
 import './style.less';
