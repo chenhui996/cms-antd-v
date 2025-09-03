@@ -26,8 +26,6 @@ const attrs = useAttrs()
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
-  console.log(attrs.onConfirm)
-
   const { class: _unusedClass, style: _unusedStyle, ...restAttrs } = attrs
 
   return {
@@ -35,8 +33,6 @@ const options = computed(() => {
     ...restAttrs
   } as PopconfirmProps
 })
-
-console.log(options)
 
 // 组件初始化 class
 const classes = computed(() => {
@@ -49,24 +45,35 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initClass: [classes.value]
 })
 
-// const openChange = (bool: boolean) => {
-//   emit('openChange', bool)
-// }
-
-const confirm = (e: MouseEvent) => {
-  console.log('in confirm', e);
-  emit('confirm', e)
+const openChange = (bool: boolean) => {
+  emit('openChange', bool)
 }
 
-// const cancel = (e: MouseEvent) => {
-//   emit('cancel', e)
-// }
+const confirm = (e: MouseEvent) => {
+  return new Promise((resolve) => {
+    if (props.promiseResolve) {
+      promiseResolve().then(() => {
+        emit('confirm', e)
+        resolve(true)
+      })
+    } else {
+      emit('confirm', e)
+      resolve(true)
+    }
+  })
+}
 
+const cancel = (e: MouseEvent) => {
+  emit('cancel', e)
+}
+
+const promiseResolve = () => {
+  const cb = props.promiseResolve
+  return new Promise((resolve) => {
+    cb?.(resolve)
+  })
+}
 </script>
-
-<!-- @confirm="confirm" -->
-<!-- @openChange="openChange"
-@cancel="cancel" -->
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
@@ -75,8 +82,8 @@ const confirm = (e: MouseEvent) => {
       :style="mergedStyle"
       :class="mergedClass"
       @confirm="confirm"
-      @cancel="(e) => emit('cancel', e)"
-      @openChange="(v) => emit('openChange', v)"
+      @cancel="cancel"
+      @openChange="openChange"
     >
       <template v-if="$slots.cancelButton" #cancelButton>
         <slot name="cancelButton" />

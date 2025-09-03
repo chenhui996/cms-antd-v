@@ -1,4 +1,4 @@
-import { ref, h } from 'vue';
+import { ref, h, watch } from 'vue';
 import Popconfirm from '../Popconfirm.vue'
 import { Button } from '../../Button/index'
 import { Space, message, Checkbox } from 'ant-design-vue'
@@ -364,25 +364,41 @@ export const PromiseComponent = () => {
       Checkbox,
     },
     setup() {
+      const open = ref<boolean>(false);
       const confirm = (e: MouseEvent) => {
-        console.log(e);
-        return new Promise(resolve => {
-          setTimeout(() => resolve(true), 3000);
-        });
+        console.log('in confirm', e);
       };
+
+      const promiseResolve = (resolve: (value: unknown) => void) => {
+        console.log('in promiseResolve');
+
+        return new Promise(() => {
+          setTimeout(() => {
+            resolve(true);
+          }, 3000)
+        })
+      }
 
       const cancel = (e: MouseEvent) => {
         console.log(e);
         message.error('Click on No');
       };
 
+      const handleOpenChange = (bool: boolean) => {
+        console.log('in handleOpenChange', bool);
+        open.value = bool;
+      }
+
       return {
+        open,
         confirm,
-        cancel
+        cancel,
+        promiseResolve,
+        handleOpenChange
       }
     },
     template: `
-  <Popconfirm title="Title" @confirm="confirm" @cancel="cancel">
+  <Popconfirm title="Title" @confirm="confirm" @cancel="cancel" :promise-resolve="promiseResolve" @openChange="handleOpenChange" :open="open">
     <Button type="primary">Open Popconfirm with Promise</Button>
   </Popconfirm>
 `

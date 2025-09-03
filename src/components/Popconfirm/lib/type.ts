@@ -29,12 +29,14 @@ export interface BasePopconfirmProps {
     description?: string | number | Slot<any> // ? slot
     /** 是否显示 (v-model) */
     open?: boolean | undefined;
+    /** 确认按钮返回的 Promise 的 resolve 方法，在异步结束时，调用 resolve 方法关闭 Popconfirm */
+    promiseResolve?: (resolve: (value: unknown) => void) => void;
 }
 
 export type CSPopconfirmProps = BasePopconfirmProps
 
-export interface PopconfirmEmits { 
+export interface PopconfirmEmits {
     (e: 'cancel', event: MouseEvent): void
-    (e: 'confirm', fn: any): void
+    (e: 'confirm', event: MouseEvent): void
     (e: 'openChange', open: boolean): void
 }
