@@ -1,0 +1,36 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import Select from '../Select.vue'
+import * as SelectStories from './Select.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={SelectStories} />
+
+<Title />
+
+> 下拉选择器。<br /><br />
+> 弹出一个下拉菜单给用户选择操作，用于代替原生的选择器，或者需要一个更优雅的多选器时。<br /><br />
+> 当选项少时（少于 5 项），建议直接将选项平铺，使用 Radio 是更好的选择。
+
+```ts
+import { Select } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={SelectStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Select
+
+<ArgTypes of={Select} />
