@@ -24,7 +24,8 @@ const props = withDefaults(defineProps<CSSelectProps>(), {
   placement: 'bottomLeft',
   size: 'middle',
   showArrow: true,
-  open: undefined
+  open: undefined,
+  virtual: true
 })
 
 const emit = defineEmits<SelectEmits>()
@@ -32,6 +33,7 @@ const attrs = useAttrs()
 
 const resAttrs = computed(() => {
   const { class: _unusedClass, style: _unusedStyle, ...restAttrs } = attrs
+
   return restAttrs as SelectProps
 })
 
@@ -54,7 +56,7 @@ const handleFocus = (e: FocusEvent) => {
   emit('focus', e)
 }
 
-const resValue = ref(props.value);
+const resValue = ref(props.value)
 </script>
 
 <template>
@@ -75,7 +77,6 @@ const resValue = ref(props.value);
       :popupClassName="popupClassName"
       :dropdownMatchSelectWidth="dropdownMatchSelectWidth"
       :dropdownMenuStyle="dropdownMenuStyle"
-      :dropdownRender="dropdownRender"
       :dropdownStyle="dropdownStyle"
       :fieldNames="fieldNames"
       :filterOption="filterOption"
@@ -102,7 +103,6 @@ const resValue = ref(props.value);
       :showSearch="showSearch"
       :size="size"
       :status="status"
-      :suffixIcon="suffixIcon"
       :tagRender="tagRender"
       :tokenSeparators="tokenSeparators"
       :virtual="virtual"
@@ -111,29 +111,32 @@ const resValue = ref(props.value);
       @change="handleChange"
       @focus="handleFocus"
     >
-      <template v-if="$slots.notFoundContent" #notFoundContent="notFoundContentScope">
-        <slot name="notFoundContent" v-bind="notFoundContentScope" />
+      <template v-if="$slots.notFoundContent" #notFoundContent>
+        <slot name="notFoundContent" />
       </template>
-      <template v-if="$slots.option" #option="optionScope">
-        <slot name="option" v-bind="optionScope" />
+      <template v-if="$slots.dropdownRender" #dropdownRender="dropdownRenderScope">
+        <slot name="dropdownRender" v-bind="dropdownRenderScope" />
       </template>
-      <template v-if="$slots.maxTagPlaceholder" #maxTagPlaceholder="maxTagPlaceholderScope">
-        <slot name="maxTagPlaceholder" v-bind="maxTagPlaceholderScope" />
+      <template v-if="$slots.option" #option>
+        <slot name="option" />
       </template>
-      <template v-if="$slots.clearIcon" #clearIcon="clearIconScope">
-        <slot name="clearIcon" v-bind="clearIconScope" />
+      <template v-if="$slots.maxTagPlaceholder" #maxTagPlaceholder>
+        <slot name="maxTagPlaceholder" />
       </template>
-      <template v-if="$slots.placeholder" #placeholder="placeholderScope">
-        <slot name="placeholder" v-bind="placeholderScope" />
+      <template v-if="$slots.clearIcon">
+        <slot name="clearIcon" />
       </template>
-      <template v-if="$slots.removeIcon" #removeIcon="removeIconScope">
-        <slot name="removeIcon" v-bind="removeIconScope" />
+      <template v-if="$slots.placeholder" #placeholder>
+        <slot name="placeholder" />
       </template>
-      <template v-if="$slots.suffixIcon" #suffixIcon="suffixIconScope">
-        <slot name="suffixIcon" v-bind="suffixIconScope" />
+      <template v-if="$slots.removeIcon" #removeIcon>
+        <slot name="removeIcon" />
       </template>
-      <template v-if="$slots.tagRender" #tagRender="tagRenderScope">
-        <slot name="tagRender" v-bind="tagRenderScope" />
+      <template v-if="$slots.suffixIcon" #suffixIcon>
+        <slot name="suffixIcon" />
+      </template>
+      <template v-if="$slots.tagRender" #tagRender>
+        <slot name="tagRender" />
       </template>
       <slot />
     </ASelect>

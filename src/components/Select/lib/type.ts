@@ -92,8 +92,8 @@ export interface BaseSelectProps extends SelectProps {
     size?: 'large' | 'small' | 'middle'
     /** 设置校验状态 */
     status?: 'error' | 'warning'
-    /** 自定义的选择框后缀图标 */
-    suffixIcon?: VNode | Slot<any>
+    // /** 自定义的选择框后缀图标 */
+    // suffixIcon?: VNode | Slot<any>
     /** 自定义 tag 内容 render，仅在 mode 为 multiple 或 tags 时生效 */
     tagRender?: Slot<any> | ((props: any) => any)
     /** 自动分词的分隔符，仅在 mode="tags" 时生效 */
