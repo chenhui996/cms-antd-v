@@ -1,5 +1,5 @@
 import { ref, reactive } from 'vue';
-import Select from '../Select.vue'
+import { Select } from '../index'
 import {
   Space, SelectOption, type SelectProps,
   // Select 
@@ -113,6 +113,7 @@ export const Default = () => {
 
       const handleChange = (value: string) => {
         console.log(`selected ${value}`);
+        value1.value = value;
       };
       return {
         value1,
@@ -126,42 +127,43 @@ export const Default = () => {
       }
     },
     template: `
-  <Space direction="vertical">
-    <Select style="width: 120px">
+  <h2>use a-select-option</h2>
+  <Space>
+    <Select
+      ref="select"
+      v-model:value="value1"
+      style="width: 120px"
+      @focus="focus"
+      @change="handleChange"
+    >
       <SelectOption value="jack">Jack</SelectOption>
       <SelectOption value="lucy">Lucy</SelectOption>
       <SelectOption value="disabled" disabled>Disabled</SelectOption>
       <SelectOption value="Yiminghe">yiminghe</SelectOption>
     </Select>
+    <Select v-model:value="value2" style="width: 120px" disabled>
+      <SelectOption value="lucy">Lucy</SelectOption>
+    </Select>
+    <Select v-model:value="value3" style="width: 120px" loading>
+      <SelectOption value="lucy">Lucy</SelectOption>
+    </Select>
+  </Space>
+  <h2 style="margin-top: 10px">use options (recommend)</h2>
+  <Space>
+    <Select
+      ref="select"
+      v-model:value="value1"
+      style="width: 120px"
+      :options="options1"
+      @focus="focus"
+      @change="handleChange"
+    ></Select>
+    <Select v-model:value="value2" style="width: 120px" disabled :options="options2"></Select>
+    <Select v-model:value="value3" style="width: 120px" loading :options="options3"></Select>
   </Space>
 `
   }
 };
-      // v-model:value="value1"
-      // ref="select"
-      // @focus="focus"
-      // @change="handleChange"
-// @change="handleChange"
-
-// <Select v-model:value="value2" style="width: 120px" disabled>
-// <SelectOption value="lucy">Lucy</SelectOption>
-// </Select>
-// <Select v-model:value="value3" style="width: 120px" loading>
-// <SelectOption value="lucy">Lucy</SelectOption>
-// </Select>
-// <h2 style="margin-top: 10px">use options (recommend)</h2>
-// <Space direction="vertical">
-//   <Select
-//     ref="select"
-//     v-model:value="value1"
-//     style="width: 120px"
-//     :options="options1"
-//     @focus="focus"
-//     @change="handleChange"
-//   ></Select>
-//   <Select v-model:value="value2" style="width: 120px" disabled :options="options2"></Select>
-//   <Select v-model:value="value3" style="width: 120px" loading :options="options3"></Select>
-// </Space>
 
 Default.storyName = "基本使用 select";
 Default.parameters = parameters(Default)

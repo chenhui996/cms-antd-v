@@ -98,10 +98,12 @@ export interface BaseSelectProps extends SelectProps {
     tagRender?: Slot<any> | ((props: any) => any)
     /** 自动分词的分隔符，仅在 mode="tags" 时生效 */
     tokenSeparators?: string[]
-    /** 指定当前选中的条目(v-model) */
+    // /** 指定当前选中的条目(v-model) */
     value?: string | string[] | number | number[]
     /** 设置 false 时关闭虚拟滚动 */
     virtual?: boolean
+    /** 设置是否为加载中状态 */
+    loading?: boolean
 }
 
 export interface BaseSelectOptionProps extends BaseOptionType {

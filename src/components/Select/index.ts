@@ -1,2 +1,2 @@
-export { default as Switch } from "./Select.vue"
-export type { CSSwitchProps, SwitchEmits } from "./lib/type"
+export { default as Select } from "./Select.vue"
+export type { CSSelectProps, SelectEmits } from "./lib/type"

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { useAttrs, computed } from 'vue'
+import { useAttrs, computed, ref } from 'vue'
 import { Select as ASelect, ConfigProvider } from 'ant-design-vue'
 import type { SelectProps, DefaultOptionType, SelectValue } from 'ant-design-vue/lib/select'
 import useForward from '@/hooks/useForward'
 import type { CSSelectProps, SelectEmits } from './lib/type'
 
 defineOptions({
-  name: 'CSSelect',
-  inheritAttrs: false
+  name: 'CSSelect'
+  // inheritAttrs: false
 })
 
 const props = withDefaults(defineProps<CSSelectProps>(), {
@@ -20,47 +20,19 @@ const props = withDefaults(defineProps<CSSelectProps>(), {
   defaultActiveFirstOption: true,
   disabled: false,
   dropdownMatchSelectWidth: true,
-  // fieldNames: { value: 'value', label: 'label', options: 'options' } as any, // ?
-  // filterOption: true,
-  // getPopupContainer: () => document.body,
-  // labelInValue: false,
   listHeight: 256,
-  // notFoundContent: 'Not Found',
-  // optionFilterProp: 'value',
   placement: 'bottomLeft',
   size: 'middle',
-  // virtual: true,
-  showArrow: true
+  showArrow: true,
+  open: undefined
 })
 
 const emit = defineEmits<SelectEmits>()
 const attrs = useAttrs()
 
-// options 为合并后的 props+attrs（直接 v-bind 用）
-const options = computed(() => {
+const resAttrs = computed(() => {
   const { class: _unusedClass, style: _unusedStyle, ...restAttrs } = attrs
-  const { onChange: _unusedOnChange, ...restProps } = props
-
-  console.log('props', props)
-  // 处理 getPopupContainer
-  let getPopupContainer: any = props.getPopupContainer
-  
-  if (getPopupContainer && typeof getPopupContainer !== 'function') {
-    // 如果是 DOM 元素，包装成函数
-    if (getPopupContainer instanceof HTMLElement) {
-      getPopupContainer = () => getPopupContainer
-    } else {
-      getPopupContainer = () => document.body
-    }
-  } else if (!getPopupContainer) {
-    getPopupContainer = () => document.body
-  }
-
-  return {
-    ...restProps,
-    ...restAttrs,
-    getPopupContainer
-  } as SelectProps
+  return restAttrs as SelectProps
 })
 
 // 组件初始化 class
@@ -76,13 +48,69 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 
 const handleChange = (value: SelectValue, option: DefaultOptionType | Array<DefaultOptionType>) => {
   emit('change', value, option)
-  // props?.onChange?.(value, option)
 }
+
+const handleFocus = (e: FocusEvent) => {
+  emit('focus', e)
+}
+
+const resValue = ref(props.value);
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ASelect v-bind="options" :style="mergedStyle" :class="mergedClass" @change="handleChange">
+    <ASelect
+      v-bind="resAttrs"
+      :style="mergedStyle"
+      :class="mergedClass"
+      :open="open"
+      :allowClear="allowClear"
+      :autoClearSearchValue="autoClearSearchValue"
+      :autofocus="autofocus"
+      :bordered="bordered"
+      :clearIcon="clearIcon"
+      :defaultActiveFirstOption="defaultActiveFirstOption"
+      :defaultOpen="defaultOpen"
+      :disabled="disabled"
+      :popupClassName="popupClassName"
+      :dropdownMatchSelectWidth="dropdownMatchSelectWidth"
+      :dropdownMenuStyle="dropdownMenuStyle"
+      :dropdownRender="dropdownRender"
+      :dropdownStyle="dropdownStyle"
+      :fieldNames="fieldNames"
+      :filterOption="filterOption"
+      :filterSort="filterSort"
+      :firstActiveValue="firstActiveValue"
+      :getPopupContainer="getPopupContainer"
+      :labelInValue="labelInValue"
+      :listHeight="listHeight"
+      :maxTagCount="maxTagCount"
+      :maxTagPlaceholder="maxTagPlaceholder"
+      :maxTagTextLength="maxTagTextLength"
+      :menuItemSelectedIcon="menuItemSelectedIcon"
+      :mode="mode"
+      :notFoundContent="notFoundContent"
+      :option="option"
+      :optionFilterProp="optionFilterProp"
+      :optionLabelProp="optionLabelProp"
+      :options="options"
+      :placeholder="placeholder"
+      :placement="placement"
+      :removeIcon="removeIcon"
+      :searchValue="searchValue"
+      :showArrow="showArrow"
+      :showSearch="showSearch"
+      :size="size"
+      :status="status"
+      :suffixIcon="suffixIcon"
+      :tagRender="tagRender"
+      :tokenSeparators="tokenSeparators"
+      :virtual="virtual"
+      v-model:value="resValue"
+      :loading="loading"
+      @change="handleChange"
+      @focus="handleFocus"
+    >
       <template v-if="$slots.notFoundContent" #notFoundContent="notFoundContentScope">
         <slot name="notFoundContent" v-bind="notFoundContentScope" />
       </template>
