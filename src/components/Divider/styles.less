@@ -1,0 +1,29 @@
+.cs-divider.ant-divider {
+  &.ant-divider-horizontal {
+    &:not(.ant-divider-dashed) {
+      border-block-start: 1px solid @divider-border-color;
+
+      &.ant-divider-with-text {
+        border-block-start-width: 0;
+
+        &::before,
+        &::after {
+          border-block-start: 1px solid @divider-border-color;
+        }
+      }
+    }
+  }
+
+  &.ant-divider-vertical {
+    border-inline-start: 1px solid @divider-border-color;
+
+    &.ant-divider-with-text {
+      border-inline-start-width: 0;
+
+      &::before,
+      &::after {
+        border-inline-start: 1px solid @divider-border-color;
+      }
+    }
+  }
+}

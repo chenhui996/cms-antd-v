@@ -1,0 +1,83 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { Spin } from '../index'
+import * as SpinStories from './Spin.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={SpinStories} />
+
+<Title />
+
+> 用于页面和区块的加载中状态。<br /><br />
+> 使用：页面局部处于等待异步数据或正在渲染过程时，合适的加载动效会有效缓解用户的焦虑。
+
+```ts
+import { Spin } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={SpinStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.ContainerComponent.storyName}
+
+> 放入一个容器中。
+
+<Canvas of={SpinStories.ContainerComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.SizeComponent.storyName}
+
+> 小的用于文本加载，默认用于 **卡片容器级** 加载，大的用于 **页面级** 加载。
+
+<Canvas of={SpinStories.SizeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.TipComponent.storyName}
+
+> 自定义描述文案。
+
+<Canvas of={SpinStories.TipComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.IndicatorComponent.storyName}
+
+> 使用自定义指示符。
+
+<Canvas of={SpinStories.IndicatorComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.CardLoadingComponent.storyName}
+
+> 可以直接把内容内嵌到 `Spin` 中，将现有容器变为加载状态。
+
+<Canvas of={SpinStories.CardLoadingComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SpinStories.DelayComponent.storyName}
+
+> 设置 `delay` 属性后，`Spin` 会等待指定时间后显示。
+
+<Canvas of={SpinStories.DelayComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Spin
+
+<ArgTypes of={Spin} />

@@ -41,30 +41,11 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleChange = (event: RadioChangeEvent) => {
-  emit('change', event)
-}
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
-}
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <ARadioGroup
-      v-bind="options"
-      :style="mergedStyle"
-      :class="mergedClass"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
-    >
+    <ARadioGroup v-bind="options" :style="mergedStyle" :class="mergedClass">
       <slot />
     </ARadioGroup>
   </ConfigProvider>

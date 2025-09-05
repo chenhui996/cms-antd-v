@@ -40,14 +40,6 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
   initStyle: {},
   initClass: [classes.value]
 })
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
-}
 </script>
 
 <template>
@@ -56,8 +48,6 @@ const handleBlur = (event: FocusEvent) => {
       v-bind="options"
       :style="mergedStyle"
       :class="mergedClass"
-      @focus="handleFocus"
-      @blur="handleBlur"
     >
       <slot />
     </ARadioButton>

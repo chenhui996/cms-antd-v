@@ -1,0 +1,183 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import Select from '../Select.vue'
+import * as SelectStories from './Select.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={SelectStories} />
+
+<Title />
+
+> 下拉选择器。<br /><br />
+> 弹出一个下拉菜单给用户选择操作，用于代替原生的选择器，或者需要一个更优雅的多选器时。<br /><br />
+> 当选项少时（少于 5 项），建议直接将选项平铺，使用 Radio 是更好的选择。
+
+```ts
+import { Select } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={SelectStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.TagsComponent.storyName}
+
+> tags select，随意输入的内容（scroll the menu）
+
+<Canvas of={SelectStories.TagsComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.AutoSliptComponent.storyName}
+
+> 试下复制 露西,杰克 到输入框里。只在 tags 和 multiple 模式下可用。
+
+<Canvas of={SelectStories.AutoSliptComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.MultipleComponent.storyName}
+
+> 多选 multiple，多选，从已有条目中选择（scroll the menu）
+
+<Canvas of={SelectStories.MultipleComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.GroupComponent.storyName}
+
+> 用 `OptGroup` 或 `options.options` 进行选项分组。
+
+<Canvas of={SelectStories.GroupComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.SearchComponent.storyName}
+
+> 展开后可对选项进行搜索。
+
+<Canvas of={SelectStories.SearchComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.SuffixIconComponent.storyName}
+
+> 自定义后缀图标。
+
+<Canvas of={SelectStories.SuffixIconComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.DropdownRenderComponent.storyName}
+
+> 使用 `dropdownRender` 对下拉菜单进行自由扩展。
+
+<Canvas of={SelectStories.DropdownRenderComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.BigCountComponent.storyName}
+
+> Select 使用了虚拟滚动技术，因而获得了比 1.x 更好的性能
+
+<Canvas of={SelectStories.BigCountComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.PlacementComponent.storyName}
+
+> 可以通过 `placement` 手动指定弹出的位置。
+
+<Canvas of={SelectStories.PlacementComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.SizeComponent.storyName}
+
+> 三种大小的选择框，当 `size` 分别为 `large` 和 `small` 时，输入框高度为 `40px` 和 `24px` ，默认高度为 `32px`。
+
+<Canvas of={SelectStories.SizeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.MaxTagCountComponent.storyName}
+
+> 设置一个数字，超过后自动折叠。<br /><br />
+> maxTagCount 也可以设置成响应式，但响应式对性能有所消耗，不推荐在大表单场景下使用。
+
+<Canvas of={SelectStories.MaxTagCountComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.GetTextComponent.storyName}
+
+> 默认情况下 `onChange` 里只能拿到 value，如果需要拿到选中的节点文本 label，可以使用 `labelInValue` 属性。 选中项的 `label` 会被包装到 `value` 中传递给 `onChange` 等函数，此时 `value` 是一个对象。
+
+<Canvas of={SelectStories.GetTextComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.ConnectComponent.storyName}
+
+> 省市联动是典型的例子。 推荐使用 `Cascader` 组件。
+
+<Canvas of={SelectStories.ConnectComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.SearchComponent.storyName}
+
+> 搜索 mock api 远程数据。
+
+<Canvas of={SelectStories.SearchComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.HiddenSelectedComponent.storyName}
+
+> 隐藏下拉列表中已选择的选项。。
+
+<Canvas of={SelectStories.HiddenSelectedComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.CustomTagComponent.storyName}
+
+> 使用 `optionLabelProp` 指定回填到选择框的 `Option` 属性。<br /><br />
+> 或者使用 `tagRender` 插槽自定义渲染节点。
+
+<Canvas of={SelectStories.CustomTagComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.FieldNamesComponent.storyName}
+
+> 方便数据结构转换。<br /><br />
+> 仅支持 `options` 传递，不支持 `a-select-option` 构造节点。
+
+<Canvas of={SelectStories.FieldNamesComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.StatusComponent.storyName}
+
+> 使用 `status` 为 Select 添加状态，可选 `error` 或者 `warning`。
+
+<Canvas of={SelectStories.StatusComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Select
+
+<ArgTypes of={Select} />

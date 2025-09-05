@@ -72,6 +72,50 @@ import { InputNumber } from "cms-antd-v";
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
 
+## {InputNumberStories.OutOfRangeComponent.storyName}
+
+> 当通过受控将 value 超出边界时，提供警告样式。
+
+<Canvas of={InputNumberStories.OutOfRangeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.FormatterComponent.storyName}
+
+> 使用 `formatter` 属性可以格式化展示输入的值，使用 `parser` 属性可以解析输入的值。<br /><br />
+> 注意：`formatter` 和 `parser` 需要搭配使用。
+
+<Canvas of={InputNumberStories.FormatterComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {InputNumberStories.IconButtonComponent.storyName}
+
+> 使用 `upIcon` 和 `downIcon` 属性可以自定义上箭头和下箭头图标。
+
+<Canvas of={InputNumberStories.IconButtonComponent} />
+
+> 依赖引用：
+
+```ts
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons-vue';
+``` 
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}   
+
+## {InputNumberStories.StatusComponent.storyName}
+
+> 使用 `status` 为 InputNumber 添加状态，可选 `error` 或者 `warning`。
+
+<Canvas of={InputNumberStories.StatusComponent} />
+
+> 依赖引用：
+
+```ts
+import { ClockCircleOutlined } from '@ant-design/icons-vue';
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}   
 
 ---
 
