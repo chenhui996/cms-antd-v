@@ -95,6 +95,83 @@ import { Select } from "cms-antd-v";
 
 <Canvas of={SelectStories.PlacementComponent} />
 
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.SizeComponent.storyName}
+
+> 三种大小的选择框，当 `size` 分别为 `large` 和 `small` 时，输入框高度为 `40px` 和 `24px` ，默认高度为 `32px`。
+
+<Canvas of={SelectStories.SizeComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.MaxTagCountComponent.storyName}
+
+> 设置一个数字，超过后自动折叠。<br /><br />
+> maxTagCount 也可以设置成响应式，但响应式对性能有所消耗，不推荐在大表单场景下使用。
+
+<Canvas of={SelectStories.MaxTagCountComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.GetTextComponent.storyName}
+
+> 默认情况下 `onChange` 里只能拿到 value，如果需要拿到选中的节点文本 label，可以使用 `labelInValue` 属性。 选中项的 `label` 会被包装到 `value` 中传递给 `onChange` 等函数，此时 `value` 是一个对象。
+
+<Canvas of={SelectStories.GetTextComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.ConnectComponent.storyName}
+
+> 省市联动是典型的例子。 推荐使用 `Cascader` 组件。
+
+<Canvas of={SelectStories.ConnectComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.SearchComponent.storyName}
+
+> 搜索 mock api 远程数据。
+
+<Canvas of={SelectStories.SearchComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.HiddenSelectedComponent.storyName}
+
+> 隐藏下拉列表中已选择的选项。。
+
+<Canvas of={SelectStories.HiddenSelectedComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.CustomTagComponent.storyName}
+
+> 使用 `optionLabelProp` 指定回填到选择框的 `Option` 属性。<br /><br />
+> 或者使用 `tagRender` 插槽自定义渲染节点。
+
+<Canvas of={SelectStories.CustomTagComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.FieldNamesComponent.storyName}
+
+> 方便数据结构转换。<br /><br />
+> 仅支持 `options` 传递，不支持 `a-select-option` 构造节点。
+
+<Canvas of={SelectStories.FieldNamesComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {SelectStories.StatusComponent.storyName}
+
+> 使用 `status` 为 Select 添加状态，可选 `error` 或者 `warning`。
+
+<Canvas of={SelectStories.StatusComponent} />  
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
 ---
 
 ## API

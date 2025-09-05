@@ -99,7 +99,7 @@ export interface BaseSelectProps extends SelectProps {
     /** 自动分词的分隔符，仅在 mode="tags" 时生效 */
     tokenSeparators?: string[]
     // /** 指定当前选中的条目(v-model) */
-    value?: string | string[] | number | number[]
+    value?: SelectValue
     /** 设置 false 时关闭虚拟滚动 */
     virtual?: boolean
     /** 设置是否为加载中状态 */
@@ -144,7 +144,7 @@ export interface SelectEmits {
     /** 键盘按下时回调 */
     (e: 'inputKeyDown', event: KeyboardEvent): void
     /** 文本框值变化时回调 */
-    (e: 'search', payload: { value: string | string[] | number | number[], option: DefaultOptionType | Array<DefaultOptionType> }): void
+    (e: 'search', value: string): void
     /** 被选中时调用，参数为选中项的 value (或 key) 值 */
     (e: 'select', value: string): void
     /** 鼠标移入时回调 */

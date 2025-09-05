@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { useAttrs, computed, ref } from 'vue'
+import { useAttrs, computed, ref, watch } from 'vue'
 import { Select as ASelect, ConfigProvider } from 'ant-design-vue'
 import type { SelectProps, DefaultOptionType, SelectValue } from 'ant-design-vue/lib/select'
 import useForward from '@/hooks/useForward'
@@ -25,7 +25,10 @@ const props = withDefaults(defineProps<CSSelectProps>(), {
   size: 'middle',
   showArrow: true,
   open: undefined,
-  virtual: true
+  virtual: true,
+  labelInValue: false,
+  // 单选为 true,多选为 false
+  showSearch: true
 })
 
 const emit = defineEmits<SelectEmits>()
@@ -56,91 +59,92 @@ const handleFocus = (e: FocusEvent) => {
   emit('focus', e)
 }
 
-const resValue = ref(props.value)
+const handleSearch = (value: string) => {
+  emit('search', value)
+}
+
+const resValue = defineModel<SelectValue>('value')
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
-    <ASelect
-      v-bind="resAttrs"
-      :style="mergedStyle"
-      :class="mergedClass"
-      :open="open"
-      :allowClear="allowClear"
-      :autoClearSearchValue="autoClearSearchValue"
-      :autofocus="autofocus"
-      :bordered="bordered"
-      :clearIcon="clearIcon"
-      :defaultActiveFirstOption="defaultActiveFirstOption"
-      :defaultOpen="defaultOpen"
-      :disabled="disabled"
-      :popupClassName="popupClassName"
-      :dropdownMatchSelectWidth="dropdownMatchSelectWidth"
-      :dropdownMenuStyle="dropdownMenuStyle"
-      :dropdownStyle="dropdownStyle"
-      :fieldNames="fieldNames"
-      :filterOption="filterOption"
-      :filterSort="filterSort"
-      :firstActiveValue="firstActiveValue"
-      :getPopupContainer="getPopupContainer"
-      :labelInValue="labelInValue"
-      :listHeight="listHeight"
-      :maxTagCount="maxTagCount"
-      :maxTagPlaceholder="maxTagPlaceholder"
-      :maxTagTextLength="maxTagTextLength"
-      :menuItemSelectedIcon="menuItemSelectedIcon"
-      :mode="mode"
-      :notFoundContent="notFoundContent"
-      :option="option"
-      :optionFilterProp="optionFilterProp"
-      :optionLabelProp="optionLabelProp"
-      :options="options"
-      :placeholder="placeholder"
-      :placement="placement"
-      :removeIcon="removeIcon"
-      :searchValue="searchValue"
-      :showArrow="showArrow"
-      :showSearch="showSearch"
-      :size="size"
-      :status="status"
-      :tagRender="tagRender"
-      :tokenSeparators="tokenSeparators"
-      :virtual="virtual"
-      v-model:value="resValue"
-      :loading="loading"
-      @change="handleChange"
-      @focus="handleFocus"
-    >
-      <template v-if="$slots.notFoundContent" #notFoundContent>
-        <slot name="notFoundContent" />
-      </template>
-      <template v-if="$slots.dropdownRender" #dropdownRender="dropdownRenderScope">
-        <slot name="dropdownRender" v-bind="dropdownRenderScope" />
-      </template>
-      <template v-if="$slots.option" #option>
-        <slot name="option" />
-      </template>
-      <template v-if="$slots.maxTagPlaceholder" #maxTagPlaceholder>
-        <slot name="maxTagPlaceholder" />
-      </template>
-      <template v-if="$slots.clearIcon">
-        <slot name="clearIcon" />
-      </template>
-      <template v-if="$slots.placeholder" #placeholder>
-        <slot name="placeholder" />
-      </template>
-      <template v-if="$slots.removeIcon" #removeIcon>
-        <slot name="removeIcon" />
-      </template>
-      <template v-if="$slots.suffixIcon" #suffixIcon>
-        <slot name="suffixIcon" />
-      </template>
-      <template v-if="$slots.tagRender" #tagRender>
-        <slot name="tagRender" />
-      </template>
-      <slot />
-    </ASelect>
-  </ConfigProvider>
+  <ASelect
+    v-bind="resAttrs"
+    :style="mergedStyle"
+    :class="mergedClass"
+    :open="open"
+    :allowClear="allowClear"
+    :autoClearSearchValue="autoClearSearchValue"
+    :autofocus="autofocus"
+    :bordered="bordered"
+    :clearIcon="clearIcon"
+    :defaultActiveFirstOption="defaultActiveFirstOption"
+    :defaultOpen="defaultOpen"
+    :disabled="disabled"
+    :popupClassName="popupClassName"
+    :dropdownMatchSelectWidth="dropdownMatchSelectWidth"
+    :dropdownMenuStyle="dropdownMenuStyle"
+    :dropdownStyle="dropdownStyle"
+    :fieldNames="fieldNames"
+    :filterOption="filterOption"
+    :filterSort="filterSort"
+    :firstActiveValue="firstActiveValue"
+    :getPopupContainer="getPopupContainer"
+    :labelInValue="labelInValue"
+    :listHeight="listHeight"
+    :maxTagCount="maxTagCount"
+    :maxTagTextLength="maxTagTextLength"
+    :menuItemSelectedIcon="menuItemSelectedIcon"
+    :mode="mode"
+    :notFoundContent="notFoundContent"
+    :optionFilterProp="optionFilterProp"
+    :optionLabelProp="optionLabelProp"
+    :options="options"
+    :placeholder="placeholder"
+    :placement="placement"
+    :removeIcon="removeIcon"
+    :searchValue="searchValue"
+    :showArrow="showArrow"
+    :showSearch="showSearch"
+    :size="size"
+    :status="status"
+    :tagRender="tagRender"
+    :tokenSeparators="tokenSeparators"
+    :virtual="virtual"
+    v-model:value="resValue"
+    :loading="loading"
+    @change="handleChange"
+    @focus="handleFocus"
+    @search="handleSearch"
+  >
+    <template v-if="$slots.notFoundContent" #notFoundContent>
+      <slot name="notFoundContent" />
+    </template>
+    <template v-if="$slots.dropdownRender" #dropdownRender="dropdownRenderScope">
+      <slot name="dropdownRender" v-bind="dropdownRenderScope" />
+    </template>
+    <template v-if="$slots.option" #option="optionScope">
+      <slot name="option" v-bind="optionScope" />
+    </template>
+    <template v-if="$slots.tagRender" #tagRender="tagRenderScope">
+      <slot name="tagRender" v-bind="tagRenderScope" />
+    </template>
+    <template v-if="$slots.maxTagPlaceholder" #maxTagPlaceholder="omittedValues">
+      <slot name="maxTagPlaceholder" v-bind="omittedValues" />
+    </template>
+    <template v-if="$slots.clearIcon" #clearIcon="clearIconScope">
+      <slot name="clearIcon" v-bind="clearIconScope" />
+    </template>
+    <template v-if="$slots.placeholder" #placeholder="placeholderScope">
+      <slot name="placeholder" v-bind="placeholderScope" />
+    </template>
+    <template v-if="$slots.removeIcon" #removeIcon="removeIconScope">
+      <slot name="removeIcon" v-bind="removeIconScope" />
+    </template>
+    <template v-if="$slots.suffixIcon" #suffixIcon="suffixIconScope">
+      <slot name="suffixIcon" v-bind="suffixIconScope" />
+    </template>
+    <slot />
+  </ASelect>
 </template>
 
 <style lang="less">

@@ -5,7 +5,7 @@ import { Button } from '../../Button'
 import { Divider } from '../../Divider'
 import { RadioGroup, RadioButton } from '../../Radio'
 import {
-  Space, SelectOption, type SelectProps, SelectOptGroup, Input,
+  Space, SelectOption, type SelectProps, SelectOptGroup, Input, Tag,
   // Select
 } from 'ant-design-vue'
 import { UserOutlined, SmileOutlined, MehOutlined, PlusOutlined } from '@ant-design/icons-vue';
@@ -605,7 +605,7 @@ export const BigCountComponent = () => {
     },
     setup() {
       const options: { value: string; disabled: boolean }[] = [];
-      for (let i = 0; i < 100000; i++) {
+      for (let i = 0; i < 100; i++) {
         const value = `${i.toString(36)}${i}`;
         options.push({
           value,
@@ -613,7 +613,7 @@ export const BigCountComponent = () => {
         });
       }
 
-      const value = ref(['a10', 'c12']);
+      const value = ref(['00', '11']);
 
       return {
         value,
@@ -623,12 +623,13 @@ export const BigCountComponent = () => {
     template: `
   <h2>{{ options.length }} Items</h2>
   <Select
-    v-model:value="value"
-    mode="multiple"
-    style="width: 100%"
-    placeholder="Please select"
-    :options="options"
-  />
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="Please select"
+      :options="options"
+      popupClassName="custom-select-styles"
+    />
 `
   }
 };
@@ -646,7 +647,8 @@ export const PlacementComponent = () => {
       SmileOutlined,
       MehOutlined,
       RadioGroup,
-      RadioButton
+      RadioButton,
+      SelectOption,
     },
     setup() {
       const placement = ref('topLeft' as const);
@@ -658,7 +660,7 @@ export const PlacementComponent = () => {
       }
     },
     template: `
-  <RadioGroup v-model:value="placement">
+    <RadioGroup v-model:value="placement">
     <RadioButton value="topLeft">topLeft</RadioButton>
     <RadioButton value="topRight">topRight</RadioButton>
     <RadioButton value="bottomLeft">bottomLeft</RadioButton>
@@ -672,8 +674,8 @@ export const PlacementComponent = () => {
     :dropdown-match-select-width="false"
     :placement="placement"
   >
-    <SelectOption value="HangZhou">HangZhou #310000</SelectOption>
-    <SelectOption value="NingBo">NingBo #315000</SelectOption>
+    <SelectOption value="HangZhou">HangZhou ##310000</SelectOption>
+    <SelectOption value="NingBo">NingBo 315000</SelectOption>
     <SelectOption value="WenZhou">WenZhou #325000</SelectOption>
   </Select>
 `
@@ -682,3 +684,575 @@ export const PlacementComponent = () => {
 
 PlacementComponent.storyName = "弹出位置 placement";
 PlacementComponent.parameters = parameters(PlacementComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const SizeComponent = () => {
+  return {
+    components: {
+      Select,
+      Space,
+      RadioGroup,
+      RadioButton
+    },
+    setup() {
+      const popupScroll = () => {
+        console.log('popupScroll');
+      };
+      const size = ref<SelectProps['size']>('middle');
+      const value1 = ref('a1');
+      const value2 = ref(['a1', 'b2']);
+      const value3 = ref(['a1', 'b2']);
+      const options = [...Array(25)].map((_, i) => ({ value: (i + 10).toString(36) + (i + 1) }));
+
+      return {
+        size,
+        value1,
+        value2,
+        value3,
+        options,
+        popupScroll
+      }
+    },
+    template: `
+  <RadioGroup v-model:value="size">
+    <RadioButton value="large">Large</RadioButton>
+    <RadioButton value="middle">Middle</RadioButton>
+    <RadioButton value="small">Small</RadioButton>
+  </RadioGroup>
+  <br />
+  <br />
+  <Space direction="vertical">
+    <Select
+      v-model:value="value1"
+      :size="size"
+      style="width: 200px"
+      :options="options"
+    ></Select>
+    <Select
+      v-model:value="value2"
+      :options="options"
+      mode="multiple"
+      :size="size"
+      placeholder="Please select"
+      style="width: 200px"
+      @popupScroll="popupScroll"
+    ></Select>
+    <Select
+      v-model:value="value3"
+      :options="options"
+      mode="tags"
+      :size="size"
+      placeholder="Please select"
+      style="width: 200px"
+    ></Select>
+  </Space>
+`
+  }
+};
+
+SizeComponent.storyName = "三种大小 size";
+SizeComponent.parameters = parameters(SizeComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const MaxTagCountComponent = () => {
+  return {
+    components: {
+      Space,
+      Select,
+      Button
+    },
+    setup() {
+      const options = ref<SelectProps['options']>([]);
+
+      for (let i = 10; i < 36; i++) {
+        const value = i.toString(36) + i;
+        options.value?.push({
+          label: `Long Label: ${value}`,
+          value,
+        });
+      }
+      const maxTagCount = ref(2);
+      const maxTagTextLength = ref(10);
+      const value = ref(['a10', 'c12', 'h17', 'j19', 'k20']);
+
+      return {
+        options,
+        maxTagCount,
+        maxTagTextLength,
+        value
+      }
+    },
+    template: `
+  <Space direction="vertical" style="width: 100%">
+    <Space>
+      <Button type="primary" @click="maxTagCount++">maxTagCount++</Button>
+      <Button type="primary" @click="maxTagCount--">maxTagCount--</Button>
+    </Space>
+
+    <h2>maxTagCount: {{ maxTagCount }}</h2>
+    <Select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="Select Item..."
+      :max-tag-count="maxTagCount"
+      :options="options"
+    >
+      <template #maxTagPlaceholder="omittedValues">
+        <span style="color: red">+ {{ omittedValues.length }} ...</span>
+      </template>
+    </Select>
+    <h2>maxTagCount: responsive</h2>
+    <Select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="Select Item..."
+      :options="options"
+    ></Select>
+    <Space>
+      <Button type="primary" @click="maxTagTextLength++">maxTagTextLength++</Button>
+      <Button type="primary" @click="maxTagTextLength--">maxTagTextLength--</Button>
+    </Space>
+    <h2>maxTagTextLength: {{ maxTagTextLength }}</h2>
+    <Select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="Select Item..."
+      :max-tag-text-length="maxTagTextLength"
+      :options="options"
+    ></Select>
+  </Space>
+`
+  }
+};
+
+MaxTagCountComponent.storyName = "最多显示多少个选项及选项最大长度";
+MaxTagCountComponent.parameters = parameters(MaxTagCountComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const GetTextComponent = () => {
+  return {
+    components: {
+      Select,
+    },
+    setup() {
+      const options = ref<SelectProps['options']>([
+        {
+          value: 'jack',
+          label: 'Jack (100)',
+        },
+        {
+          value: 'lucy',
+          label: 'Lucy (101)',
+        },
+      ]);
+      const handleChange: SelectProps['onChange'] = value => {
+        console.log(value); // { key: "lucy", label: "Lucy (101)" }
+      };
+
+      const value = ref({ value: 'lucy', label: 'Lucy (101)' });
+
+      return {
+        options,
+        value,
+        handleChange
+      }
+    },
+    template: `
+  <Select
+    v-model:value="value"
+    label-in-value
+    style="width: 120px"
+    :options="options"
+    @change="handleChange"
+  ></Select>
+`
+  }
+};
+
+GetTextComponent.storyName = "获得选项的文本";
+GetTextComponent.parameters = parameters(GetTextComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const ConnectComponent = () => {
+  return {
+    components: {
+      Space,
+      Select,
+    },
+    setup() {
+      const provinceData = ['Zhejiang', 'Jiangsu'];
+      const cityData = {
+        Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
+        Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
+      };
+      const province = ref(provinceData[0]);
+      const secondCity = ref(cityData[province.value as keyof typeof cityData][0]);
+      const cities = computed(() => {
+        return cityData[province.value as keyof typeof cityData];
+      });
+
+      watch(province, val => {
+        secondCity.value = cityData[val as keyof typeof cityData][0];
+      });
+
+      return {
+        provinceData,
+        cityData,
+        province,
+        secondCity,
+        cities
+      }
+    },
+    template: `
+  <Space>
+    <Select
+      v-model:value="province"
+      style="width: 120px"
+      :options="provinceData.map(pro => ({ value: pro }))"
+    ></Select>
+    <Select
+      v-model:value="secondCity"
+      style="width: 120px"
+      :options="cities.map(city => ({ value: city }))"
+    ></Select>
+  </Space>
+`
+  }
+};
+
+ConnectComponent.storyName = "联动";
+ConnectComponent.parameters = parameters(ConnectComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const SearchApiComponent = () => {
+  return {
+    components: {
+      Select,
+    },
+    setup() {
+      let timeout: any;
+      let currentValue = '';
+
+      function fetch(value: string, callback: any) {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        currentValue = value;
+
+        const mockData = [
+          {
+            v: 'jack',
+            l: 'Jack',
+          },
+          {
+            v: 'qack',
+            l: 'Qack',
+          },
+          {
+            v: 'aack',
+            l: 'Aack',
+          },
+        ];
+
+        function fake() {
+          if (currentValue === value) {
+            const result = mockData;
+            const data: any[] = [];
+            result.forEach((r: any) => {
+              data.push({
+                value: r.v,
+                label: r.l,
+              });
+            });
+            callback(data);
+          }
+        }
+
+        timeout = setTimeout(fake, 300);
+      }
+
+      const data = ref<any[]>([]);
+      const value = ref();
+
+      const handleSearch = (val: string) => {
+        fetch(val, (d: any[]) => (data.value = d));
+      };
+      const handleChange = (val: string) => {
+        console.log(val);
+        value.value = val;
+        fetch(val, (d: any[]) => (data.value = d));
+      };
+
+      return {
+        data,
+        value,
+        handleSearch,
+        handleChange
+      }
+    },
+    template: `
+  <Select
+    v-model:value="value"
+    show-search
+    placeholder="input search text"
+    style="width: 200px"
+    :default-active-first-option="false"
+    :show-arrow="false"
+    :filter-option="false"
+    :not-found-content="null"
+    :options="data"
+    @search="handleSearch"
+    @change="handleChange"
+  ></Select>
+`
+  }
+};
+
+SearchApiComponent.storyName = "搜索框 search";
+SearchApiComponent.parameters = parameters(SearchApiComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const HiddenSelectedComponent = () => {
+  return {
+    components: {
+      Select,
+    },
+    setup() {
+      const OPTIONS = ['Apples', 'Nails', 'Bananas', 'Helicopters'];
+      const selectedItems = ref<string[]>([]);
+      const filteredOptions = computed(() => OPTIONS.filter(o => !selectedItems.value.includes(o)));
+
+      return {
+        OPTIONS,
+        selectedItems,
+        filteredOptions
+      }
+    },
+    template: `
+  <Select
+    v-model:value="selectedItems"
+    mode="multiple"
+    placeholder="Inserted are removed"
+    style="width: 100%"
+    :options="filteredOptions.map(item => ({ value: item }))"
+  ></Select>
+`
+  }
+};
+
+HiddenSelectedComponent.storyName = "隐藏已选择选项 hidden selected";
+HiddenSelectedComponent.parameters = parameters(HiddenSelectedComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const CustomTagComponent = () => {
+  return {
+    components: {
+      Space,
+      Select,
+      SelectOption,
+      Tag
+    },
+    setup() {
+      const value = ref(['china']);
+
+      const options = ref([
+        {
+          value: 'china',
+          label: 'China (中国)',
+          icon: '🇨🇳',
+        },
+        {
+          value: 'usa',
+          label: 'USA (美国)',
+          icon: '🇺🇸',
+        },
+        {
+          value: 'japan',
+          label: 'Japan (日本)',
+          icon: '🇯🇵',
+        },
+        {
+          value: 'korea',
+          label: 'Korea (韩国)',
+          icon: '🇨🇰',
+        },
+      ]);
+
+      watch(value, (val: any) => {
+        console.log(`selected:`, val);
+      });
+
+      return {
+        value,
+        options
+      }
+    },
+    template: `
+  <Space direction="vertical" style="width: 100%">
+    <Select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="select one country"
+      option-label-prop="children"
+    >
+      <SelectOption value="china" label="China">
+        <span role="img" aria-label="China">🇨🇳</span>
+        &nbsp;&nbsp;China (中国)
+      </SelectOption>
+      <SelectOption value="usa" label="USA">
+        <span role="img" aria-label="USA">🇺🇸</span>
+        &nbsp;&nbsp;USA (美国)
+      </SelectOption>
+      <SelectOption value="japan" label="Japan">
+        <span role="img" aria-label="Japan">🇯🇵</span>
+        &nbsp;&nbsp;Japan (日本)
+      </SelectOption>
+      <SelectOption value="korea" label="Korea">
+        <span role="img" aria-label="Korea">🇰🇷</span>
+        &nbsp;&nbsp;Korea (韩国)
+      </SelectOption>
+    </Select>
+
+    <Select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="select one country"
+      option-label-prop="label"
+      :options="options"
+    >
+      <template #option="{ value: val, label, icon }">
+        <span role="img" :aria-label="val">{{ icon }}</span>
+        &nbsp;&nbsp;{{ label }}
+      </template>
+    </Select>
+    <span>Note: v-slot:option support from v2.2.5</span>
+  </Space>
+  <br />
+  <br />
+  <Space direction="vertical" style="width: 100%">
+    <Select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="select one country"
+      :options="options"
+    >
+      <template #option="{ value: val, label, icon }">
+        <span role="img" :aria-label="val">{{ icon }}</span>
+        &nbsp;&nbsp;{{ label }}
+      </template>
+      <template #tagRender="{ value: val, label, closable, onClose, option }">
+        <Tag :closable="closable" style="margin-right: 3px" @close="onClose">
+          {{ label }}&nbsp;&nbsp;
+          <span role="img" :aria-label="val">{{ option.icon }}</span>
+        </Tag>
+      </template>
+    </Select>
+    <span>Note: v-slot:tagRender support from v3.0</span>
+  </Space>
+`
+  }
+};
+
+CustomTagComponent.storyName = "定制回填内容";
+CustomTagComponent.parameters = parameters(CustomTagComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const FieldNamesComponent = () => {
+  return {
+    components: {
+      Select
+    },
+    setup() {
+      const value = ref('lucy');
+      const options = ref<SelectProps['options']>([
+        {
+          id: 'jack',
+          name: 'Jack',
+          children: [
+            {
+              id: 'small jack',
+              name: 'samll Jack',
+            },
+          ],
+        },
+        {
+          id: 'lucy',
+          name: 'Lucy',
+        },
+        {
+          id: 'disabled',
+          name: 'Disabled',
+          disabled: true,
+        },
+        {
+          id: 'yiminghe',
+          name: 'Yiminghe',
+        },
+      ]);
+
+      const focus = () => {
+        console.log('focus');
+      };
+
+      const handleChange = (value: string) => {
+        console.log(`selected ${value}`);
+      };
+
+      return {
+        value,
+        options,
+        focus,
+        handleChange
+      }
+    },
+    template: `
+  <Select
+    ref="select"
+    v-model:value="value"
+    style="width: 120px"
+    :options="options"
+    :field-names="{ label: 'name', value: 'id', options: 'children' }"
+    @focus="focus"
+    @change="handleChange"
+  ></Select>
+`
+  }
+};
+
+FieldNamesComponent.storyName = "自定义 label、value、options 字段";
+FieldNamesComponent.parameters = parameters(FieldNamesComponent)
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+export const StatusComponent = () => {
+  return {
+    components: {
+      Space,
+      Select
+    },
+    template: `
+  <Space direction="vertical" style="width: 100%">
+    <Select status="error" style="width: 100%" />
+    <Select status="warning" style="width: 100%" />
+  </Space>
+`
+  }
+};
+
+StatusComponent.storyName = "自定义状态 status";
+StatusComponent.parameters = parameters(StatusComponent)

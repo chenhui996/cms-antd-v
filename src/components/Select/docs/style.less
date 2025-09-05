@@ -75,3 +75,40 @@
       linear-gradient(90deg, rgba(130, 130, 130, 0.1) 1px, transparent 1px) !important;
   }
 }
+
+.custom-select-styles {
+  .ant-select-item {
+    height: 36px !important;
+    position: relative;
+    padding: 0 !important;
+
+    .ant-select-item-option-content {
+      position: absolute;
+      height: calc(100% - 4px);
+      width: 100%;
+      // background-color: red;
+      padding: 5px 12px;
+      border-radius: 4px;
+    }
+
+    &.ant-select-item-option-selected {
+      background-color: transparent !important;
+      .ant-select-item-option-content {
+        background-color: #e6f4ff;
+      }
+    }
+
+    &.ant-select-item-option-active {
+      background-color: transparent !important;
+      .ant-select-item-option-content {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    .ant-select-item-option-state {
+      position: absolute;
+      right: 12px;
+      top: calc(50% - 12px);
+    }
+  }
+}
