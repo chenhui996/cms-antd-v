@@ -1,11 +1,15 @@
 import { ref, watch, defineComponent, computed } from 'vue';
-import { Select } from '../index'
+import {
+  Select,
+  SelectOption,
+  SelectOptGroup
+} from '../index'
 import { Input } from '../../Input'
 import { Button } from '../../Button'
 import { Divider } from '../../Divider'
 import { RadioGroup, RadioButton } from '../../Radio'
 import {
-  Space, SelectOption, type SelectProps, SelectOptGroup, Tag
+  Space, type SelectProps, Tag,
 } from 'ant-design-vue'
 import { UserOutlined, SmileOutlined, MehOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import type { Meta } from '@storybook/vue3';
@@ -262,9 +266,10 @@ export const MultipleComponent = () => {
       Select
     },
     setup() {
-      const handleChange = (value: string[]) => {
-        console.log(`selected ${value}`);
+      const handleChange = (value2: string[], option: any, isAllSelected: boolean) => {
+        console.log(`选中项`, value2, '是否已经全部选中', isAllSelected);
       };
+
       const value = ref(['a1', 'b2']);
 
       return {

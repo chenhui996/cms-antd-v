@@ -1,5 +1,5 @@
 import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
-import Select from '../Select.vue'
+import {Select, SelectOption, SelectOptGroupError} from '../index'
 import * as SelectStories from './Select.stories';
 import { Title, Controls } from '@storybook/addon-docs'
 
@@ -12,7 +12,7 @@ import { Title, Controls } from '@storybook/addon-docs'
 > 当选项少时（少于 5 项），建议直接将选项平铺，使用 Radio 是更好的选择。
 
 ```ts
-import { Select } from "cms-antd-v";
+import { Select, SelectOption } from "cms-antd-v";
 ```
 
 {/* ------------------------------------------------------------------------------------------------------------------------ */}
@@ -181,3 +181,11 @@ import { Select } from "cms-antd-v";
 ### Select
 
 <ArgTypes of={Select} />
+
+### SelectOption
+
+<ArgTypes of={SelectOption} />
+
+### SelectOptGroup
+
+<ArgTypes of={SelectOptGroupError} />   

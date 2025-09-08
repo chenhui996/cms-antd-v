@@ -66,7 +66,13 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 // emit -------------------------------------------------------------------------------------------
 
 const handleChange = (value: SelectValue, option: DefaultOptionType | Array<DefaultOptionType>) => {
-  emit('change', value, option)
+  let isAllSelected = false
+
+  if (props.mode === 'multiple' || props.mode === 'tags') {
+    isAllSelected = props.options!.length === (value as any[])?.length
+  }
+
+  emit('change', value, option, isAllSelected)
 }
 
 const handleFocus = (e: FocusEvent) => {
@@ -119,7 +125,7 @@ const aSelectRef = ref()
 // 暴露方法给父组件
 defineExpose({
   focus: () => aSelectRef.value?.focus(),
-  blur: () => aSelectRef.value?.blur(),
+  blur: () => aSelectRef.value?.blur()
 })
 </script>
 

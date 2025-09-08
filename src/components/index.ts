@@ -7,6 +7,10 @@ export { InputNumber } from './InputNumber'
 export { Radio, RadioButton, RadioGroup } from './Radio'
 export { Switch } from './Switch'
 export { Spin } from './Spin'
+export { Drawer } from './Drawer'
+export { Divider } from './Divider'
+export { Select, SelectOption, SelectOptGroup } from './Select'
+export { Popconfirm } from './Popconfirm'
 
 // 类型导出
 export type { CSButtonProps, ButtonEmits } from './Button/lib/type'
@@ -17,3 +21,7 @@ export type { CSInputNumberProps, InputNumberEmits } from './InputNumber/lib/typ
 export type { CSRadioProps, RadioEmits, CSRadioGroupProps, RadioGroupEmits } from './Radio/lib/type'
 export type { CSSwitchProps, SwitchEmits } from './Switch/lib/type'
 export type { CSSpinProps, SpinEmits } from './Spin/lib/type'
+export type { CSDrawerProps, DrawerEmits } from './Drawer/lib/type'
+export type { CSDividerProps, DividerEmits } from './Divider/lib/type'
+export type { CSSelectProps, SelectEmits, CSSelectOptionProps, SelectOptionEmits, CSSelectOptGroupProps, SelectOptGroupEmits } from './Select/lib/type'
+export type { CSPopconfirmProps, PopconfirmEmits } from './Popconfirm/lib/type'

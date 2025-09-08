@@ -1,2 +1,5 @@
 export { default as Select } from "./Select.vue"
-export type { CSSelectProps, SelectEmits } from "./lib/type"
+export { default as SelectOption } from "./SelectOption.vue"
+export { default as SelectOptGroup } from "ant-design-vue/lib/vc-select/OptGroup"
+export { default as SelectOptGroupError } from "./SelectOptGroup.vue"
+export type { CSSelectProps, SelectEmits, CSSelectOptionProps, SelectOptionEmits, CSSelectOptGroupProps, SelectOptGroupEmits } from "./lib/type"
