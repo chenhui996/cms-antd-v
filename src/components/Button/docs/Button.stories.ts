@@ -13,7 +13,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   decorators: [
     () => ({
-      template: '<div class="storybook-demo"><story /></div>',
+      template: '<div class="storybook-demo cs-btn-demo"><story /></div>',
     })
   ],
 };

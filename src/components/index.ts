@@ -11,6 +11,7 @@ export { Drawer } from './Drawer'
 export { Divider } from './Divider'
 export { Select, SelectOption, SelectOptGroup } from './Select'
 export { Popconfirm } from './Popconfirm'
+export { Tooltip } from './Tooltip'
 
 // 类型导出
 export type { CSButtonProps, ButtonEmits } from './Button/lib/type'
@@ -25,3 +26,4 @@ export type { CSDrawerProps, DrawerEmits } from './Drawer/lib/type'
 export type { CSDividerProps, DividerEmits } from './Divider/lib/type'
 export type { CSSelectProps, SelectEmits, CSSelectOptionProps, SelectOptionEmits, CSSelectOptGroupProps, SelectOptGroupEmits } from './Select/lib/type'
 export type { CSPopconfirmProps, PopconfirmEmits } from './Popconfirm/lib/type'
+export type { CSTooltipProps, TooltipEmits } from './Tooltip/lib/type'

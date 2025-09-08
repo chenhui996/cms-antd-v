@@ -1,0 +1,69 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import {Tooltip} from '../index'
+import * as TooltipStories from './Tooltip.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={TooltipStories} />
+
+<Title />
+
+> 警告提示，展现需要关注的信息。<br /><br />
+> 当某个页面需要向用户显示警告的信息时。<br /><br />
+> 非浮层的静态展现形式，始终展现，不会自动消失，用户可以点击关闭。
+
+```ts
+import { Tooltip } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TooltipStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={TooltipStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TooltipStories.ColorComponent.storyName}
+
+> 我们添加了多种预设色彩的文字提示样式，用作不同场景使用。
+
+<Canvas of={TooltipStories.ColorComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TooltipStories.PlacementComponent.storyName}
+
+> 位置有 12 个方向。
+
+<Canvas of={TooltipStories.PlacementComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TooltipStories.AutoComponent.storyName}
+
+> 可以设置 `autoAdjustOverflow` 属性来控制是否自动调整位置。
+
+<Canvas of={TooltipStories.AutoComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TooltipStories.ArrowComponent.storyName}
+
+> 可以设置 `arrow` 属性来控制箭头是否显示。
+
+<Canvas of={TooltipStories.ArrowComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Tooltip
+
+<ArgTypes of={Tooltip} />
