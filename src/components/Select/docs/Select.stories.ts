@@ -1,18 +1,15 @@
-import { ref, reactive, watch, defineComponent, computed } from 'vue';
+import { ref, watch, defineComponent, computed } from 'vue';
 import { Select } from '../index'
-// import { Input } from '../../Input' // input 有问题，等待修复
+import { Input } from '../../Input'
 import { Button } from '../../Button'
 import { Divider } from '../../Divider'
 import { RadioGroup, RadioButton } from '../../Radio'
 import {
-  Space, SelectOption, type SelectProps, SelectOptGroup, Input, Tag,
-  // Select
+  Space, SelectOption, type SelectProps, SelectOptGroup, Tag
 } from 'ant-design-vue'
 import { UserOutlined, SmileOutlined, MehOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import type { Meta } from '@storybook/vue3';
 import './style.less';
-
-// const components = { Select }
 
 const meta: Meta<typeof Select> = {
   title: '通用/Select 选择器',
@@ -497,6 +494,8 @@ export const SuffixIconComponent = () => {
   }
 };
 
+
+
 SuffixIconComponent.storyName = "后缀图标 suffixIcon";
 SuffixIconComponent.parameters = parameters(SuffixIconComponent)
 
@@ -628,7 +627,6 @@ export const BigCountComponent = () => {
       style="width: 100%"
       placeholder="Please select"
       :options="options"
-      popupClassName="custom-select-styles"
     />
 `
   }

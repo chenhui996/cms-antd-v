@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<CSInputProps>(), {
   openChinese: false
 })
 
+const resValue = defineModel<string>('value')
 const emit = defineEmits<InputEmits>()
 const attrs = useAttrs()
 
@@ -50,19 +51,14 @@ watch(
   { immediate: true }
 )
 
-const { onInput, ...restProps } = props
+const { onInput } = props
 
 // options 为合并后的 props+attrs（直接 v-bind 用）
-const options = computed(() => {
-  const { class: _unusedClass, style: _unusedStyle, type: _unusedType, ...restAttrs } = attrs
-
-  // 当 openChinese 开启时，禁用 antd 默认的 showCount
-  const finalShowCount = props.openChinese ? false : props.showCount
+const resAttrs = computed(() => {
+  const { class: _unusedClass, style: _unusedStyle, ...restAttrs } = attrs
 
   return {
-    ...restProps,
-    ...restAttrs,
-    showCount: finalShowCount
+    ...restAttrs
   } as InputProps
 })
 
@@ -124,19 +120,65 @@ const chineseCountDisplay = computed(() => {
   return `${currentLength}`
 })
 
+const handleChange = (event: Event) => {
+  emit('change', event)
+}
+
+const handlePressEnter = (event: Event) => {
+  emit('pressEnter', event)
+}
+
 const handleValueUpdate = (value: string) => {
   emit('value-update', value)
 }
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
+
+const aInputRef = ref()
+
+// 暴露方法给父组件
+defineExpose({
+  focus: () => aInputRef.value?.focus(),
+  blur: () => aInputRef.value?.blur(),
+})
 </script>
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
     <AInput
-      v-bind="options"
+      ref="aInputRef"
+      v-bind="resAttrs"
       :style="mergedStyle"
       :class="mergedClass"
+      :addonAfter="addonAfter"
+      :addonBefore="addonBefore"
+      :allowClear="allowClear"
+      :bordered="bordered"
+      :clearIcon="clearIcon"
+      :defaultValue="defaultValue"
+      :disabled="disabled"
+      :id="id"
+      :maxlength="maxlength"
+      :openChinese="openChinese"
+      :prefix="prefix"
+      :showCount="openChinese ? false : showCount"
+      :status="status"
+      :size="size"
+      :suffix="suffix"
+      :type="type"
+      v-model:value="resValue"
+      @change="handleChange"
+      @pressEnter="handlePressEnter"
       @input="handleInput"
       @value-update="handleValueUpdate"
+      @focus="handleFocus"
+      @blur="handleBlur"
     >
       <template v-if="$slots.icon" #icon>
         <slot name="icon"></slot>

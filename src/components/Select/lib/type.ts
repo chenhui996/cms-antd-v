@@ -9,6 +9,16 @@ type DropdownObject = {
     props?: Record<string, any>;
 };
 
+export type Key = string | number;
+export type RawValueType = string | number;
+export interface LabelInValueType {
+    label: any;
+    originLabel?: any;
+    value: RawValueType;
+    /** @deprecated `key` is useless since it should always same as `value` */
+    key?: Key;
+}
+
 export interface BaseSelectProps extends SelectProps {
     /** 支持清除 */
     allowClear?: boolean;
@@ -92,8 +102,8 @@ export interface BaseSelectProps extends SelectProps {
     size?: 'large' | 'small' | 'middle'
     /** 设置校验状态 */
     status?: 'error' | 'warning'
-    // /** 自定义的选择框后缀图标 */
-    // suffixIcon?: VNode | Slot<any>
+    /** 自定义的选择框后缀图标 */
+    suffixIcon?: VNode | Slot<any>
     /** 自定义 tag 内容 render，仅在 mode 为 multiple 或 tags 时生效 */
     tagRender?: Slot<any> | ((props: any) => any)
     /** 自动分词的分隔符，仅在 mode="tags" 时生效 */
@@ -138,7 +148,7 @@ export interface SelectEmits {
     /** 取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效 */
     (e: 'deselect', payload: { value: string | string[] | number | number[], option: DefaultOptionType | Array<DefaultOptionType> }): void
     /** 展开下拉菜单的回调 */
-    (e: 'dropdownVisibleChange	', open: boolean): void
+    (e: 'dropdownVisibleChange', open: boolean): void
     /** 获取焦点 */
     (e: 'focus', event: FocusEvent): void
     /** 键盘按下时回调 */
@@ -146,7 +156,7 @@ export interface SelectEmits {
     /** 文本框值变化时回调 */
     (e: 'search', value: string): void
     /** 被选中时调用，参数为选中项的 value (或 key) 值 */
-    (e: 'select', value: string): void
+    (e: 'select', value: RawValueType | LabelInValueType): void
     /** 鼠标移入时回调 */
     (e: 'mouseEnter', event: MouseEvent): void
     /** 鼠标离开时回调 */

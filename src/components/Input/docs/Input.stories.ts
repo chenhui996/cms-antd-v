@@ -72,12 +72,16 @@ export const Default = () => {
     },
     setup() {
       const value = ref<string>('');
+      const handleChange = (e: Event) => {
+        console.log('handleChange', e)
+      }
       return {
-        value
+        value,
+        handleChange
       }
     },
     template: `
-  <Input v-model:value="value" placeholder="默认输入框" style="width: 200px;" />
+  <Input v-model:value="value" placeholder="默认输入框" style="width: 200px;" @change="handleChange" />
 `
   }
 };
@@ -103,10 +107,20 @@ export const OpenChineseComponent = () => {
         console.log('handleUpdate', val)
       }
 
+      const handleChange = (e: Event) => {
+        console.log('handleChange', e)
+      }
+
+      const handleInput = (e: Event) => {
+        console.log('onInput', e)
+      }
+
       return {
         value,
         value1,
-        handleUpdate
+        handleUpdate,
+        handleChange,
+        handleInput
       }
     },
     template: `
@@ -116,7 +130,7 @@ export const OpenChineseComponent = () => {
   <Input placeholder="openChinese 基础使用" :maxlength="11" show-count open-chinese :bordered="false" />
   <br />
   <br />
-  <Input v-model:value="value1" @value-update="handleUpdate" placeholder="openChinese 配合 v-model" :maxlength="5" show-count open-chinese />
+  <Input v-model:value="value1" @input="handleInput" @value-update="handleUpdate" @change="handleChange" placeholder="openChinese 配合 v-model" :maxlength="7" show-count open-chinese />
   <br />
   <br />
   <Button @click="value1 = '测试内容中文计数'">设置为 "测试内容中文计数"，自动截取 5 个字符</Button>
@@ -634,6 +648,8 @@ export const FormatTooltipComponent = () => {
 
       const inputValue = ref<string>('111');
       const formatValue = computed(() => {
+        console.log('in');
+
         if (inputValue.value === '-') return '-';
         return formatNumber(inputValue.value);
       });
@@ -648,21 +664,47 @@ export const FormatTooltipComponent = () => {
         }
       };
 
+      watch(inputValue, (val, preVal) => {
+        format(val, preVal);
+      });
+
+      const onInput = (e: Event) => {
+        console.log('onInput', e)
+      }
+
+      const onFocus = (e: Event) => {
+        console.log('onFocus', e)
+      }
+
       // '.' at the end or only '-' in the input box.
-      const onBlur = () => {
+      const onBlur = (e: Event) => {
+        console.log('onBlur', e)
         if (inputValue.value.charAt(inputValue.value.length - 1) === '.' || inputValue.value === '-') {
           format(inputValue.value.slice(0, -1), inputValue.value);
         }
       };
 
-      watch(inputValue, (val, preVal) => {
-        format(val, preVal);
-      });
+      const onMouseEnter = (e: Event) => {
+        console.log('onMouseEnter', e)
+      }
+
+      const onMouseLeave = (e: Event) => {
+        console.log('onMouseLeave', e)
+      }
+
+      const onInputKeyDown = (e: Event) => {
+        console.log('onInputKeyDown', e)
+      }
 
       return {
         inputValue,
         formatValue,
-        onBlur
+        onBlur,
+        onInput,
+        onFocus,
+        onMouseEnter,
+        onMouseLeave,
+        onInputKeyDown
       }
     },
     template: `
@@ -679,6 +721,11 @@ export const FormatTooltipComponent = () => {
       :max-length="25"
       style="width: 120px"
       @blur="onBlur"
+      @input="onInput"
+      @focus="onFocus"
+      @mouseEnter="onMouseEnter"
+      @mouseLeave="onMouseLeave"
+      @inputKeyDown="onInputKeyDown"
     />
   </Tooltip>
 `

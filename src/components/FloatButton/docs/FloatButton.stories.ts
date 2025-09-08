@@ -20,7 +20,7 @@ const meta: Meta<typeof FloatButton> = {
   component: FloatButton,
   decorators: [
     () => ({
-      template: '<div class="storybook-demo"><story /></div>',
+      template: '<div class="storybook-demo float-button-demo"><story /></div>',
     })
   ],
 };

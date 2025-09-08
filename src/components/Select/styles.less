@@ -1,2 +1,52 @@
 .cs-select.ant-select {
+  .ant-select-selector {
+    border-radius: @select-border-radius;
+  }
+
+  &.ant-select-disabled {
+    color: @select-color-disabled;
+    background-color: @select-bg-disabled;
+  }
+
+  // 自定义清除图标
+  .cs-normal-clear(
+    @select-clear-icon-bg,
+    @select-clear-icon-bg-hover,
+    @select-clear-icon-color
+  );
+}
+
+.cs-select-dropdown.ant-select-dropdown {
+  border-radius: @select-border-radius;
+
+  .ant-select-item {
+    color: @select-color;
+    background-color: @select-bg;
+
+    &:hover {
+      color: @select-color-hover;
+      background-color: @select-bg-hover;
+    }
+
+    &.ant-select-item-option-selected {
+      background-color: @select-bg-active;
+      color: @select-color-active;
+    }
+
+    &.ant-select-item-option-disabled {
+      background-color: transparent;
+      color: @select-color-disabled;
+    }
+  }
+
+  .ant-select-item-option-selected:has(+ .ant-select-item-option-selected) {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .ant-select-item-option-selected:has(+ .ant-select-item-option-selected)
+    + .ant-select-item-option-selected {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+  }
 }

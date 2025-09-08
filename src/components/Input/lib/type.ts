@@ -133,6 +133,12 @@ export interface InputEmits {
     (e: 'update:value', value: string): void
     /** 普通事件触发更新事件 */
     (e: 'value-update', value: string): void
+    /** 输入框内容变化时的回调 */
+    (e: 'input', event: Event): void
+    /** 获取焦点 */
+    (e: 'focus', event: FocusEvent): void
+    /** 移除焦点 */
+    (e: 'blur', event: FocusEvent): void
 }
 
 export interface TextAreaEmits {
