@@ -1,6 +1,6 @@
 import { ref, reactive } from 'vue';
-import Switch from '../Switch.vue'
-import Button from '../../Button/Button.vue'
+import { Switch } from '../index'
+import { Button } from '../../Button'
 import { Space } from 'ant-design-vue'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import type { Meta } from '@storybook/vue3';

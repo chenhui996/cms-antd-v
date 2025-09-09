@@ -1,0 +1,155 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import {Modal, ModalMethodContainer} from '../index'
+import * as ModalStories from './Modal.stories';
+import { Title, Controls } from '@storybook/addon-docs'
+
+<Meta of={ModalStories} />
+
+<Title />
+
+> 模态对话框。<br /><br />
+> 需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 Modal 在当前页面正中打开一个浮层，承载相应的操作。<br /><br />
+> 另外当需要一个简洁的确认框询问用户时，可以使用 Modal.confirm() 等语法糖方法。。
+
+```ts
+import { Modal } from "cms-antd-v";
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.Default.storyName}
+
+> 最简单的用法。
+
+<Canvas of={ModalStories.Default} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.CustomFooterComponent.storyName}
+
+> 更复杂的例子，自定义了页脚的按钮，点击提交后进入 loading 状态，完成后关闭。 不需要默认确定取消按钮时，你可以把 `footer` 设为 `null`。
+
+<Canvas of={ModalStories.CustomFooterComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.MethodComponent.storyName}
+
+> 各种类型的信息提示，只提供一个按钮用于关闭。
+
+<Canvas of={ModalStories.MethodComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.LocaleComponent.storyName}
+
+> 设置 `okText` 与 `cancelText` 以自定义按钮文字。
+
+<Canvas of={ModalStories.LocaleComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.PositionComponent.storyName}
+
+> 使用 `centered` 或类似 `style.top` 的样式来设置对话框位置。
+
+<Canvas of={ModalStories.PositionComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.PromiseComponent.storyName}
+
+> 使用 `confirm()` 可以快捷地弹出确认框。onCancel/onOk 返回 promise 可以延迟关闭。
+
+<Canvas of={ModalStories.PromiseComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.ButtonPropsComponent.storyName}
+
+> 传入 `okButtonProps` 和 `cancelButtonProps` 可分别自定义确定按钮和取消按钮的 props。
+
+<Canvas of={ModalStories.ButtonPropsComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.CustomRenderComponent.storyName}
+
+> 使用 `modalRender` 自定义渲染对话框。
+
+<Canvas of={ModalStories.CustomRenderComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.AsyncCloseComponent.storyName}
+
+> 点击确定后异步关闭对话框，例如提交表单。
+
+<Canvas of={ModalStories.AsyncCloseComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.ConfirmComponent.storyName}
+
+> 使用 `confirm()` 可以快捷地弹出确认框。
+
+<Canvas of={ModalStories.ConfirmComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.UseModalComponent.storyName}
+
+> 使用 `useModal` 可以获取上下文。
+
+<Canvas of={ModalStories.UseModalComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.ControlModalComponent.storyName}
+
+> 手动更新和关闭 `Modal.method` 方式创建的对话框。
+
+<Canvas of={ModalStories.ControlModalComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.WidthComponent.storyName}
+
+> 使用 `width` 来设置模态对话框的宽度。
+
+<Canvas of={ModalStories.WidthComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {ModalStories.FullComponent.storyName}
+
+> 使用 `wrapClassName` 来设置模态对话框的宽度。
+
+<Canvas of={ModalStories.FullComponent} />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+---
+
+## API
+
+### 属性
+
+### Modal
+
+<ArgTypes of={Modal} />
+
+### Modal.method()
+
+- Modal.info
+- Modal.success
+- Modal.error
+- Modal.warning
+- Modal.confirm
+- Modal.useModal
+
+> 以上均为一个函数，参数为 object，具体属性如下：
+
+<ArgTypes of={ModalMethodContainer} />
+
