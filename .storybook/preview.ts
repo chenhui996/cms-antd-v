@@ -1,6 +1,7 @@
 
 import type { Preview } from '@storybook/vue3';
 import '@/styles/index.less'
+import 'vxe-table/lib/style.css'
 
 const preview: Preview = {
   parameters: {

@@ -1,0 +1,188 @@
+import { Meta, Canvas, Story, ArgTypes } from '@storybook/blocks';
+import { reactive, toRefs } from 'vue';
+import { TableSelect } from '../index'
+import * as TableSelectStories from './TableSelect.stories';
+import { Title } from '@storybook/addon-docs'
+
+<Meta of={TableSelectStories} />
+
+<Title />
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TableSelectStories.Default.storyName}
+
+> 基础用法。
+
+<Canvas of={TableSelectStories.Default}></Canvas>
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TableSelectStories.ChildrenComponent.storyName}
+
+> children 树。
+
+<Canvas of={TableSelectStories.ChildrenComponent}></Canvas>
+
+> ts定义:
+
+```ts
+enum suspendedEnum {
+  GROUP = '群组',
+  NORMAL = '一般投组',
+  NORMAL_SUSPEND = '一般投组(停用)',
+  PNTT = '资产衍生',
+  PNTT_SUSPEND = '衍生投组(停用)'
+}
+enum portfolioTypeEnum {
+  HTM = 'HTM',
+  FVTPL = 'FVTPL',
+  Hedge = 'Hedge',
+  'A/R' = 'A/R',
+  TradingN = '为出售而持有/剩余',
+  HTMN = '为收取而持有',
+  AFS = 'AFS',
+  Trading = 'Trading',
+  AFSN = '为收取及出售而持有'
+}
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TableSelectStories.PCIdComponent.storyName}
+
+> 父子id树。
+
+<Canvas of={TableSelectStories.PCIdComponent}></Canvas>
+
+> ts定义:
+
+```ts
+enum suspendedEnumIdDemo {
+  GROUP = '群组',
+  NORMAL = '一般投组',
+  NORMAL_SUSPEND = '一般投组(停用)',
+  PNTT = '资产衍生',
+  PNTT_SUSPEND = '衍生投组(停用)'
+}
+enum portfolioTypeEnumIdDemo {
+  HTM = 'HTM',
+  FVTPL = 'FVTPL',
+  Hedge = 'Hedge',
+  'A/R' = 'A/R',
+  TradingN = '为出售而持有/剩余',
+  HTMN = '为收取而持有',
+  AFS = 'AFS',
+  Trading = 'Trading',
+  AFSN = '为收取及出售而持有',
+  AFSN1 = '为收取及出售而持有1',
+  AFSN2 = '为收取及出售而持有2',
+  AFSN3 = '为收取及出售而持有3',
+  AFSN5 = '为收取及出售而持有5'
+}
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TableSelectStories.AllReturnComponent.storyName}
+
+> 父子id树 all_return。
+
+<Canvas of={TableSelectStories.AllReturnComponent}></Canvas>
+
+> ts定义:
+
+```ts
+enum suspendedEnumAllReturnDemo {
+  GROUP = '群组',
+  NORMAL = '一般投组',
+  NORMAL_SUSPEND = '一般投组(停用)',
+  PNTT = '资产衍生',
+  PNTT_SUSPEND = '衍生投组(停用)'
+}
+enum portfolioTypeEnumAllReturnDemo {
+  HTM = 'HTM',
+  FVTPL = 'FVTPL',
+  Hedge = 'Hedge',
+  'A/R' = 'A/R',
+  TradingN = '为出售而持有/剩余',
+  HTMN = '为收取而持有',
+  AFS = 'AFS',
+  Trading = 'Trading',
+  AFSN = '为收取及出售而持有'
+}
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TableSelectStories.CustomPCComponent.storyName}
+
+> 父子id树自定义父子关系。
+
+<Canvas of={TableSelectStories.CustomPCComponent}></Canvas>
+
+> ts定义:
+
+```ts
+enum suspendedEnumCPCDemo {
+  GROUP = '群组',
+  NORMAL = '一般投组',
+  NORMAL_SUSPEND = '一般投组(停用)',
+  PNTT = '资产衍生',
+  PNTT_SUSPEND = '衍生投组(停用)'
+}
+enum portfolioTypeEnumCPCDemo {
+  HTM = 'HTM',
+  FVTPL = 'FVTPL',
+  Hedge = 'Hedge',
+  'A/R' = 'A/R',
+  TradingN = '为出售而持有/剩余',
+  HTMN = '为收取而持有',
+  AFS = 'AFS',
+  Trading = 'Trading',
+  AFSN = '为收取及出售而持有'
+}
+```
+
+{/* ------------------------------------------------------------------------------------------------------------------------ */}
+
+## {TableSelectStories.BigDataComponent.storyName}
+
+> 大量数据示例。
+
+<Canvas of={TableSelectStories.BigDataComponent}></Canvas>
+
+> ts定义:
+
+```ts
+enum suspendedEnumBigDataDemo {
+  GROUP = '群组',
+  NORMAL = '一般投组',
+  NORMAL_SUSPEND = '一般投组(停用)',
+  PNTT = '资产衍生',
+  PNTT_SUSPEND = '衍生投组(停用)'
+}
+
+enum portfolioTypeEnumBigDataDemo {
+  HTM = 'HTM',
+  FVTPL = 'FVTPL',
+  Hedge = 'Hedge',
+  'A/R' = 'A/R',
+  TradingN = '为出售而持有/剩余',
+  HTMN = '为收取而持有',
+  AFS = 'AFS',
+  Trading = 'Trading',
+  AFSN = '为收取及出售而持有'
+}
+```
+
+---
+
+## API
+
+### 属性
+
+### TableSelect
+
+<ArgTypes of={TableSelect} />
+

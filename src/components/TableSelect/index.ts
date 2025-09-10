@@ -1,0 +1,1 @@
+export { default as TableSelect } from './TableSelect.vue'
