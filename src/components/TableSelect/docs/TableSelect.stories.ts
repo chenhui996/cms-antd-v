@@ -118,145 +118,6 @@ Default.parameters = parameters(Default)
 
 // ------------------------------------------------------------------------------------------------------------------------
 
-enum suspendedEnum {
-  GROUP = '群组',
-  NORMAL = '一般投组',
-  NORMAL_SUSPEND = '一般投组(停用)',
-  PNTT = '资产衍生',
-  PNTT_SUSPEND = '衍生投组(停用)'
-}
-enum portfolioTypeEnum {
-  HTM = 'HTM',
-  FVTPL = 'FVTPL',
-  Hedge = 'Hedge',
-  'A/R' = 'A/R',
-  TradingN = '为出售而持有/剩余',
-  HTMN = '为收取而持有',
-  AFS = 'AFS',
-  Trading = 'Trading',
-  AFSN = '为收取及出售而持有'
-}
-
-export const ChildrenComponent = () => ({
-  components: { TableSelect },
-  setup() {
-    const selectedKeys = ref([67600, 67602])
-
-    const filtersList = [
-      {
-        name: '投组类型',
-        key: 'portfolioType',
-        options: Object.entries(portfolioTypeEnum).map(([value, label]) => ({
-          value,
-          label
-        }))
-      },
-      {
-        name: '投组来源',
-        key: 'portfolioSource',
-        options: Object.entries(suspendedEnum).map(([value, label]) => ({
-          value,
-          label
-        }))
-      }
-    ]
-
-    const portfolioList = [
-      {
-        label: '本币投组',
-        value: 'local_currency',
-        children2: [
-          {
-            label: 'POC演示投组2(zlt985)',
-            portfolioSource: 'NORMAL',
-            portfolioType: 'AFSN',
-            value: 67600,
-            isCheck: true
-          },
-          {
-            label: '本币流动性投组',
-            portfolioSource: 'NORMAL',
-            portfolioType: 'HTM',
-            value: 67604,
-            isCheck: true
-          },
-          {
-            label: '本币定期投组',
-            portfolioSource: 'NORMAL',
-            portfolioType: 'HTMN',
-            value: 67606,
-            isCheck: true
-          }
-        ]
-      },
-      {
-        label: '外币投组',
-        value: 'foreign_currency',
-        children2: [
-          {
-            label: 'POC演示投组3(zlt985)',
-            portfolioSource: 'NORMAL',
-            portfolioType: 'TradingN',
-            value: 67602,
-            isCheck: true
-          },
-          {
-            label: '外币交易投组',
-            portfolioSource: 'NORMAL',
-            portfolioType: 'Trading',
-            value: 67605,
-            isCheck: true
-          },
-          {
-            label: '外币对冲投组',
-            portfolioSource: 'NORMAL',
-            portfolioType: 'Hedge',
-            value: 67607,
-            isCheck: true
-          }
-        ]
-      }
-    ]
-    const change = (e: any) => {
-      console.log(e)
-    }
-
-    const treeConfig = {
-      rowField: 'id',
-      parentField: 'parentId',
-      childrenField: 'children2'
-    }
-
-    return {
-      checked: ref(false),
-      selectedKeys,
-      portfolioList,
-      filtersList,
-      change,
-      treeConfig
-    }
-  },
-  template: `
-  <TableSelect
-    v-model="selectedKeys"
-    :tableList="portfolioList"
-    :isValueKeyMode="true"
-    labelKey="label"
-    valueKey="value"
-    :filtersList="filtersList"
-    treeConfigType="children"
-    id="product"
-    :treeConfig="treeConfig"
-    @update:modelValue="change"
-  ></TableSelect>
-`
-})
-
-ChildrenComponent.storyName = 'children 树自定义父子关系'
-ChildrenComponent.parameters = parameters(ChildrenComponent)
-
-// ------------------------------------------------------------------------------------------------------------------------
-
 enum suspendedEnumIdDemo {
   GROUP = '群组',
   NORMAL = '一般投组',
@@ -976,36 +837,28 @@ export const BigDataComponent = () => ({
     const selectedKeys = ref([100000, 100001])
     // 生成10000条不重复测试数据
 
-    enum suspendedEnum {
-      GROUP = '群组',
-      NORMAL = '一般投组',
-      NORMAL_SUSPEND = '一般投组(停用)',
-      PNTT = '资产衍生',
-      PNTT_SUSPEND = '衍生投组(停用)'
-    }
-
     const filtersList = [
       {
         name: '投组类型',
         key: 'portfolioType',
         options: Object.entries(portfolioTypeEnumBigDataDemo).map(([value, label]) => ({
-    value,
-    label
+          value,
+          label
         }))
       },
       {
         name: '投组来源',
         key: 'portfolioSource',
         options: Object.entries(suspendedEnumBigDataDemo).map(([value, label]) => ({
-    value,
-    label
+          value,
+          label
         }))
       }
     ]
 
     const generateTestData = (count: number) => {
-      const types = Object.keys(portfolioTypeEnum)
-      const types2 = Object.keys(suspendedEnum)
+      const types = Object.keys(portfolioTypeEnumBigDataDemo)
+      const types2 = Object.keys(suspendedEnumBigDataDemo)
       return Array.from({ length: count }, (_, i) => ({
         label1: `投组名称-${i + 1}`,
         value1: 100000 + i,
@@ -1014,10 +867,12 @@ export const BigDataComponent = () => ({
         isFavorite: false
       }))
     }
+
     const portfolioList = generateTestData(20000)
     const change = (e: any) => {
       console.log(e)
     }
+    
     return {
       checked: ref(false),
       selectedKeys,

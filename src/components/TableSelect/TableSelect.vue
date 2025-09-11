@@ -2,24 +2,23 @@
   <!-- 投组选择器卡片容器 -->
   <div ref="querySelectContainerRef" class="query-select-container">
     <!-- 主选择器组件 -->
-    <a-select
+    <Select
+      v-model:value="(selectedRecords as SelectValue)"
       mode="multiple"
       width="100%"
-      v-model:value="(selectedRecords as SelectValue)"
+      class="select-container"
+      size="middle"
+      placeholder="请选择投组"
+      :dropdown-style="{ minWidth: '600px', padding: '0' }"
+      :disabled="disabled"
+      :max-tag-count="1"
+      :filter-option="false"
+      :dropdownMatchSelectWidth="false"
       :open="open"
       @click="handleFocus"
       @popupVisibleChange="handlePopupVisibleChange"
       @select-change="handleSelectChange"
       @clear="clearAll"
-      :filter-option="false"
-      :dropdownMatchSelectWidth="false"
-      size="middle"
-      :max-tag-count="1"
-      placeholder="请选择投组"
-      :dropdown-style="{ minWidth: '600px' }"
-      class="select-container"
-      popup-class-name="ctableSelect"
-      :disabled="disabled"
     >
       <template #tagRender>
         <template v-if="selectedRecords.length !== totalLength">
@@ -39,38 +38,36 @@
       </template>
 
       <!-- 自定义下拉面板内容 -->
-      <template #dropdownRender>
+      <template  #dropdownRender>
         <div ref="querySelectRef" class="query-select-content" tabindex="-1">
           <div class="left-content">
             <!-- 查询表单 -->
-            <a-form ref="formRef" class="searchFrom" :model="params" name="querySelect">
-              <a-form-item label="搜索投组" name="inputValue" :rules="[{ required: false }]">
-                <a-input
+            <Form ref="formRef" class="searchFrom" :model="params" name="querySelect">
+              <FormItem label="搜索投组" name="inputValue" :rules="[{ required: false }]">
+                <Input
                   :allow-clear="true"
                   placeholder="请输入"
                   ref="searchRef"
                   v-model:value="params.inputValue"
                   @change="handleFilterChange()"
                 />
-              </a-form-item>
+              </FormItem>
               <template v-if="filtersList && filtersList.length > 0">
-                <a-form-item v-for="item in filtersList" :label="item.name" :key="item.key">
-                  <t-select
-                    ref="typeListRef"
-                    :max-tag-count="1"
+                <FormItem v-for="item in filtersList" :label="item.name" :key="item.key">
+                  <TSelect
+                    :maxTagCount="1"
                     mode="multiple"
-                    allow-clear
-                    show-arrow
+                    allowClear
+                    showArrow
                     placeholder="请选择"
                     :options="item.options"
-                    :is-all-editor="true"
                     v-model="params[item.key]"
                     @change="handleFilterChange()"
                   >
-                  </t-select>
-                </a-form-item>
+                  </TSelect>
+                </FormItem>
               </template>
-            </a-form>
+            </Form>
 
             <!-- 投组列表 -->
             <div
@@ -97,7 +94,7 @@
                 :header-cell-config="{
                   height: 40
                 }"
-                :class="isTree ? 'treeTable' : ''"
+                :class="isTree ? 'treeTable cs-tz-component' : 'cs-tz-component'"
                 height="100%"
                 :border="'none'"
                 :column-config="{ resizable: false }"
@@ -172,11 +169,12 @@
           </div>
 
           <div style="height: 100%; width: 1px; margin: 0; background: #f0f0f0" />
+
           <!-- 已选投组区域 -->
           <div ref="rightBoxContainer" class="right-content" :style="{ width: '50%' }">
             <div class="right-bottom">
               <div>
-                <span>已选择投组( {{ selectedRecords.length || 0 }})</span>
+                <span>已选择的投组( {{ selectedRecords.length || 0 }} )</span>
               </div>
               <div>
                 <Button class="tableGhose" type="text" @click="clearAll">清空全部</Button>
@@ -230,7 +228,7 @@
           </div>
         </div>
       </template>
-    </a-select>
+    </Select>
   </div>
 </template>
 
@@ -238,10 +236,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // 导入组件
 import {
-  Select as ASelect,
-  Form as AForm,
-  FormItem as AFormItem,
-  Input as AInput
+  // Select,
+  Form,
+  FormItem,
+  // Input
 } from 'ant-design-vue'
 import { ref, nextTick, computed, onUnmounted, watch, onMounted, reactive, type Ref } from 'vue'
 import type { SelectValue } from 'ant-design-vue/es/select'
@@ -251,7 +249,7 @@ import { cloneDeep, debounce } from 'lodash'
 import {
   treeToFlatWithoutId,
   findParentsInFlatTree,
-  convertToTree,
+  // convertToTree,
   flattenRecords,
   countLastLevelNodes,
   initFavorites,
@@ -261,6 +259,8 @@ import {
   saveFavorites
 } from './lib/utils'
 import { Button } from '../Button'
+import { Input } from '../Input'
+import { Select } from '../Select'
 import TSelect from './TSelect.vue'
 import { useValueKeyMode, useSelectedRecords } from './lib/useComputedUtils'
 import type { ParamsType, TableRowData, TableSelectProps } from './lib/types'
@@ -286,7 +286,7 @@ const props = withDefaults(defineProps<TableSelectProps>(), {
       childrenField: 'children',
       indent: '10'
     }
-  }
+  },
 }) // 组件属性
 const emit = defineEmits(['update:modelValue', 'change']) // 定义事件发射器
 defineExpose({})
@@ -309,7 +309,7 @@ const sortConfig: any = ref({
     field: 'save',
     order: 'asc'
   },
-  sortMethod({ data }: {data: TableRowData[]}) {
+  sortMethod({ data }: { data: TableRowData[] }) {
     // 取出第一个排序的列
     console.log('sort')
     // 递归排序函数
@@ -470,7 +470,7 @@ const handleFocus = async () => {
  * 根据搜索输入和筛选条件过滤投组数据
  * 300ms防抖延迟
  */
- const handleFilterChange = debounce(async () => {
+const handleFilterChange = debounce(async () => {
   const { inputValue } = params
   console.log(inputValue)
   const filteredData = originData.value.filter((item) => {
@@ -502,7 +502,11 @@ const handleFocus = async () => {
   // 由于 filterData 是只读数组，而 loadData 方法需要可变数组，这里使用扩展运算符创建一个新的可变数组
   // tableRef.value?.loadData([...filterData]);
 
-  tableData.value = findParentsInFlatTree(originData.value, filterData, props.treeConfig) as TableRowData[]
+  tableData.value = findParentsInFlatTree(
+    originData.value,
+    filterData,
+    props.treeConfig
+  ) as TableRowData[]
   nextTick(() => {
     tableRef.value?.clearCheckboxRow()
     tableRef.value?.setCheckboxRow(selectedRecords.value, true)
@@ -533,7 +537,7 @@ const saveFav = () => {
  * 保持下拉面板打开并更新选中状态
  * @param params - 选择变更参数
  */
- const selectChange = ({ row, checked }: any) => {
+const selectChange = ({ row, checked }: any) => {
   // 递归处理树形结构选中状态
   if (row.children && row.children.length > 0) {
     if (checked) {
@@ -541,7 +545,7 @@ const saveFav = () => {
       const leafRecords = flattenRecords(row.children, true)
       leafRecords.forEach((item: any) => {
         if (isValueKeyMode.value) {
-          // value Array return 
+          // value Array return
           if (!props.modelValue.includes(item[props.valueKey])) {
             result.push(item)
           }
@@ -551,16 +555,19 @@ const saveFav = () => {
             result.push(item)
           }
         }
-
       })
       selectedRecords.value = [...selectedRecords.value, ...result] as TableRowData[]
     } else {
       const ids = row.children.map((map: any) => map[props.onlyKey])
-      selectedRecords.value = selectedRecords.value.filter((item: any) => !ids.includes(item[props.onlyKey])) as TableRowData[]
+      selectedRecords.value = selectedRecords.value.filter(
+        (item: any) => !ids.includes(item[props.onlyKey])
+      ) as TableRowData[]
     }
   } else {
     if (!checked) {
-      selectedRecords.value = selectedRecords.value.filter((item: any) => item[props.onlyKey] !== row[props.onlyKey]) as TableRowData[]
+      selectedRecords.value = selectedRecords.value.filter(
+        (item: any) => item[props.onlyKey] !== row[props.onlyKey]
+      ) as TableRowData[]
     } else {
       selectedRecords.value = [...selectedRecords.value, row]
     }
@@ -572,7 +579,7 @@ const saveFav = () => {
  * 根据绑定模式更新不同格式的双向绑定数据
  * @param e - 包含行索引和行数据的事件对象
  */
- const deleteItem = (e: { rowIndex: number; row: TableRowData }) => {
+const deleteItem = (e: { rowIndex: number; row: TableRowData }) => {
   const { row } = e
   if (isValueKeyMode.value) {
     // 为了避免隐式的 'any' 类型错误，明确指定 selectedRecords.value[rowIndex] 的类型为 TableRowData
@@ -584,11 +591,17 @@ const saveFav = () => {
       emit('update:modelValue', newModelValue)
     }
   } else {
-    const _index = selectedRecords.value.findIndex((item: any) => item[props.valueKey] === row[props.valueKey!])
+    const _index = selectedRecords.value.findIndex(
+      (item: any) => item[props.valueKey] === row[props.valueKey!]
+    )
     selectedRecords.value.splice(_index, 1)
-    tableData2.value = findParentsInFlatTree(originData.value, selectedRecords.value, props.treeConfig) as TableRowData[]
+    tableData2.value = findParentsInFlatTree(
+      originData.value,
+      selectedRecords.value,
+      props.treeConfig
+    ) as TableRowData[]
     nextTick(() => {
-      (tableRef2.value as any)?.setAllTreeExpand(true)
+      ;(tableRef2.value as any)?.setAllTreeExpand(true)
     })
     emit('update:modelValue', selectedRecords.value)
   }
@@ -719,21 +732,24 @@ watch(
  * 监听已选投组变化
  * 根据选中状态更新已选投组列表数据
  */
- watch(
+watch(
   () => selectedRecords.value,
   (n, o) => {
     if ((n && n.length === 0) || !n) {
       selectedData.value = []
       tableRef.value?.clearCheckboxRow()
     } else {
-
       tableRef.value?.clearCheckboxRow()
       tableRef.value?.setCheckboxRow(n, true)
     }
     // console.log(selectedData.value)
-    tableData2.value = findParentsInFlatTree(originData.value, n, props.treeConfig) as TableRowData[]
+    tableData2.value = findParentsInFlatTree(
+      originData.value,
+      n,
+      props.treeConfig
+    ) as TableRowData[]
     nextTick(() => {
-      (tableRef2.value as any)?.setAllTreeExpand(true)
+      ;(tableRef2.value as any)?.setAllTreeExpand(true)
     })
   },
   { immediate: true }

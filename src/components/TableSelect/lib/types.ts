@@ -44,3 +44,9 @@ export interface TableSelectProps {
   onlyKey?: string
   disabled?: boolean,
 }
+
+export interface TSelectProps {
+  modelValue: any[]
+  options: any[]
+  mode: 'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE'
+}

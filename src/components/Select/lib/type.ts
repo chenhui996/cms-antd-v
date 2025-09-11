@@ -85,7 +85,7 @@ export interface BaseSelectProps extends SelectProps {
     /** 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 value。 */
     optionLabelProp?: string
     /** options 数据，如果设置则不需要手动构造 selectOption 节点 */
-    options?: { value: string, label: string, disabled?: boolean, key?: string, title?: string }[]
+    options?: DefaultOptionType[]
     /** 选择框默认文字 */
     placeholder?: string | Slot<any>
     /** 选择框弹出的位置 */
@@ -140,11 +140,15 @@ export type CSSelectProps = BaseSelectProps
 export type CSSelectOptionProps = BaseSelectOptionProps
 export type CSSelectOptGroupProps = BaseSelectOptGroupProps
 
+export interface CSOptionType extends DefaultOptionType {
+    isAllSelected: boolean
+  }
+
 export interface SelectEmits {
     /** 失去焦点的时回调 */
     (e: 'blur', event: Event): void
     /** 选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数, params: value, option, isAllSelected */
-    (e: 'change', value: SelectValue, option: DefaultOptionType | Array<DefaultOptionType>, isAllSelected: boolean): void
+    (e: 'change', value: SelectValue, option: CSOptionType | Array<CSOptionType>): void
     /** 取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效 */
     (e: 'deselect', payload: { value: string | string[] | number | number[], option: DefaultOptionType | Array<DefaultOptionType> }): void
     /** 展开下拉菜单的回调 */
@@ -163,7 +167,9 @@ export interface SelectEmits {
     (e: 'mouseLeave', event: MouseEvent): void
     /** 下拉列表滚动时的回调 */
     (e: 'popupScroll', event: UIEvent): void
+    /** 点击时回调 */
+    (e: 'click', event: MouseEvent): void
 }
 
-export interface SelectOptionEmits {}
-export interface SelectOptGroupEmits {}
+export interface SelectOptionEmits { }
+export interface SelectOptGroupEmits { }

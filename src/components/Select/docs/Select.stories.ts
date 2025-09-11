@@ -266,8 +266,8 @@ export const MultipleComponent = () => {
       Select
     },
     setup() {
-      const handleChange = (value2: string[], option: any, isAllSelected: boolean) => {
-        console.log(`选中项`, value2, '是否已经全部选中', isAllSelected);
+      const handleChange = (value2: string[], option: any) => {
+        console.log(`选中项`, value2, '是否已经全部选中', option?.isAllSelected);
       };
 
       const value = ref(['a1', 'b2']);

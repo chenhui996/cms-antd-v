@@ -6,7 +6,7 @@ import { Select as ASelect, ConfigProvider } from 'ant-design-vue'
 import { CloseSquareFilled } from '@ant-design/icons-vue'
 import type { SelectProps, DefaultOptionType, SelectValue } from 'ant-design-vue/lib/select'
 import useForward from '@/hooks/useForward'
-import type { CSSelectProps, SelectEmits, RawValueType, LabelInValueType } from './lib/type'
+import type { CSSelectProps, SelectEmits, RawValueType, LabelInValueType, CSOptionType } from './lib/type'
 
 // ------------------------------------------------------------------------------------------------
 
@@ -72,7 +72,7 @@ const handleChange = (value: SelectValue, option: DefaultOptionType | Array<Defa
     isAllSelected = props.options!.length === (value as any[])?.length
   }
 
-  emit('change', value, option, isAllSelected)
+  emit('change', value, {...option, isAllSelected})
 }
 
 const handleFocus = (e: FocusEvent) => {
@@ -116,6 +116,10 @@ const handleMouseLeave = (e: MouseEvent) => {
 
 const handlePopupScroll = (e: UIEvent) => {
   emit('popupScroll', e)
+}
+
+const handleClick = (e: MouseEvent) => {
+  emit('click', e)
 }
 
 // --------------------------------------------------------------
@@ -187,6 +191,7 @@ defineExpose({
     @mouseEnter="handleMouseEnter"
     @mouseLeave="handleMouseLeave"
     @popupScroll="handlePopupScroll"
+    @click="handleClick"
   >
     <template v-if="$slots.notFoundContent" #notFoundContent>
       <slot name="notFoundContent" />

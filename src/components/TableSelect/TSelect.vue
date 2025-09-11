@@ -1,67 +1,27 @@
-<template>
-  <a-select
-    v-bind="$attrs"
-    v-model:value="selectedValues"
-    :options="options"
-    :mode="mode"
-    @change="handleChange"
-    :virtual="false"
-  >
-    <!-- 自定义下拉面板 -->
-    <template #dropdownRender="{ menuNode: menu }">
-      <div class="select-header">
-        <!-- 原有选项列表 -->
-
-        <v-nodes :vnodes="menu"></v-nodes
-        ><!-- 全选和清空按钮 -->
-        <a-divider style="margin: 5px 0" />
-        <div class="select-operations">
-          <Button
-            type="ghost"
-            size="small"
-            @click.stop="handleClear"
-            :disabled="!selectedValues.length"
-          >
-            清空
-          </Button>
-          <Button type="secoundPrimary" size="small" @click.stop="handleCheckAll">全选 </Button>
-        </div>
-      </div>
-    </template>
-
-    <!-- 选项通过插槽传入 -->
-    <slot />
-  </a-select>
-</template>
-
-<script setup>
-import { ref, watch, computed, defineComponent } from 'vue'
-import { Select as ASelect, Divider as ADivider } from 'ant-design-vue'
-import Button from '../Button/Button.vue'
+<script lang="ts" setup>
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ref, watch, computed, defineComponent, useAttrs } from 'vue'
+// import { Select } from 'ant-design-vue'
+import { Select } from '../Select'
+import { Divider } from '../Divider'
+import { Button } from '../Button'
+import type { TSelectProps } from './lib/types'
+import type { SelectValue } from 'ant-design-vue/lib/select'
+import type { CSSelectProps } from '../Select/lib/type'
 
 // 定义组件属性
-const props = defineProps({
+const props = withDefaults(defineProps<TSelectProps>(), {
   // 绑定值（支持v-model）
-  modelValue: {
-    type: Array,
-    default: () => []
-  },
+  modelValue: () => [],
   // 选项数据
-  options: {
-    type: Array,
-    required: true,
-    description: '选项数组，格式: [{ value, label }, ...]'
-  },
+  options: () => [],
   // 选择模式（默认多选）
-  mode: {
-    type: String,
-    default: 'multiple',
-    validator: (val) => ['multiple', 'tags'].includes(val)
-  }
+  mode: () => 'multiple'
 })
 
 // 定义事件
 const emit = defineEmits(['update:modelValue', 'change'])
+const attrs = useAttrs()
 
 // 选中值
 const selectedValues = ref([...props.modelValue])
@@ -75,16 +35,11 @@ watch(
   { deep: true }
 )
 
-// 计算是否全选
-const isAllSelected = computed(() => {
-  return props.options.length > 0 && selectedValues.value.length === props.options.length
-})
-
 // 处理选择变化
-const handleChange = (values) => {
-  selectedValues.value = values
-  emit('update:modelValue', values)
-  emit('change', values)
+const handleChange = (value: SelectValue) => {
+  selectedValues.value = value as any[]
+  emit('update:modelValue', value)
+  emit('change', value)
 }
 
 // 全选/取消全选
@@ -110,23 +65,51 @@ const VNodes = defineComponent({
 const handleClear = () => {
   handleChange([])
 }
+
+const resAttrs = computed(() => {
+  const { class: _unusedClass, style: _unusedStyle, ...restAttrs } = attrs
+
+  return {
+    ...props,
+    ...restAttrs,
+    virtual: false
+  } as CSSelectProps
+})
 </script>
 
-<style scoped>
+<template>
+  <Select v-bind="resAttrs" v-model:value="selectedValues" @change="handleChange">
+    <template #dropdownRender="{ menuNode: menu }"
+      ><!-- 自定义下拉面板 -->
+      <div class="select-header">
+        <VNodes :vnodes="menu"></VNodes
+        ><!-- 原有选项列表 -->
+        <Divider style="margin: 5px -4px; width: calc(100% + 8px)" />
+        <div class="select-operations">
+          <!-- 全选和清空按钮 -->
+          <Button type="text" @click.stop="handleClear" :disabled="!selectedValues.length">
+            清空
+          </Button>
+          <Button type="text-primary" @click.stop="handleCheckAll">全选 </Button>
+        </div>
+      </div>
+    </template>
+    <slot /><!-- 选项通过插槽传入 -->
+  </Select>
+</template>
+
+<style>
 .select-header {
   width: 100%;
 }
 
 .select-operations {
-  padding: 6px 12px;
+  padding: 3px 8px;
   display: flex;
   justify-content: space-between;
 }
 
-/* 调整按钮样式 */
-:deep(.ant-btn-text) {
-  padding: 0 8px;
-  height: auto;
-  line-height: 1.5;
+.select-operations .cs-btn {
+  width: 80px;
 }
 </style>
