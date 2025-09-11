@@ -1,6 +1,6 @@
 <template>
   <!-- 投组选择器卡片容器 -->
-  <div ref="querySelectContainerRef" class="query-select-container">
+  <div ref="querySelectContainerRef" class="query-select-container cs-table-select-container">
     <!-- 主选择器组件 -->
     <Select
       v-model:value="(selectedRecords as SelectValue)"
@@ -39,7 +39,7 @@
 
       <!-- 自定义下拉面板内容 -->
       <template  #dropdownRender>
-        <div ref="querySelectRef" class="query-select-content" tabindex="-1">
+        <div ref="querySelectRef" class="query-select-content cs-table-select-dropdown" tabindex="-1">
           <div class="left-content">
             <!-- 查询表单 -->
             <Form ref="formRef" class="searchFrom" :model="params" name="querySelect">
@@ -60,6 +60,7 @@
                     allowClear
                     showArrow
                     placeholder="请选择"
+                    popupClassName="cs-t-select-dropdown"
                     :options="item.options"
                     v-model="params[item.key]"
                     @change="handleFilterChange()"
@@ -94,7 +95,7 @@
                 :header-cell-config="{
                   height: 40
                 }"
-                :class="isTree ? 'treeTable cs-tz-component' : 'cs-tz-component'"
+                :class="isTree ? 'treeTable cs-table-select' : 'cs-table-select'"
                 height="100%"
                 :border="'none'"
                 :column-config="{ resizable: false }"
@@ -171,7 +172,7 @@
           <div style="height: 100%; width: 1px; margin: 0; background: #f0f0f0" />
 
           <!-- 已选投组区域 -->
-          <div ref="rightBoxContainer" class="right-content" :style="{ width: '50%' }">
+          <div ref="rightBoxContainer" class="right-content">
             <div class="right-bottom">
               <div>
                 <span>已选择的投组( {{ selectedRecords.length || 0 }} )</span>
@@ -184,7 +185,7 @@
               <div style="height: calc(100% - 5px)">
                 <VxeTable
                   ref="tableRef2"
-                  :class="isTree ? 'treeTable' : ''"
+                  :class="isTree ? 'treeTable cs-table-select' : 'cs-table-select'"
                   :cell-config="{ height: 32 }"
                   :column-config="{ resizable: false }"
                   :virtual-y-config="{ enabled: true, gt: 0 }"
@@ -758,6 +759,6 @@ watch(
 // ----------------------------------------------------------------------------------------------------
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import './styles.less';
 </style>
