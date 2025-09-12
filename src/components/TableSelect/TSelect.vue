@@ -36,7 +36,8 @@ watch(
 )
 
 // 处理选择变化
-const handleChange = (value: SelectValue) => {
+const handleChange = (...args: any[]) => {
+  const value = args[0] as SelectValue
   selectedValues.value = value as any[]
   emit('update:modelValue', value)
   emit('change', value)
@@ -73,7 +74,7 @@ const resAttrs = computed(() => {
     ...props,
     ...restAttrs,
     virtual: false
-  } as CSSelectProps
+  } as any
 })
 </script>
 

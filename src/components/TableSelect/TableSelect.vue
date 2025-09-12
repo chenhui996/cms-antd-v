@@ -49,7 +49,7 @@
                   placeholder="请输入"
                   ref="searchRef"
                   v-model:value="params.inputValue"
-                  @change="handleFilterChange()"
+                  @change="() => handleFilterChange()"
                 />
               </FormItem>
               <template v-if="filtersList && filtersList.length > 0">
@@ -62,8 +62,8 @@
                     placeholder="请选择"
                     popupClassName="cs-t-select-dropdown"
                     :options="item.options"
-                    v-model="params[item.key]"
-                    @change="handleFilterChange()"
+                    v-model="params[item.key] as any[]"
+                    @change="() => handleFilterChange()"
                   >
                   </TSelect>
                 </FormItem>
@@ -416,7 +416,8 @@ const isTree = computed(() => {
  * 处理下拉面板显示状态变更
  * @param visible - 面板可见状态
  */
-const handlePopupVisibleChange = (visible: boolean) => {
+const handlePopupVisibleChange = (...args: any[]) => {
+  const visible = args[0] as boolean
   open.value = visible
   if (visible) {
     // 打开
@@ -430,7 +431,8 @@ const handlePopupVisibleChange = (visible: boolean) => {
  * @param params - 选择变更参数
  */
 // 为参数 params 显式指定类型，避免隐式 any 类型
-const handleSelectChange = (params: { selectedKeys?: (string | number)[] }) => {
+const handleSelectChange = (...args: any[]) => {
+  const params = args[0] as { selectedKeys?: (string | number)[] }
   const selectedKeys = params.selectedKeys?.filter((item) => item) || []
   if (isValueKeyMode.value) {
     emit('update:modelValue', [...selectedKeys])
@@ -560,13 +562,13 @@ const selectChange = ({ row, checked }: any) => {
       selectedRecords.value = [...selectedRecords.value, ...result] as TableRowData[]
     } else {
       const ids = row.children.map((map: any) => map[props.onlyKey])
-      selectedRecords.value = selectedRecords.value.filter(
+      selectedRecords.value = (selectedRecords.value as TableRowData[]).filter(
         (item: any) => !ids.includes(item[props.onlyKey])
       ) as TableRowData[]
     }
   } else {
     if (!checked) {
-      selectedRecords.value = selectedRecords.value.filter(
+      selectedRecords.value = (selectedRecords.value as TableRowData[]).filter(
         (item: any) => item[props.onlyKey] !== row[props.onlyKey]
       ) as TableRowData[]
     } else {
@@ -640,7 +642,7 @@ const selectAllTable = (e: {
   } else {
     // tableRef.value?.setCheckboxRow(leafRecords, e.checked)
     const ids = leafRecords.map((item) => item[props.onlyKey])
-    const result = selectedRecords.value.filter((item: any) => !ids.includes(item[props.onlyKey]))
+    const result = (selectedRecords.value as TableRowData[]).filter((item: any) => !ids.includes(item[props.onlyKey]))
     selectedRecords.value = [...result] as TableRowData[]
   }
   // 同步更新表格复选框状态

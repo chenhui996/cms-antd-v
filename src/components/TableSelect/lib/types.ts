@@ -26,7 +26,7 @@ export interface TableRowData {
  */
 export type ParamsType = {
   inputValue: string
-  [key: string]: string[] | string
+  [key: string]: string[] | string | any[]
 }
 
 // 组件属性
