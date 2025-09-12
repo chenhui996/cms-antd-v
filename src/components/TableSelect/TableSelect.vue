@@ -204,7 +204,7 @@
                     show-header-overflow
                   >
                     <template #default="{ row }">
-                      <div :title="row[labelKey]" style="font-weight: 500">
+                      <div :title="row[labelKey]" style="color: #1f1f1f">
                         {{ row[labelKey] }}
                       </div>
                     </template>

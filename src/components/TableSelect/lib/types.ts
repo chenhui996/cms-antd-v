@@ -31,17 +31,29 @@ export type ParamsType = {
 
 // 组件属性
 export interface TableSelectProps {
+  /** 绑定值 */
   value?: TableRowData[] | (string | number)[]
+  /** 绑定值 */
   modelValue?: TableRowData[] | (string | number)[]
+  /** 表格数据 */
   tableList: TableRowData[]
+  /** 筛选条件 */
   filtersList?: Array<TableRowData>
+  /** ID */
   id?: string
+  /** 标签键 */
   labelKey?: string
+  /** 值键 */
   valueKey?: string
+  /** 是否是值键模式 */
   isValueKeyMode?: boolean
+  /** 树形配置类型 */
   treeConfigType?: 'children' | 'parent' | ''
+  /** 树形配置 */
   treeConfig?: any
+  /** Key */
   onlyKey?: string
+  /** 是否禁用 */
   disabled?: boolean,
 }
 

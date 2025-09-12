@@ -49,7 +49,6 @@
     .ant-form-item-label {
       text-align: right;
       padding-right: 2px;
-      font-weight: 500;
     }
 
     .ant-tooltip-inner {
@@ -62,15 +61,6 @@
       padding: 1px 2px;
       line-height: 1;
       font-size: 11px;
-    }
-
-    .vxe-table .vxe-checkbox--checked .vxe-checkbox-icon {
-      background-color: #1890ff;
-      border-color: #1890ff;
-    }
-
-    .vxe-table .vxe-checkbox:hover .vxe-checkbox-icon {
-      border-color: #1890ff;
     }
 
     .action-buttons {
@@ -262,21 +252,39 @@
     }
   }
 
-  .vxe-checkbox--label {
-    color: #1f1f1f;
-    font-weight: 500;
+  // vue cell checkbox
+  .vxe-cell--checkbox {
+    .vxe-checkbox--icon {
+      font-weight: normal;
+      color: #d9d9d9;
+    }
+
+    &.is--checked,
+    &.is--indeterminate {
+      .vxe-checkbox--icon {
+        color: #1373f7 !important;
+      }
+
+      .vxe-checkbox--label {
+        color: #1f1f1f;
+      }
+    }
+
+    &:not(.is--disabled) {
+      &:hover {
+        .vxe-checkbox--icon {
+          color: #1373f7 !important;
+        }
+      }
+    }
   }
 
-  .vxe-table--render-default .vxe-cell--checkbox.is--checked,
-  .vxe-table--render-default .vxe-cell--checkbox.is--checked .vxe-checkbox--icon,
-  .vxe-table--render-default .vxe-cell--checkbox.is--indeterminate,
-  .vxe-table--render-default .vxe-cell--checkbox.is--indeterminate .vxe-checkbox--icon {
-    color: #1373f7 !important;
-  }
-
-  .vxe-table--render-default .vxe-checkbox--icon {
-    &:hover {
-      color: #1373f7 !important;
+  // vue arrow icon
+  .vxe-cell--tree-btn{
+    .vxe-table-icon-caret-right{
+      font-size: 10px;
+      color: #1f1f1f;
+      line-height: 14px;
     }
   }
 
@@ -296,6 +304,10 @@
       width: 121px;
       height: 100px;
     }
+  }
+
+  .vxe-table .vxe-table--scroll-y-handle {
+    width: 4px !important;
   }
 
   .vxe-table--header-wrapper {
