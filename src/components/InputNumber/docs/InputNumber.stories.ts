@@ -68,13 +68,19 @@ export const Default = () => {
     },
     setup() {
       const value = ref<number>(3);
+
+      const handleChange = (val: number | string | null) => {
+        console.log('changed', val);
+      }
+
       return {
-        value
+        value,
+        handleChange
       }
     },
     template: `
   <div>
-    <InputNumber id="inputNumber" v-model:value="value" :min="1" :max="10" />
+    <InputNumber id="inputNumber" v-model:value="value" :min="1" :max="10" @change="handleChange" />
     当前值：{{ value }}
   </div>
 `

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
-import { useAttrs, computed, ref, watch } from 'vue'
+import { h, useAttrs, computed } from 'vue';
+import type { VNodeChild } from 'vue';
 import { InputNumber as AInputNumber, ConfigProvider } from 'ant-design-vue'
 import type { InputNumberProps } from 'ant-design-vue/lib/input-number'
 import useForward from '@/hooks/useForward'
@@ -24,15 +25,36 @@ const props = withDefaults(defineProps<CSInputNumberProps>(), {
   stringMode: false
 })
 
+const resValue = defineModel<ValueType>('value')
 const emit = defineEmits<InputNumberEmits>()
 const attrs = useAttrs()
 
+// ✅ 处理 prefix：支持字符串 / VNode / Function
+// const normalizePrefix = (prefix?: VNodeChild | string | (() => VNodeChild)) => {
+//   if (!prefix) return undefined;
+//   if (typeof prefix === 'string') {
+//     return () => h('span', prefix);
+//   }
+//   return prefix;
+// };
+
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
-  const { class: _unusedClass, style: _unusedStyle, ...restAttrs } = attrs
-  return {
-    ...props,
+  const {
+    class: _unusedClass,
+    style: _unusedStyle,
+    
     ...restAttrs
+  } = attrs
+
+  const {
+    value: _unusedValue,
+    'onUpdate:value': _unusedOnUpdate, // <-- 过滤掉,
+    ...restProps
+  } = props
+  return {
+    ...restProps,
+    ...restAttrs,
   } as InputNumberProps
 })
 
@@ -53,7 +75,12 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 
 <template>
   <ConfigProvider :wave="{ disabled: false }">
-    <AInputNumber v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <AInputNumber
+      v-bind="options"
+      :style="mergedStyle"
+      :class="mergedClass"
+      v-model:value="resValue"
+    >
       <template v-if="$slots.addonAfter" #addonAfter>
         <slot name="addonAfter"></slot>
       </template>

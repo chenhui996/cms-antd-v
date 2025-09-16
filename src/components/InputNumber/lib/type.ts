@@ -33,7 +33,7 @@ export interface BaseInputNumberProps extends InputNumberProps {
     /** 数值精度 */
     precision?: number;
     /** 带有前缀图标的 input */
-    prefix?: Slot<any>;
+    prefix?: Slot<any> | string;
     /** 输入框大小 */
     size?: 'large' | 'middle' | 'small';
     /** 设置校验状态 */
@@ -47,14 +47,14 @@ export interface BaseInputNumberProps extends InputNumberProps {
     /** 自定义下箭头图标 */
     downIcon?: Slot<any>;
     /** 当前值(v-model) */
-    value?: number;
+    value?: ValueType; // ✅ 同时支持数字和字符串
 }
 
-export type CSInputNumberProps = InputNumberProps
+export type CSInputNumberProps = BaseInputNumberProps
 
 export interface InputNumberEmits {
     /** 输入框内容变化时的回调 */
-    (e: 'change', value: number | string): void
+    (e: 'change', value: ValueType): void
     /** 按下回车的回调 */
     (e: 'pressEnter', event: Event): void
     /** 点击上下箭头的回调 */
