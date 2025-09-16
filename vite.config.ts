@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
+import { copyFileSync, existsSync, mkdirSync } from 'fs'
 
 export default defineConfig({
   plugins: [
@@ -13,7 +14,24 @@ export default defineConfig({
       tsconfigPath: './tsconfig.app.json',
       rollupTypes: true,
       insertTypesEntry: true
-    })
+    }),
+    // 自定义插件：自动复制样式类型声明文件
+    {
+      name: 'copy-style-types',
+      writeBundle() {
+        const srcFile = resolve(__dirname, 'src/types/style.d.ts')
+        const distDir = resolve(__dirname, 'dist/types')
+        const distFile = resolve(distDir, 'style.d.ts')
+        
+        if (existsSync(srcFile)) {
+          if (!existsSync(distDir)) {
+            mkdirSync(distDir, { recursive: true })
+          }
+          copyFileSync(srcFile, distFile)
+          console.log('✅ 已自动复制样式类型声明文件到 dist/types/style.d.ts')
+        }
+      }
+    }
   ],
   build: {
     lib: {

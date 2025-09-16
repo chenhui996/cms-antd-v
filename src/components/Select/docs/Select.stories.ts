@@ -380,13 +380,9 @@ export const SearchComponent = () => {
   return {
     components: {
       Select,
+      SelectOption
     },
     setup() {
-      const options = ref<SelectProps['options']>([
-        { value: 'jack', label: 'Jack' },
-        { value: 'lucy', label: 'Lucy' },
-        { value: 'tom', label: 'Tom' },
-      ]);
       const handleChange = (value: string) => {
         console.log(`selected ${value}`);
       };
@@ -397,14 +393,13 @@ export const SearchComponent = () => {
         console.log('focus');
       };
       const filterOption = (input: string, option: any) => {
-        return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+        return option?.label.indexOf(input) >= 0 || option?.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
       };
 
       const value = ref<string | undefined>(undefined);
 
       return {
         value,
-        options,
         handleChange,
         handleFocus,
         handleBlur,
@@ -417,12 +412,17 @@ export const SearchComponent = () => {
     show-search
     placeholder="Select a person"
     style="width: 200px"
-    :options="options"
     :filter-option="filterOption"
     @focus="handleFocus"
     @blur="handleBlur"
     @change="handleChange"
-  ></Select>
+  >
+    <SelectOption value="apple" label="苹果">苹果</SelectOption>
+    <SelectOption value="banana" label="香蕉">香蕉</SelectOption>
+    <SelectOption value="orange" label="橙子">橙子</SelectOption>
+    <SelectOption value="grape" label="葡萄">葡萄</SelectOption>
+    <SelectOption value="strawberry" label="草莓">草莓</SelectOption>
+  </Select>
 `
   }
 };

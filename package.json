@@ -11,7 +11,10 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./style": "./dist/style.css"
+    "./style": {
+      "types": "./dist/types/style.d.ts",
+      "default": "./dist/style.css"
+    }
   },
   "files": [
     "dist"

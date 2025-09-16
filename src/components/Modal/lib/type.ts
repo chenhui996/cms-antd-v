@@ -29,7 +29,7 @@ export interface BaseModalProps extends ModalProps {
     /** 强制渲染 Modal */
     forceRender?: boolean
     /** 指定 Modal 挂载的 HTML 节点 */
-    getContainer?: string | false | HTMLElement | getContainerFunc
+    getContainer?: string | false | HTMLElement | getContainerFunc | HTMLBodyElement
     /** 是否支持键盘 esc 关闭 */
     keyboard?: boolean
     /** 是否展示遮罩 */

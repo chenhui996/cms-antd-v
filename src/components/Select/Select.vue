@@ -69,7 +69,7 @@ const handleChange = (value: SelectValue, option: DefaultOptionType | Array<Defa
   let isAllSelected = false
 
   if (props.mode === 'multiple' || props.mode === 'tags') {
-    isAllSelected = props.options!.length === (value as any[])?.length
+    isAllSelected = props.options?.length === (value as any[])?.length
   }
 
   emit('change', value, {...option, isAllSelected})

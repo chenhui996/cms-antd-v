@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<CSModalProps>(), {
   closable: true,
   destroyOnClose: false,
   forceRender: false,
-  getContainer: () => document.body,
+  getContainer: undefined,
   keyboard: true,
   mask: true,
   maskClosable: true,
