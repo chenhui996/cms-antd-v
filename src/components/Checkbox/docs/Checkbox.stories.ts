@@ -1,9 +1,10 @@
 import { ref, computed, reactive, watch } from 'vue';
-import Checkbox from '../Checkbox.vue'
+import { Checkbox } from '../index'
 import CheckboxGroup from '../CheckboxGroup.vue';
 import { Row, Col } from 'ant-design-vue';
 import Button from '../../Button/Button.vue';
 import type { Meta } from '@storybook/vue3';
+import type { CheckboxChangeEvent } from 'ant-design-vue/lib/checkbox/interface';
 import './style.less';
 
 const components = { Checkbox }
@@ -104,17 +105,23 @@ export const ControlComponent = () => {
       const label = computed(() => {
         return `${checked.value ? 'Checked' : 'Unchecked'}-${disabled.value ? 'Disabled' : 'Enabled'}`;
       });
+
+      const handleChange = (e: CheckboxChangeEvent) => {
+        console.log('change', e.target.checked);
+      }
+
       return {
         checked,
         disabled,
         toggleChecked,
         toggleDisable,
-        label
+        label,
+        handleChange
       }
     },
     template: `
   <p :style="{ marginBottom: '20px' }">
-    <Checkbox v-model:checked="checked" :disabled="disabled">
+    <Checkbox v-model:checked="checked" :disabled="disabled" @change="handleChange">
       {{ label }}
     </Checkbox>
   </p>
