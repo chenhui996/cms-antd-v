@@ -9,7 +9,7 @@ import type { CSInputGroupProps, InputGroupEmits } from './lib/type'
 
 defineOptions({
   name: 'CSInputGroup',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSInputGroupProps>(), {
@@ -42,7 +42,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AInputGroup
       v-bind="options"
       :style="mergedStyle"
@@ -50,7 +50,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
     >
       <slot></slot>
     </AInputGroup>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

@@ -10,7 +10,7 @@ import type { RadioChangeEvent } from 'ant-design-vue/lib/radio/interface'
 
 defineOptions({
   name: 'CSRadioGroup',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSRadioGroupProps>(), {
@@ -44,11 +44,11 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ARadioGroup v-bind="options" :style="mergedStyle" :class="mergedClass">
       <slot />
     </ARadioGroup>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

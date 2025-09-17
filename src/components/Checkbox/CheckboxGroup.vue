@@ -9,7 +9,7 @@ import type { CSCheckboxGroupProps, CheckboxGroupEmits, OptionItem } from './lib
 
 defineOptions({
   name: 'CSCheckboxGroup',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSCheckboxGroupProps>(), {
@@ -41,7 +41,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ACheckboxGroup
       v-bind="options"
       :style="mergedStyle"
@@ -52,7 +52,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot />
     </ACheckboxGroup>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

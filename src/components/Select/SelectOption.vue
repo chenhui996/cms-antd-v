@@ -9,7 +9,7 @@ import type { CSSelectOptionProps, SelectOptionEmits } from './lib/type'
 
 defineOptions({
   name: 'CSSelectOption',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSSelectOptionProps>(), {

@@ -9,7 +9,7 @@ import type { CSSpinProps, SpinEmits } from './lib/type'
 
 defineOptions({
   name: 'CSSpin',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSSpinProps>(), {
@@ -42,7 +42,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ASpin v-bind="options" :style="mergedStyle" :class="mergedClass">
       <template v-if="$slots.indicator" #indicator>
         <slot name="indicator" />
@@ -52,7 +52,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot />
     </ASpin>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

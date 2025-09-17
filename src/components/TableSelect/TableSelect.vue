@@ -3,7 +3,7 @@
   <div ref="querySelectContainerRef" class="query-select-container cs-table-select-container">
     <!-- 主选择器组件 -->
     <Select
-      v-model:value="(selectedRecords as SelectValue)"
+      v-model:value="selectedRecords"
       mode="multiple"
       width="100%"
       class="select-container"
@@ -393,7 +393,7 @@ const isFavorite = computed(() => (value: { toString: () => any }) => favorites.
  * 处理选中记录的双向绑定
  * @returns 计算属性对象，包含get和set方法
  */
-const selectedRecords = useSelectedRecords(props, isValueKeyMode, emit, tableRef, originData)
+const selectedRecords = useSelectedRecords(props, isValueKeyMode, emit, tableRef, originData) as any
 
 // 页面卸载前保存数据
 const handleBeforeUnload = () => saveFavorites(Object.fromEntries(favorites.entries()), idb)
@@ -681,7 +681,7 @@ onMounted(async () => {
   await initFavorites(idb, favorites)
   // 初始化复选框状态
   if (tableRef.value && selectedRecords.value.length) {
-    selectedRecords.value.forEach((item) => {
+    selectedRecords.value.forEach((item: any) => {
       if (tableRef.value) {
         tableRef.value.setCheckboxRow(item, true)
       }
@@ -700,7 +700,7 @@ onMounted(() => {
   // 修复 'value' 属性不存在于 'Reactive<Map<any, any>>' 类型的问题，使用 Object.fromEntries 转换 Map 为对象
   window.addEventListener('beforeunload', saveFav)
   if (tableRef.value && selectedRecords.value.length) {
-    selectedRecords.value.forEach((item) => {
+    selectedRecords.value.forEach((item: any) => {
       if (tableRef.value) {
         tableRef.value.setCheckboxRow(item, true)
       }

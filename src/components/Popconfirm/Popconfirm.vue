@@ -9,7 +9,7 @@ import type { CSPopconfirmProps, PopconfirmEmits } from './lib/type'
 
 defineOptions({
   name: 'CSPopconfirm',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSPopconfirmProps>(), {
@@ -76,7 +76,7 @@ const promiseResolve = () => {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <APopconfirm
       v-bind="options"
       :style="mergedStyle"
@@ -102,7 +102,7 @@ const promiseResolve = () => {
       </template>
       <slot />
     </APopconfirm>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

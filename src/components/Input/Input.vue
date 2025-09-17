@@ -10,7 +10,7 @@ import { getChineseCharLength, truncateToMaxLength } from './lib/chineseCount'
 
 defineOptions({
   name: 'CSInput',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSInputProps>(), {
@@ -150,7 +150,7 @@ defineExpose({
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AInput
       ref="aInputRef"
       v-bind="resAttrs"
@@ -202,7 +202,7 @@ defineExpose({
 
       <slot></slot>
     </AInput>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

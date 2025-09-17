@@ -9,7 +9,7 @@ import type { CSFloatButtonGroupProps, FloatButtonGroupEmits } from './lib/type'
 
 defineOptions({
   name: 'CSFloatButtonGroup'
-  // inheritAttrs: false
+  // inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSFloatButtonGroupProps>(), {
@@ -50,7 +50,7 @@ console.log('options', options)
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AFloatButtonGroup
       v-bind="props"
       :style="mergedStyle"
@@ -62,7 +62,7 @@ console.log('options', options)
       </template>
       <slot />
     </AFloatButtonGroup>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

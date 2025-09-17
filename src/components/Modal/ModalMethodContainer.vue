@@ -13,7 +13,7 @@ import type { ModalMethodProps, ModalMethodEmits } from './lib/type'
 
 defineOptions({
   name: 'CSModalMethodContainer',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<ModalMethodProps>(), {

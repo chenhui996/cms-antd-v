@@ -9,7 +9,7 @@ import type { CSDrawerProps, DrawerEmits } from './lib/type'
 
 defineOptions({
   name: 'CSDrawer',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSDrawerProps>(), {

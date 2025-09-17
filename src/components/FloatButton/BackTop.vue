@@ -9,7 +9,7 @@ import type { CSBackTopProps, BackTopEmits } from './lib/type'
 
 defineOptions({
   name: 'CSBackTop',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSBackTopProps>(), {
@@ -50,7 +50,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ABackTop
       v-bind="options"
       :style="mergedStyle"
@@ -59,7 +59,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       <!-- 透传所有 slots -->
       <slot />
     </ABackTop>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

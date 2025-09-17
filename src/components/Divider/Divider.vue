@@ -9,7 +9,7 @@ import type { CSDividerProps, DividerEmits } from './lib/type'
 
 defineOptions({
   name: 'CSSwitch',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSDividerProps>(), {
@@ -48,11 +48,11 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ADivider v-bind="options" :style="mergedStyle" :class="mergedClass">
       <slot />
     </ADivider>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

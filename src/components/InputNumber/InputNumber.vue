@@ -10,7 +10,7 @@ import type { CSInputNumberProps, InputNumberEmits, ValueType } from './lib/type
 
 defineOptions({
   name: 'CSInputNumber',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSInputNumberProps>(), {
@@ -74,7 +74,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AInputNumber
       v-bind="options"
       :style="mergedStyle"
@@ -98,7 +98,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot></slot>
     </AInputNumber>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

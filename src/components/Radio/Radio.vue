@@ -9,7 +9,7 @@ import type { CSRadioProps, RadioEmits } from './lib/type'
 
 defineOptions({
   name: 'CSRadio',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSRadioProps>(), {
@@ -43,7 +43,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ARadio
       v-bind="options"
       :style="mergedStyle"
@@ -51,7 +51,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
     >
       <slot />
     </ARadio>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

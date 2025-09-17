@@ -46,7 +46,7 @@ const handleChange = (...args: any[]) => {
 // 全选/取消全选
 const handleCheckAll = () => {
   // 执行全选
-  const allValues = props.options.map((item) => item.value)
+  const allValues = props.options.map((item: any) => item.value)
   handleChange(allValues)
 }
 

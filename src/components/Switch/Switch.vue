@@ -9,7 +9,7 @@ import type { CSSwitchProps, SwitchEmits } from './lib/type'
 
 defineOptions({
   name: 'CSSwitch',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSSwitchProps>(), {
@@ -47,7 +47,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ASwitch v-bind="options" :style="mergedStyle" :class="mergedClass">
       <template v-if="$slots.checkedChildren" #checkedChildren>
         <slot name="checkedChildren" />
@@ -57,7 +57,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot />
     </ASwitch>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

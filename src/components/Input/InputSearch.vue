@@ -14,7 +14,7 @@ type MouseEvent = globalThis.MouseEvent
 
 defineOptions({
   name: 'CSInputSearch',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSInputSearchProps>(), {
@@ -55,7 +55,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AInputSearch
       v-bind="options"
       :style="mergedStyle"
@@ -81,7 +81,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot></slot>
     </AInputSearch>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

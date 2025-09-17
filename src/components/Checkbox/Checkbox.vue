@@ -10,7 +10,7 @@ import type { CheckboxChangeEvent } from 'ant-design-vue/lib/checkbox/interface'
 
 defineOptions({
   name: 'CSCheckbox',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSCheckboxProps>(), {
@@ -44,7 +44,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!--  <ConfigProvider :wave="{ disabled: false }"> -->
     <ACheckbox
       v-bind="options"
       :style="mergedStyle"
@@ -52,7 +52,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
     >
       <slot />
     </ACheckbox>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

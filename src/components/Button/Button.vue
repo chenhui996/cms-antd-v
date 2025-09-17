@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cs from 'classnames'
 import { useAttrs, computed } from 'vue'
-import { Button as AButton, ConfigProvider } from 'ant-design-vue'
+import { Button as AButton } from 'ant-design-vue'
 import type { ButtonProps } from 'ant-design-vue/lib/button/buttonTypes'
 import useForward from '@/hooks/useForward'
 import type { CSButtonProps, ButtonEmits } from './lib/type'
 
 defineOptions({
   name: 'CSButton',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSButtonProps>(), {
@@ -30,7 +30,7 @@ const attrs = useAttrs()
 // options 为合并后的 props+attrs（直接 v-bind 用）
 const options = computed(() => {
   const { class: _unusedClass, style: _unusedStyle, type: _unusedType, ...restAttrs } = attrs
-  
+
   return {
     ...props,
     ...restAttrs
@@ -54,19 +54,13 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
-    <AButton
-      v-bind="options"
-      :style="mergedStyle"
-      :class="mergedClass"
-    >
-      <!-- 透传所有 slots -->
-      <slot />
-      <template #icon>
-        <slot name="icon" />
-      </template>
-    </AButton>
-  </ConfigProvider>
+  <AButton v-bind="options" :style="mergedStyle" :class="mergedClass">
+    <!-- 透传所有 slots -->
+    <slot />
+    <template #icon>
+      <slot name="icon" />
+    </template>
+  </AButton>
 </template>
 
 <style lang="less">

@@ -9,7 +9,7 @@ import type { CSInputPasswordProps, InputPasswordEmits } from './lib/type'
 
 defineOptions({
   name: 'CSInputPassword',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSInputPasswordProps>(), {
@@ -43,7 +43,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AInputPassword
       v-bind="options"
       :style="mergedStyle"
@@ -69,7 +69,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot></slot>
     </AInputPassword>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

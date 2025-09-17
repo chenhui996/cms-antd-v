@@ -43,7 +43,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <ATextarea
       v-bind="options"
       :style="mergedStyle"
@@ -51,7 +51,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
     >
       <slot></slot>
     </ATextarea>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">

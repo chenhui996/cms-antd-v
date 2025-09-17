@@ -12,7 +12,7 @@ import type { CSSelectProps, SelectEmits, RawValueType, LabelInValueType, CSOpti
 
 defineOptions({
   name: 'CSSelect'
-  // inheritAttrs: false
+  // inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSSelectProps>(), {

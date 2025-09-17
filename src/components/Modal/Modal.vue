@@ -13,7 +13,7 @@ import type { CSModalProps, ModalEmits } from './lib/type'
 
 defineOptions({
   name: 'CSModal',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSModalProps>(), {

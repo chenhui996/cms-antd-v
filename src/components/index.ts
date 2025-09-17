@@ -13,6 +13,7 @@ export { Select, SelectOption, SelectOptGroup } from './Select'
 export { Popconfirm } from './Popconfirm'
 export { Tooltip } from './Tooltip'
 export { Modal } from './Modal'
+export { TableSelect } from './TableSelect'
 
 // 类型导出
 export type { CSButtonProps, ButtonEmits } from './Button/lib/type'

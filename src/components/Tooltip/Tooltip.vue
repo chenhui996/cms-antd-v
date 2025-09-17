@@ -9,7 +9,7 @@ import type { CSTooltipProps, TooltipEmits } from './lib/type'
 
 defineOptions({
   name: 'CSTooltip',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSTooltipProps>(), {

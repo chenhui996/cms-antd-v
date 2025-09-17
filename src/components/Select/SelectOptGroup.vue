@@ -9,7 +9,7 @@ import type { CSSelectOptGroupProps, SelectOptGroupEmits } from './lib/type'
 
 defineOptions({
   name: 'CSSelectOptGroup',
-  inheritAttrs: false
+  inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSSelectOptGroupProps>(), {

@@ -9,7 +9,7 @@ import type { CSFloatButtonProps, FloatButtonEmits } from './lib/type'
 
 defineOptions({
   name: 'CSFloatButton',
-  // inheritAttrs: false
+  // inheritAttrs: true
 })
 
 const props = withDefaults(defineProps<CSFloatButtonProps>(), {
@@ -43,7 +43,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
 </script>
 
 <template>
-  <ConfigProvider :wave="{ disabled: false }">
+  <!-- <ConfigProvider :wave="{ disabled: false }"> -->
     <AFloatButton
       v-bind="options"
       :style="mergedStyle"
@@ -55,7 +55,7 @@ const { mergedStyle, mergedClass } = useForward(props, attrs, {
       </template>
       <slot />
     </AFloatButton>
-  </ConfigProvider>
+  <!--  </ConfigProvider> -->
 </template>
 
 <style lang="less">
