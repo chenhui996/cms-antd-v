@@ -46,7 +46,7 @@ const options = computed(() => {
   const {
     class: _unusedClass,
     style: _unusedStyle,
-    footer: _attrsFooter,
+    // footer: _attrsFooter,
     ...restAttrs
   } = attrs as Record<string, any>
 
@@ -57,7 +57,7 @@ const options = computed(() => {
     onOk: _unusedOnOk,
     open: _unusedOpen,
     visible: _unusedVisible,
-    footer: _propsFooter,
+    // footer: _propsFooter,
     ...restProps
   } = props as unknown as Record<string, any>
 

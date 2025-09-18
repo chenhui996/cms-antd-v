@@ -160,7 +160,6 @@ defineExpose({
       :addonBefore="addonBefore"
       :allowClear="allowClear"
       :bordered="bordered"
-      :clearIcon="clearIcon"
       :defaultValue="defaultValue"
       :disabled="disabled"
       :id="id"
@@ -172,6 +171,7 @@ defineExpose({
       :size="size"
       :suffix="suffix"
       :type="type"
+      :placeholder="placeholder"
       v-model:value="resValue"
       @change="handleChange"
       @pressEnter="handlePressEnter"
@@ -199,7 +199,10 @@ defineExpose({
           {{ chineseCountDisplay }}
         </span>
       </template>
-
+      <template v-if="$slots.clearIcon" #clearIcon>
+        <slot name="clearIcon"></slot>
+      </template>
+        
       <slot></slot>
     </AInput>
   <!--  </ConfigProvider> -->

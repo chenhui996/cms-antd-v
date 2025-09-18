@@ -412,7 +412,6 @@ export const SearchComponent = () => {
     show-search
     placeholder="Select a person"
     style="width: 200px"
-    :filter-option="filterOption"
     @focus="handleFocus"
     @blur="handleBlur"
     @change="handleChange"
@@ -426,6 +425,8 @@ export const SearchComponent = () => {
 `
   }
 };
+
+    // :filter-option="filterOption"
 
 SearchComponent.storyName = "带搜索框 search";
 SearchComponent.parameters = parameters(SearchComponent)
@@ -506,7 +507,7 @@ SuffixIconComponent.parameters = parameters(SuffixIconComponent)
 
 // ------------------------------------------------------------------------------------------------------------------------
 
-const VNodes = defineComponent({
+const VNodesOut = defineComponent({
   props: {
     vnodes: {
       type: Object,
@@ -527,7 +528,7 @@ export const DropdownRenderComponent = () => {
       Input,
       Button,
       PlusOutlined,
-      VNodes
+      VNodes: VNodesOut
     },
     setup() {
       const VNodes = defineComponent({

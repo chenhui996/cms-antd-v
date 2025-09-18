@@ -6,7 +6,13 @@ import { Select as ASelect, ConfigProvider } from 'ant-design-vue'
 import { CloseSquareFilled } from '@ant-design/icons-vue'
 import type { SelectProps, DefaultOptionType, SelectValue } from 'ant-design-vue/lib/select'
 import useForward from '@/hooks/useForward'
-import type { CSSelectProps, SelectEmits, RawValueType, LabelInValueType, CSOptionType } from './lib/type'
+import type {
+  CSSelectProps,
+  SelectEmits,
+  RawValueType,
+  LabelInValueType,
+  CSOptionType
+} from './lib/type'
 
 // ------------------------------------------------------------------------------------------------
 
@@ -30,9 +36,10 @@ const props = withDefaults(defineProps<CSSelectProps>(), {
   open: undefined,
   virtual: true,
   labelInValue: false,
-  // 单选为 true,多选为 false
-  showSearch: true,
-  placeholder: '请选择...'
+  placeholder: '请选择...',
+  optionFilterProp: 'value', // ✅ 改回官方默认
+  filterOption: true
+  // showSearch: false
 })
 
 const resValue = defineModel<SelectValue>('value')
@@ -72,7 +79,7 @@ const handleChange = (value: SelectValue, option: DefaultOptionType | Array<Defa
     isAllSelected = props.options?.length === (value as any[])?.length
   }
 
-  emit('change', value, {...option, isAllSelected})
+  emit('change', value, { ...option, isAllSelected })
 }
 
 const handleFocus = (e: FocusEvent) => {
@@ -172,7 +179,9 @@ defineExpose({
     :removeIcon="removeIcon"
     :searchValue="searchValue"
     :showArrow="showArrow"
-    :showSearch="showSearch"
+    :showSearch="
+      typeof showSearch === 'boolean' ? showSearch : mode === 'multiple' || mode === 'tags'
+    "
     :size="size"
     :status="status"
     :tagRender="tagRender"
@@ -186,12 +195,12 @@ defineExpose({
     @dropdownVisibleChange="handleDropdownVisibleChange"
     @focus="handleFocus"
     @inputKeyDown="handleInputKeyDown"
-    @search="handleSearch"
     @select="handleSelect"
     @mouseEnter="handleMouseEnter"
     @mouseLeave="handleMouseLeave"
     @popupScroll="handlePopupScroll"
     @click="handleClick"
+    v-on="showSearch || mode === 'multiple' || mode === 'tags' ? { search: handleSearch } : {}"
   >
     <template v-if="$slots.notFoundContent" #notFoundContent>
       <slot name="notFoundContent" />
